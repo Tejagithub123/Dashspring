@@ -1,0 +1,42 @@
+<div class="container-fluid pl-4">      
+    <div class="row">
+      
+      <div class="card my-5 col-12">
+          <div class="card-header">
+              Contat Us
+          </div>
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" [(ngModel)]="user.name" 
+                class="form-control" 
+                id="name" 
+                name="name" 
+                placeholder="Enter your name"
+                required #name="ngModel">
+            </div>
+            <div *ngIf="name.errors?.required && name.touched" class="alert alert-danger">Name is required</div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" [(ngModel)]="user.email" 
+                class="form-control" 
+                id="email" 
+                name="email" 
+                placeholder="Enter your email address"
+                required #email="ngModel">
+              
+              <div *ngIf="email.errors?.required && email.touched" class="alert alert-danger">Email is required</div>
+              <div *ngIf="!isEmail(email.value) && email.dirty && !email.errors?.required" class="alert alert-danger">Invalid Email</div>
+              <!-- <div [hidden]="!email.pristine" class="alert alert-danger">Email is required</div> -->
+            </div>
+            <button type="submit" [disabled]="!userForm.form.valid || isExists(email.value)" 
+              class="btn btn-info">Submit</button>
+
+            <div *ngIf="isExists(email.value)"  class="alert alert-danger">Email Already Exists</div>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+  
