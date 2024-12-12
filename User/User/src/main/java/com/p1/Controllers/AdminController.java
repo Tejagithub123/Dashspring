@@ -11,6 +11,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4300")
 @RequestMapping("/admin")
 public class AdminController {
 

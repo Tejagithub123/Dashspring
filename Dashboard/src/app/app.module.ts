@@ -23,7 +23,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {ToggleService} from './toggle.service';
-import { EditUserComponent } from './edit-user/edit-user.component'
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { FoyerComponent } from './components/foyer/foyer.component';
+import { PersonnelComponent } from './components/personnel/personnel.component'
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { EditUserComponent } from './edit-user/edit-user.component'
     HomeComponent,
     ContactComponent,
     UserListComponent,
-    EditUserComponent
+    EditUserComponent,
+    FoyerComponent,
+    PersonnelComponent
   ],
   imports: [
     BrowserModule,
