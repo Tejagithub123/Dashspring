@@ -30,6 +30,16 @@ export class FoyerComponent implements OnInit {
     });
   }
 
-//delete
+  deleteFoyer(id: number | undefined): void {
+    if (id) {
+      this.foyerService.deleteFoyer(id).subscribe(() => {
+        this.loadFoyers(); // Refresh the list of foyers after deletion
+      });
+    } else {
+      console.error('Foyer ID is undefined');
+    }
+  }
+  
+  
   
 }

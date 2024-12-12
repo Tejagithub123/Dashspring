@@ -30,7 +30,9 @@
             <td>{{ foyer.nom }}</td>
             <td>{{ foyer.personnel?.name || 'No personnel' }}</td> <!-- Show personnel if available -->
             <td>
-              
+              <button class="btn btn-danger" [disabled]="!foyer?.id" (click)="deleteFoyer(foyer?.id)">
+                Delete
+              </button>
             </td>
           </tr>
         </tbody>
