@@ -1,0 +1,42 @@
+<div class="card">
+    <div class="card-header">Foyer Management</div>
+    <div class="card-body">
+      <form (ngSubmit)="addFoyer()" class="mb-3">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Foyer Name"
+            [(ngModel)]="newFoyer.nom"
+            name="nom"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-success">Add Foyer</button>
+      </form>
+  
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Personnel Assigned</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let foyer of foyers; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ foyer.nom }}</td>
+            <td>{{ foyer.personnel?.name || 'No personnel' }}</td> <!-- Show personnel if available -->
+            <td>
+              <button class="btn btn-danger" [disabled]="!foyer?.id" (click)="deleteFoyer(foyer?.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
