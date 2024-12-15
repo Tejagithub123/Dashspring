@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Console } from 'console';
+import { ConnectableObservable } from 'rxjs';
 import { AuthService } from '../../services/auth/auth.service'; // You'll create this service soon
 
 @Component({
@@ -14,7 +16,8 @@ export class LoginComponent {
 
   onSubmit() {
     this.authService.login(this.loginData).subscribe(
-      (response) => {
+      (response) => { 
+        
         localStorage.setItem('token', response.token); // Save token in localStorage
         this.router.navigate(['/foyer']); // Redirect to Foyer component
       },
