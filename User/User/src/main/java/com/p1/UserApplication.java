@@ -8,6 +8,6 @@ public class UserApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(UserApplication.class, args);
-		System.out.println("run it now spring");
+		System.out.println("run it now spring now");
 	}
 }
