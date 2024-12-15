@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FoyerService } from '../../services/foyer.service';
+import { FoyerService } from '../../services/foyer/foyer.service';
 import { Foyer } from '../../models/foyer.model';
 
 @Component({

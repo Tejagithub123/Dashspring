@@ -25,7 +25,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import {ToggleService} from './toggle.service';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { FoyerComponent } from './components/foyer/foyer.component';
-import { PersonnelComponent } from './components/personnel/personnel.component'
+import { PersonnelComponent } from './components/personnel/personnel.component';
+import { LoginComponent } from './components/login/login.component'
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { PersonnelComponent } from './components/personnel/personnel.component'
     UserListComponent,
     EditUserComponent,
     FoyerComponent,
-    PersonnelComponent
+    PersonnelComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

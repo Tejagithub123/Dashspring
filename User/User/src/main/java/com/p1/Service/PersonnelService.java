@@ -1,5 +1,6 @@
 package com.p1.Service;
 
+import com.p1.Model.Utilisateur;
 import com.p1.Model.Personnel;
 import com.p1.Model.Foyer;
 import com.p1.Repository.PersonnelRepository;
@@ -24,6 +25,8 @@ public class PersonnelService {
         Optional<Foyer> foyer = foyerRepository.findById(foyerId);
         if (foyer.isPresent()) {
             personnel.setFoyer(foyer.get());
+            personnel.setRole(Utilisateur.Role.PERSONNEL);
+
             return personnelRepository.save(personnel);
         } else {
             throw new IllegalArgumentException("Le foyer n'existe pas");
@@ -48,6 +51,7 @@ public class PersonnelService {
 
         if (personnel.isPresent() && foyer.isPresent()) {
             personnel.get().setFoyer(foyer.get());
+            personnel.get().setRole(Utilisateur.Role.PERSONNEL);
             return personnelRepository.save(personnel.get());
         }
         throw new IllegalArgumentException("Personnel ou foyer non trouvés");

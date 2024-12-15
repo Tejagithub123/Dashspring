@@ -9,10 +9,12 @@ import com.p1.Model.Foyer;
 import com.p1.Service.FoyerService;
 import java.util.List;
 import javax.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4300")
 @RequestMapping("/admin")
+@PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
 
     @Autowired
@@ -75,6 +77,7 @@ public class AdminController {
         return ResponseEntity.ok(createdFoyer);
     }
 
+    @CrossOrigin(origins = "http://localhost:4300")
     // liste de foyers
     @GetMapping("/foyers")
     public ResponseEntity<List<Foyer>> getAllFoyers() {
