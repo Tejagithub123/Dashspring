@@ -2,5 +2,5 @@ projectKey=Dashspring
 serverUrl=http://localhost:9000
 serverVersion=24.12.0.100206
 dashboardUrl=http://localhost:9000/dashboard?id=Dashspring
-ceTaskId=d3996856-e2cd-49e7-a3e7-bdaabbcc6d93
-ceTaskUrl=http://localhost:9000/api/ce/task?id=d3996856-e2cd-49e7-a3e7-bdaabbcc6d93
+ceTaskId=4cf9bf57-6f60-454f-950e-2a8f23a2ba63
+ceTaskUrl=http://localhost:9000/api/ce/task?id=4cf9bf57-6f60-454f-950e-2a8f23a2ba63
