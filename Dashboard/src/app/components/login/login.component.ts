@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';  // Import the AuthService
-
+import { Router } from '@angular/router'; // Import the Router
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,7 +13,8 @@ export class LoginComponent implements OnInit {
     password: ''
   };
 
-  constructor(private authService: AuthService) { }
+
+  constructor(private authService: AuthService, private router: Router) { } 
 
   ngOnInit(): void {
   }
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.loginData).subscribe(
         (response) => {
           console.log('Login successful', response);
-          // Redirect user or store token as needed
+          this.router.navigate(['']);
         },
         (error) => {
           console.error('Login failed', error);

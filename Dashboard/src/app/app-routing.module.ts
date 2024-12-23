@@ -10,7 +10,7 @@ import { LoginComponent } from './components/login/login.component';
 
 
 
-const routes: Routes = [  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect to login page by default
+const routes: Routes = [  { path: '',  component:HomeComponent }, // Redirect to login page by default
 { path: 'login', component: LoginComponent },  // Define the login routev
 
 

@@ -1,14 +1,21 @@
-<app-navbar (menuState)='burgerClicked($event)'></app-navbar>
-<div class="container-fluid  ml-0">      
-    <div class="row ">
-       <div  class="col-3 col-md-2 pl-0 side" [hidden]="subMenuState.toggle" >
-          <app-sidebar></app-sidebar>
-       </div>
-      <div  [ngClass]="{'col-12':subMenuState.toggle, 'col-9':!subMenuState.toggle, 'col-md-10':!subMenuState.toggle}  ">
-        <!-- <div>{{subMenuState.col}}</div> -->
-        <router-outlet></router-outlet>
-      </div>
-      
+<app-navbar *ngIf="!isLoginRoute" (menuState)="burgerClicked($event)"></app-navbar>
+<div class="container-fluid ml-0">      
+    <div class="row">
+        <!-- Sidebar -->
+        <div 
+            class="col-3 col-md-2 pl-0 side" 
+            [hidden]="subMenuState.toggle || isLoginRoute">
+            <app-sidebar></app-sidebar>
+        </div>
+
+        <!-- Main Content -->
+        <div 
+            [ngClass]="{
+                'col-12': subMenuState.toggle || isLoginRoute, 
+                'col-9': !subMenuState.toggle && !isLoginRoute, 
+                'col-md-10': !subMenuState.toggle && !isLoginRoute
+            }">
+            <router-outlet></router-outlet>
+        </div>
     </div>
 </div>
-

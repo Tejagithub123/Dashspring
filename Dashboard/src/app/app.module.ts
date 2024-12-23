@@ -27,6 +27,12 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { FoyerComponent } from './components/foyer/foyer.component';
 import { PersonnelComponent } from './components/personnel/personnel.component';
 import { LoginComponent } from './components/login/login.component'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// Angular Material Modules
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -56,7 +62,14 @@ import { LoginComponent } from './components/login/login.component'
     MatButtonModule,
     MatListModule,
     MatMenuModule,
-    MatSidenavModule
+    MatSidenavModule ,
+    BrowserModule,
+    FormsModule,
+    BrowserAnimationsModule, // Required for Angular Material animations
+    MatInputModule,
+    MatFormFieldModule,
+    MatCardModule,
+
   ],
   providers: [UserService, ToggleService],
   bootstrap: [AppComponent]
