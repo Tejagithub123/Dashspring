@@ -6,6 +6,7 @@ import com.p1.Model.Foyer;
 import com.p1.Repository.PersonnelRepository;
 import com.p1.Repository.FoyerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,6 +20,8 @@ public class PersonnelService {
 
     @Autowired
     private FoyerRepository foyerRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     // Méthode pour ajouter un personnel
     public Personnel addPersonnel(Personnel personnel, Long foyerId) {
@@ -57,7 +60,6 @@ public class PersonnelService {
         throw new IllegalArgumentException("Personnel ou foyer non trouvés");
     }
 
-    // Méthode pour mettre à jour partiellement un personnel
     public Personnel updatePersonnel(Long id, Personnel updatedPersonnel) {
         Optional<Personnel> existingPersonnel = personnelRepository.findById(id);
 
@@ -81,7 +83,9 @@ public class PersonnelService {
                 personnel.setDateNaissance(updatedPersonnel.getDateNaissance());
             }
             if (updatedPersonnel.getMdp() != null) {
-                personnel.setMdp(updatedPersonnel.getMdp());
+                // Hash the password before saving
+                String hashedPassword = passwordEncoder.encode(updatedPersonnel.getMdp());
+                personnel.setMdp(hashedPassword);
             }
 
             return personnelRepository.save(personnel); // Sauvegarder les modifications

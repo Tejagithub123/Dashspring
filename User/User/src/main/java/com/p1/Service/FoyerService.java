@@ -32,8 +32,16 @@ public class FoyerService {
 
     // Méthode pour mettre à jour un foyer
     public Foyer updateFoyer(Long id, Foyer foyerDetails) {
-        Foyer foyer = foyerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Foyer non trouvé"));
+        // Rechercher le foyer par son ID
+        Foyer foyer = foyerRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Foyer non trouvé"));
+
+        // Mettre à jour les champs nom, longitude et latitude
         foyer.setNom(foyerDetails.getNom());
+        foyer.setLongitude(foyerDetails.getLongitude());
+        foyer.setLatitude(foyerDetails.getLatitude());
+
+        // Sauvegarder les modifications et retourner l'objet mis à jour
         return foyerRepository.save(foyer);
     }
 
