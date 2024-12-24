@@ -546,4 +546,132 @@ $img-shadow-color:rgba(0, 0, 0, 0.5);
 
   }
 
+} 
+@media (max-width: 768px) {  // Mobile devices
+  .sidebar {
+    width: 220px;
+  }
+
+  .sidebar-profile {
+    padding: 10px 15px;
+  }
+
+  .sidebar-footer {
+    padding: 10px;
+  }
+
+  .sidebar-search input.search-menu,
+  .sidebar-search .input-group-text {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .sidebar-menu ul li a {
+    padding: 10px 15px;
+  }
+
+  .sidebar-menu ul li a i {
+    font-size: 14px;
+    margin-right: 8px;
+  }
+
+  /* On mobile, make the sidebar hidden by default */
+  .sidebar {
+    left: -240px;
+  }
+
+  /* Toggle sidebar visibility on mobile */
+  .sidebar.active {
+    left: 0;
+  }
+
+  /* Optional: Add a button to toggle sidebar visibility on mobile */
+  .sidebar-toggle {
+    display: block;
+    position: fixed;
+    top: 10px;
+    left: 15px;
+    z-index: 9999;
+  }
+
+  /* Add styles for dropdown on smaller screens */
+  .sidebar-dropdown {
+    width: 100%;
+    padding-left: 20px;
+  }
+
+  .sidebar-dropdown .sidebar-submenu {
+    display: none; // Hide submenu by default
+  }
+
+  .sidebar-dropdown.active .sidebar-submenu {
+    display: block;
+  }
+
+  /* Adjust icon size for mobile */
+  .sidebar-menu ul li a i {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {  // Small mobile devices
+  .sidebar {
+    width: 200px;
+  }
+
+  .sidebar-menu ul li a {
+    font-size: 12px;
+  }
+
+  .sidebar-profile,
+  .sidebar-footer {
+    padding: 10px;
+  }
+
+  .sidebar-search input.search-menu,
+  .sidebar-search .input-group-text {
+    padding: 8px;
+  }
+
+  .sidebar-footer {
+    padding: 5px;
+  }
+
+  /* Hide sidebar on small screens */
+  .sidebar {
+    left: -200px;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  .sidebar-toggle {
+    display: block;
+  }
+}
+.sidebar {
+  display: block;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-submenu {
+  display: none;
+  padding-left: 20px;
+}
+
+.sidebar-submenu.show {
+  display: block;
+}
+
+.sidebar-submenu ul {
+  padding: 0;
 }

@@ -15,19 +15,19 @@ export class SidebarService {
     },
     {
       title: 'Foyer',
-      icon: 'fa fa-home',  // Replace with appropriate icon
+      icon: 'fa fa-home',  
       route: '/foyer',
       type: 'simple',
     },
     {
       title: 'Personnel',
-      icon: 'fa fa-users',  // Replace with appropriate icon
+      icon: 'fa fa-users',  
       route: '/personnel',
-      type: 'simple', // This is a link item
+      type: 'simple', 
     },
     {
       title: 'Dashboard',
-      icon: 'fa fa-tachometer-alt',
+      icon: 'fa fa-home',
       active: false,
       type: 'dropdown',
       badge: {
@@ -37,13 +37,15 @@ export class SidebarService {
       submenus: [
         {
           title: 'Dashboard 1',
+          icon: 'fa fa-home',
           type: 'simple',
-          route: '/dashboard1',  // Ensure each submenu has a route if needed
+          route: '/dashboard1',  
         },
         {
           title: 'Dashboard 2',
+          icon: 'fa fa-home',
           type: 'simple',
-          route: '/dashboard2',  // Ensure each submenu has a route if needed
+          route: '/dashboard2',  
         },
       ],
     },
@@ -94,7 +96,7 @@ export class SidebarService {
     },
     {
       title: 'Charts',
-      icon: 'fa fa-chart-line',
+      icon: 'fa fa-address-book',
       active: false,
       type: 'dropdown',
       submenus: [
