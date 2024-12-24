@@ -14,6 +14,7 @@ export class FoyerService {
 
   private getHeaders(): HttpHeaders {
     const token = this.authService.getToken(); // Get token from localStorage
+    console.log('Token:', token); 
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',

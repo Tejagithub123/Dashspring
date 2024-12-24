@@ -12,10 +12,10 @@ import { EditFoyerModalComponent } from './EditFoyerModalComponent';
 export class FoyerComponent implements OnInit {
   foyers: Foyer[] = [];
   filteredFoyers: Foyer[] = []; 
-  newFoyer: Foyer = { id: 0, nom: '', latitude: 0, longitude: 0 };  
-  searchQuery = ''; 
+  newFoyer: Foyer = { id: 0, nom: '', latitude: 0, longitude: 0, personnel: null };  
+  foyerToEdit: Foyer = { id: 0, nom: '', latitude: 0, longitude: 0, personnel: null };
 
-  foyerToEdit: Foyer = { id: 0, nom: '', latitude: 0, longitude: 0 }; 
+  searchQuery = ''; 
 
   constructor(
     private foyerService: FoyerService,
@@ -36,7 +36,7 @@ export class FoyerComponent implements OnInit {
   addFoyer(): void {
     this.foyerService.addFoyer(this.newFoyer).subscribe((createdFoyer) => {
       this.foyers.push(createdFoyer); 
-      this.newFoyer = { id: 0, nom: '', latitude: 0, longitude: 0 }; 
+      this.newFoyer = { id: 0, nom: '', latitude: 0, longitude: 0 , personnel: null  }; 
       this.filterFoyers();  
     });
   }

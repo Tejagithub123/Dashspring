@@ -7,7 +7,8 @@ import { Foyer } from '../../models/foyer.model';
   templateUrl: './edit-foyer-modal.component.html',
 })
 export class EditFoyerModalComponent {
-  @Input() foyer: Foyer = { id: 0, nom: '', longitude: 0.0, latitude: 0.0 };
+  @Input() foyer: Foyer = { id: 0, nom: '', longitude: 0.0, latitude: 0.0, personnel: null };
+
   @Output() saveFoyer = new EventEmitter<Foyer>();  
 
   constructor(public activeModal: NgbActiveModal) {}

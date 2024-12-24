@@ -76,7 +76,7 @@
         <tr *ngFor="let foyer of filteredFoyers; let i = index">
           <td>{{ i + 1 }}</td>
           <td>{{ foyer.nom }}</td>
-          <td>{{ foyer.personnel?.name || 'No personnel' }}</td>
+          <td>{{ foyer.personnel?.nom || 'No personnel' }}</td>
           <td>{{ foyer.latitude }}</td>
           <td>{{ foyer.longitude }}</td>
           <td class="d-flex justify-content-around">
