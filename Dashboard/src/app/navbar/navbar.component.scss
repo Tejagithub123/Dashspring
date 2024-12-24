@@ -1,0 +1,187 @@
+
+$header-bg: #1d1d1d;
+$header-border: #2b2b2b;
+$text-color: #bdbdbd;
+$hover-color: #ffffff;
+$accent-color: #ED2E7A;
+$header-height: 64px;
+
+.main-header {
+  background-color: $header-bg;
+  height: $header-height;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid $header-border;
+  position: fixed;
+  top: 0;
+  left: 260px; // Matches sidebar width
+  right: 0;
+  z-index: 998;
+  transition: left 0.3s ease;
+
+  // When sidebar is collapsed
+  &.sidebar-collapsed {
+    left: 0;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    .sidebar-toggle {
+      background: transparent;
+      border: none;
+      color: $text-color;
+      font-size: 20px;
+      padding: 0 15px;
+      cursor: pointer;
+      height: $header-height;
+      display: flex;
+      align-items: center;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $hover-color;
+      }
+
+      i {
+        transition: transform 0.3s ease;
+      }
+
+      &:hover i {
+        transform: rotate(90deg);
+      }
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      margin-left: 15px;
+
+      .logo {
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+      }
+
+      .company-name {
+        color: $text-color;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 0;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: $accent-color;
+        }
+      }
+    }
+  }
+
+  .header-right {
+    height: 100%;
+
+    nav {
+      height: 100%;
+
+      .list-items {
+        display: flex;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        .item {
+          height: 100%;
+          position: relative;
+
+          a {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding: 0 15px;
+            color: $text-color;
+            text-decoration: none;
+            transition: color 0.3s ease;
+
+            &:hover {
+              color: $hover-color;
+            }
+
+            i {
+              font-size: 18px;
+            }
+
+            .badge {
+              position: absolute;
+              top: 12px;
+              right: 8px;
+              font-size: 10px;
+              padding: 2px 5px;
+            }
+
+            .user-image {
+              width: 32px;
+              height: 32px;
+              border-radius: 50%;
+              margin-right: 10px;
+            }
+
+            .user-name {
+              display: block;
+              margin-left: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .main-header {
+    left: 0;
+    padding: 0 10px;
+
+    .header-left {
+      .brand {
+        .company-name {
+          display: none;
+        }
+      }
+    }
+
+    .header-right {
+      nav {
+        .list-items {
+          .item {
+            .user-name {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Animation for notification badges
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.badge {
+  animation: pulse 2s infinite;
+}

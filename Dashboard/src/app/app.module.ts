@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SidebarComponent } from './sidebar/sidebar.component';
+import { SidebarComponent } from './sidebar1/sidebar.component';
 import { WigetsComponent } from './wigets/wigets.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HomeComponent } from './home/home.component';
@@ -33,7 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
-
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,6 +69,7 @@ import { MatCardModule } from '@angular/material/card';
     MatInputModule,
     MatFormFieldModule,
     MatCardModule,
+    PerfectScrollbarModule 
 
   ],
   providers: [UserService, ToggleService],
