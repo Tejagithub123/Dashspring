@@ -23,10 +23,14 @@ public class PersonnelService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    // Méthode pour ajouter un personnel
     public Personnel addPersonnel(Personnel personnel, Long foyerId) {
         Optional<Foyer> foyer = foyerRepository.findById(foyerId);
+
         if (foyer.isPresent()) {
+
+            String hashedPassword = passwordEncoder.encode(personnel.getMdp());
+            personnel.setMdp(hashedPassword);
+
             personnel.setFoyer(foyer.get());
             personnel.setRole(Utilisateur.Role.PERSONNEL);
 
@@ -36,18 +40,15 @@ public class PersonnelService {
         }
     }
 
-    // Récupérer tous les personnels
     public List<Personnel> getAllPersonnels() {
-        return personnelRepository.findAll(); // Appelle la méthode findAll() du repository pour récupérer tous les
-                                              // personnels
+        return personnelRepository.findAll();
+
     }
 
-    // Méthode pour récupérer un personnel par ID
     public Personnel getPersonnel(Long id) {
         return personnelRepository.findById(id).orElse(null);
     }
 
-    // Méthode pour affecter un foyer à un personnel existant
     public Personnel assignFoyerToPersonnel(Long personnelId, Long foyerId) {
         Optional<Personnel> personnel = personnelRepository.findById(personnelId);
         Optional<Foyer> foyer = foyerRepository.findById(foyerId);
@@ -66,7 +67,6 @@ public class PersonnelService {
         if (existingPersonnel.isPresent()) {
             Personnel personnel = existingPersonnel.get();
 
-            // Mettre à jour uniquement les champs non nuls de updatedPersonnel
             if (updatedPersonnel.getNom() != null) {
                 personnel.setNom(updatedPersonnel.getNom());
             }
@@ -83,23 +83,22 @@ public class PersonnelService {
                 personnel.setDateNaissance(updatedPersonnel.getDateNaissance());
             }
             if (updatedPersonnel.getMdp() != null) {
-                // Hash the password before saving
+
                 String hashedPassword = passwordEncoder.encode(updatedPersonnel.getMdp());
                 personnel.setMdp(hashedPassword);
             }
 
-            return personnelRepository.save(personnel); // Sauvegarder les modifications
+            return personnelRepository.save(personnel);
         } else {
             throw new IllegalArgumentException("Personnel non trouvé");
         }
     }
 
-    // Méthode pour supprimer un personnel
     public void deletePersonnel(Long id) {
         Optional<Personnel> personnel = personnelRepository.findById(id);
 
         if (personnel.isPresent()) {
-            personnelRepository.delete(personnel.get()); // Supprimer le personnel
+            personnelRepository.delete(personnel.get());
         } else {
             throw new IllegalArgumentException("Personnel non trouvé");
         }
