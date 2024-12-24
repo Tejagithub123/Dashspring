@@ -13,7 +13,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class Personnel extends Utilisateur {
 
     @OneToOne
-    @JoinColumn(name = "foyer_id")
+    @ManyToOne
+    @JoinColumn(name = "foyer_id", nullable = true)
     @JsonBackReference
     private Foyer foyer;
 
