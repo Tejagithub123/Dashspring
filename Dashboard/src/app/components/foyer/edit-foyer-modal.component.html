@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="editFoyerModalLabel">Edit Foyer</h5>
+    <button type="button" class="close" (click)="activeModal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="saveChanges()">
+      <div class="form-group">
+        <label for="nom">Name:</label>
+        <input type="text" id="nom" [(ngModel)]="foyer.nom" name="nom" required class="form-control"/>
+      </div>
+      <div class="form-group">
+        <label for="latitude">Latitude:</label>
+        <input type="number" id="latitude" [(ngModel)]="foyer.latitude" name="latitude" required class="form-control"/>
+      </div>
+      <div class="form-group">
+        <label for="longitude">Longitude:</label>
+        <input type="number" id="longitude" [(ngModel)]="foyer.longitude" name="longitude" required class="form-control"/>
+      </div>
+   
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </form>
+  </div>
+  

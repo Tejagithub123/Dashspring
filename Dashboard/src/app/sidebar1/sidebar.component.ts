@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SidebarService } from './sidebar.service';
-import { MenuItem } from './Menuitem'; // Ensure the correct import path
+import { MenuItem } from './MenuItem'; // Ensure the correct import path
 
 @Component({
   selector: 'app-sidebar',

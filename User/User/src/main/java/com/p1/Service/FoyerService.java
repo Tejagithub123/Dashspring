@@ -15,37 +15,44 @@ public class FoyerService {
     @Autowired
     private FoyerRepository foyerRepository;
 
-    // Méthode pour ajouter un foyer
     public Foyer addFoyer(Foyer foyer) {
         return foyerRepository.save(foyer);
     }
 
-    // Récupérer tous les foyers
     public List<Foyer> getAllFoyers() {
         return foyerRepository.findAll();
     }
 
-    // Méthode pour récupérer un foyer par ID
     public Optional<Foyer> getFoyerById(Long id) {
         return foyerRepository.findById(id);
     }
 
-    // Méthode pour mettre à jour un foyer
     public Foyer updateFoyer(Long id, Foyer foyerDetails) {
-        // Rechercher le foyer par son ID
+        System.out.println("updating");
+
+        // Find the foyer by ID, throw an exception if not found
         Foyer foyer = foyerRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Foyer non trouvé"));
 
-        // Mettre à jour les champs nom, longitude et latitude
-        foyer.setNom(foyerDetails.getNom());
-        foyer.setLongitude(foyerDetails.getLongitude());
-        foyer.setLatitude(foyerDetails.getLatitude());
+        // Only update 'nom' if a new value is provided
+        if (foyerDetails.getNom() != null && !foyerDetails.getNom().isEmpty()) {
+            foyer.setNom(foyerDetails.getNom());
+        }
 
-        // Sauvegarder les modifications et retourner l'objet mis à jour
+        // Only update latitude if a new value is provided
+        if (foyerDetails.getLatitude() != 0.0) {
+            foyer.setLatitude(foyerDetails.getLatitude());
+        }
+
+        // Only update longitude if a new value is provided and it's not 0.0
+        if (foyerDetails.getLongitude() != 0.0 && foyerDetails.getLongitude() != 0.0) {
+            foyer.setLongitude(foyerDetails.getLongitude());
+        }
+
+        // Save the updated foyer object
         return foyerRepository.save(foyer);
     }
 
-    // Méthode pour supprimer un foyer
     public void deleteFoyer(Long id) {
         Foyer foyer = foyerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Foyer non trouvé"));
         foyerRepository.delete(foyer);

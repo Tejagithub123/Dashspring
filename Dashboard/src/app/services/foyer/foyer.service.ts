@@ -31,10 +31,12 @@ export class FoyerService {
   addFoyer(foyer: Foyer): Observable<Foyer> {
     return this.http.post<Foyer>(this.baseUrl, foyer, { headers: this.getHeaders() });
   }
-
   updateFoyer(id: number, foyer: Foyer): Observable<Foyer> {
-    return this.http.put<Foyer>(`${this.baseUrl}/${id}`, foyer, { headers: this.getHeaders() });
+    return this.http.put<Foyer>(`${this.baseUrl}/${id}`, foyer, {
+      headers: this.getHeaders(),
+    });
   }
+  
 
   deleteFoyer(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`, { headers: this.getHeaders() });

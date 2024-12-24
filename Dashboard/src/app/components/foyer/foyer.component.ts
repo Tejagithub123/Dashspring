@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FoyerService } from '../../services/foyer/foyer.service';
 import { Foyer } from '../../models/foyer.model';
-import { FormControl } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';  // Import NgbModal
+import { EditFoyerModalComponent } from './EditFoyerModalComponent';
 
 @Component({
   selector: 'app-foyer',
@@ -10,11 +11,16 @@ import { FormControl } from '@angular/forms';
 })
 export class FoyerComponent implements OnInit {
   foyers: Foyer[] = [];
-  filteredFoyers: Foyer[] = []; // Array to store filtered foyers
-  newFoyer: Foyer = { id: 0, nom: '', latitude: 0, longitude: 0 };  // Include latitude and longitude
-  searchQuery = ''; // Search query for filtering
+  filteredFoyers: Foyer[] = []; 
+  newFoyer: Foyer = { id: 0, nom: '', latitude: 0, longitude: 0 };  
+  searchQuery = ''; 
 
-  constructor(private foyerService: FoyerService) {}
+  foyerToEdit: Foyer = { id: 0, nom: '', latitude: 0, longitude: 0 }; 
+
+  constructor(
+    private foyerService: FoyerService,
+    private modalService: NgbModal  // Inject NgbModal
+  ) {}
 
   ngOnInit(): void {
     this.loadFoyers();
@@ -23,43 +29,67 @@ export class FoyerComponent implements OnInit {
   loadFoyers(): void {
     this.foyerService.getAllFoyers().subscribe((data) => {
       this.foyers = data;
-      this.filteredFoyers = data;  // Set filteredFoyers to all foyers initially
+      this.filteredFoyers = data;  
     });
   }
 
   addFoyer(): void {
     this.foyerService.addFoyer(this.newFoyer).subscribe((createdFoyer) => {
-      this.foyers.push(createdFoyer); // Add new foyer to list
-      this.newFoyer = { id: 0, nom: '', latitude: 0, longitude: 0 }; // Reset form
-      this.filterFoyers();  // Apply filtering after adding
+      this.foyers.push(createdFoyer); 
+      this.newFoyer = { id: 0, nom: '', latitude: 0, longitude: 0 }; 
+      this.filterFoyers();  
     });
   }
 
   deleteFoyer(id: number | undefined): void {
     if (id) {
       this.foyerService.deleteFoyer(id).subscribe(() => {
-        this.loadFoyers(); // Refresh the list of foyers after deletion
+        this.loadFoyers(); 
       });
     } else {
       console.error('Foyer ID is undefined');
     }
   }
 
-  // Update Foyer functionality (you can implement as needed)
-  editFoyer(foyer: Foyer): void {
-    // For now, just log the foyer
-    console.log('Editing foyer:', foyer);
-    // Implement the update logic here
+ // Function to update foyer
+ editFoyer(): void {
+  if (this.foyerToEdit.id !== undefined) {
+    console.log('Editing foyer:', this.foyerToEdit);
+    this.foyerService.updateFoyer(this.foyerToEdit.id, this.foyerToEdit).subscribe(
+      (updatedFoyer) => {
+        console.log('Foyer updated successfully:', updatedFoyer);
+        this.loadFoyers();
+      },
+      (error) => {
+        console.error('Error updating foyer:', error);
+      }
+    );
+  } else {
+    console.error('Foyer ID is undefined, cannot update.');
   }
+}
 
-  // Filter foyers based on search query
+selectFoyerForEditing(foyer: Foyer): void {
+  this.foyerToEdit = { ...foyer };
+  // Open the modal programmatically
+  const modalRef = this.modalService.open(EditFoyerModalComponent);
+  modalRef.componentInstance.foyer = this.foyerToEdit;
+
+  // Listen for the saveFoyer event from the modal and update the foyer
+  modalRef.componentInstance.saveFoyer.subscribe((updatedFoyer: Foyer) => {
+    this.foyerToEdit = updatedFoyer;  // Update the foyer in the parent
+    this.editFoyer();  // Call the edit function to update via API
+  });
+}
+
   filterFoyers(): void {
     if (this.searchQuery) {
       this.filteredFoyers = this.foyers.filter(foyer =>
         foyer.nom.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     } else {
-      this.filteredFoyers = this.foyers;  // Show all if search query is empty
+      this.filteredFoyers = this.foyers;  
     }
   }
+
 }
