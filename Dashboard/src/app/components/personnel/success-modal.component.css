@@ -1,0 +1,114 @@
+/* Styling for the modal background */
+body {
+    letter-spacing: 0.7px;
+    background-color: #eee;
+}
+
+/* Container that centers the modal */
+.container {
+    margin-top: 120px;
+    margin-bottom: 120px;
+}
+
+/* Remove outline and box-shadow for focused or active buttons */
+.btn-lg,
+a:focus,
+a:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Card with shadow effect */
+.card-1 {
+    box-shadow: 2px 4px 15px 0px #AA00FF;
+}
+
+/* Styling for the paragraph inside modal */
+p {
+    font-size: 13px;
+}
+
+/* Small text with a smaller font size */
+.small {
+    font-size: 9px !important;
+}
+
+/* Custom cursor pointer for clickable elements */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Button with rounded corners and specific background/color */
+.btn-round-lg {
+    border-radius: 22.5px;
+    background-color: #eee;
+    color: #3D5AFE;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.9px;
+    padding: 8px 20px !important;
+    border: 1px solid #fff;
+}
+
+/* Hover effect for the button */
+.btn-round-lg:hover {
+    background-color: #fff;
+    color: #3D5AFE;
+    border: 1px solid #fff;
+}
+
+/* Focus effect for the button */
+.btn-round-lg:focus {
+    border: 1px solid #fff !important;
+}
+
+/* Modal content card background */
+.card {
+    background-color: #3D5AFE !important;
+    color: white;
+}
+
+/* Specific modal header styling */
+.modal-header {
+    background-color: #3D5AFE;
+    color: white;
+    border-bottom: 2px solid #eee;
+    padding: 20px;
+}
+
+/* Close button styling */
+.modal-header .close {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* Modal body styling */
+.modal-body {
+    font-size: 14px;
+    color: #333;
+    padding: 20px;
+}
+
+/* Modal footer styling */
+.modal-footer {
+    background-color: #f7f7f7;
+    border-top: 2px solid #eee;
+    padding: 15px;
+}
+
+/* Button styling for closing the modal */
+.modal-footer .btn-secondary {
+    background-color: #3D5AFE;
+    color: white;
+    border: none;
+    border-radius: 22.5px;
+    padding: 8px 20px;
+    font-size: 14px;
+    letter-spacing: 0.9px;
+}
+
+.modal-footer .btn-secondary:hover {
+    background-color: #eee;
+    color: #3D5AFE;
+}

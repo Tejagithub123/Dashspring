@@ -29,6 +29,7 @@ import { PersonnelComponent } from './components/personnel/personnel.component';
 import { LoginComponent } from './components/login/login.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditFoyerModalComponent } from './components/foyer/EditFoyerModalComponent';
+import { SuccessModalComponent } from './components/personnel/SuccessModalComponent';
 // Angular Material Modules
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -47,7 +48,8 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
     FoyerComponent,
     PersonnelComponent,
     LoginComponent , 
-    EditFoyerModalComponent
+    EditFoyerModalComponent,
+    SuccessModalComponent
   ],
   imports: [
     BrowserModule,
