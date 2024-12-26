@@ -43,13 +43,23 @@ export class FoyerComponent implements OnInit {
 
   deleteFoyer(id: number | undefined): void {
     if (id) {
-      this.foyerService.deleteFoyer(id).subscribe(() => {
-        this.loadFoyers(); 
+      this.foyerService.deleteFoyer(id).subscribe({
+        next: () => {
+          this.loadFoyers(); // Reload the list of foyers after successful deletion
+        },
+        error: (err) => {
+          if (err.status === 403) {
+            alert('This foyer cannot be deleted because it has personnel assigned.');
+          } else {
+            console.error('Error deleting foyer:', err);
+          }
+        }
       });
     } else {
       console.error('Foyer ID is undefined');
     }
   }
+  
 
  // Function to update foyer
  editFoyer(): void {

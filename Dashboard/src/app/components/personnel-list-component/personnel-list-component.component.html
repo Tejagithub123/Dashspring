@@ -1,0 +1,44 @@
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+
+<div class="card">
+  <div class="card-header">Personnel List</div>
+  <div class="card-body">
+ <!-- Add Personnel button -->
+ <button class="btn btn-success float-right " [routerLink]="['/personnel']">Add Personnel   <i class="fa fa-plus" aria-hidden="true"></i></button>
+ <div><br/></div>
+ <div><br/></div>
+  <!-- Table displaying personnel records -->
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Email</th>
+        <th>Date de Naissance</th>
+        <th>CIN</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let personnel of personnels">
+        <td>{{ personnel.id }}</td>
+        <td>{{ personnel.nom }}</td>
+        <td>{{ personnel.prenom }}</td>
+        <td>{{ personnel.email }}</td>
+        <td>{{ personnel.dateNaissance }}</td>
+        <td>{{ personnel.cin }}</td>
+        <td>
+          <!-- Update and Delete buttons with safety check for undefined id -->
+          <button *ngIf="personnel.id" class="btn btn-primary" (click)="updatePersonnel(personnel.id)">Update</button>
+          <button *ngIf="personnel.id" class="btn btn-danger" (click)="deletePersonnel(personnel.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+

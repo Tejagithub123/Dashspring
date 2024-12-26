@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Personnel } from 'src/app/models/personnel.model';
 import { PersonnelService } from 'src/app/services/personnel/personnel.service';
 import { FoyerService } from 'src/app/services/foyer/foyer.service'; // Service to get foyers
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-personnel-profile',
   templateUrl: './personnel.component.html',
@@ -25,8 +25,8 @@ export class PersonnelComponent implements OnInit {
   constructor(
     private personnelService: PersonnelService,
     private route: ActivatedRoute,
-    private foyerService: FoyerService // Inject the Foyer service
-  ) {}
+    private foyerService: FoyerService ,// Inject the Foyer service
+    private router: Router) {}
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -84,6 +84,7 @@ export class PersonnelComponent implements OnInit {
           () => {
             console.log('Personnel created successfully!');
             alert('Personnel created successfully!');
+            this.router.navigate(['/liste-personnels']);
           },
           (error) => {
             console.error('Error creating personnel:', error);

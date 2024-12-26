@@ -26,28 +26,15 @@ export class SidebarService {
       type: 'simple', 
     },
     {
-      title: 'Dashboard',
-      icon: 'fa fa-home',
-      active: false,
+      title: 'list personnels',
+      icon: 'fa fa-list',
+      route : '/liste-personnels',
       type: 'dropdown',
       badge: {
         text: 'New',
         class: 'badge-warning',
       },
-      submenus: [
-        {
-          title: 'Dashboard 1',
-          icon: 'fa fa-home',
-          type: 'simple',
-          route: '/dashboard1',  
-        },
-        {
-          title: 'Dashboard 2',
-          icon: 'fa fa-home',
-          type: 'simple',
-          route: '/dashboard2',  
-        },
-      ],
+     
     },
     {
       title: 'E-commerce',

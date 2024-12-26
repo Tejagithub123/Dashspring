@@ -35,6 +35,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PersonnelListComponent } from './components/personnel-list-component/personnel-list-component.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +50,8 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
     PersonnelComponent,
     LoginComponent , 
     EditFoyerModalComponent,
-    SuccessModalComponent
+    SuccessModalComponent,
+    PersonnelListComponent
   ],
   imports: [
     BrowserModule,
