@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class Personnel extends Utilisateur {
 
     @OneToOne
-    @ManyToOne
     @JoinColumn(name = "foyer_id", nullable = true)
     @JsonBackReference
     private Foyer foyer;

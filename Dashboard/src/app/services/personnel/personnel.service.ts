@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Personnel } from '../../models/personnel.model';
 
@@ -22,43 +22,48 @@ export class PersonnelService {
     return headers;
   }
 
+  // Get all personnels
   getAll(): Observable<Personnel[]> {
     return this.http.get<Personnel[]>(`${this.baseUrl}/Allpersonnels`, {
       headers: this.getHeaders(),
     });
   }
 
+  // Get a personnel by ID
   getById(id: number): Observable<Personnel> {
     return this.http.get<Personnel>(`${this.baseUrl}/${id}`, {
       headers: this.getHeaders(),
     });
   }
 
-  create(personnel: Personnel, foyerId: number): Observable<Personnel> {
-    return this.http.post<Personnel>(`${this.baseUrl}?foyerId=${foyerId}`, personnel, {
+  // Create a new personnel (no foyer assigned)
+  create(personnel: Personnel): Observable<Personnel> {
+    return this.http.post<Personnel>(`${this.baseUrl}`, personnel, {
       headers: this.getHeaders(),
     });
   }
 
+  // Update a personnel
   update(id: number, personnel: Partial<Personnel>): Observable<Personnel> {
     return this.http.patch<Personnel>(`${this.baseUrl}/${id}`, personnel, {
       headers: this.getHeaders(),
     });
   }
 
+  // Delete a personnel
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`, {
       headers: this.getHeaders(),
     });
   }
 
+  // Assign a foyer to a personnel
   assignFoyer(personnelId: number, foyerId: number): Observable<Personnel> {
+    const params = new HttpParams().set('foyerId', foyerId.toString());
     return this.http.put<Personnel>(
-      `${this.baseUrl}/${personnelId}/foyer?foyerId=${foyerId}`,
-      {},
-      {
-        headers: this.getHeaders(),
-      }
+      `${this.baseUrl}/${personnelId}/foyer`,
+      null, // Sending empty body as required by the backend
+      { params: params, headers: this.getHeaders() }
     );
   }
 }

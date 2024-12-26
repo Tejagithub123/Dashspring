@@ -38,29 +38,31 @@
           required
         />
       </div>
-      <button type="submit" class="btn btn-success">Add Foyer</button>
+      <button type="submit" class="btn btn-success float-right">Add Foyer  <i class="fa fa-plus" aria-hidden="true"></i></button>
+
     </form>
 
-    <!-- Search Foyer Form -->
-    <form>
-      <div class="mb-3 row">
-        <label for="table-filtering-search" class="col-xs-5 col-sm-auto col-form-label">Search:</label>
-        <div class="col-xs-3 col-sm-auto">
-          <input
-            type="text"
-            class="form-control"
-            id="table-filtering-search"
-            placeholder="Search by Foyer Name"
-            [(ngModel)]="searchQuery"
-            name="searchQuery"
-            (ngModelChange)="filterFoyers()"
-          />
-        </div>
-      </div>
-    </form>
+
 
     <!-- Foyer Table -->
     <h3 style="text-align: center;">List of Foyers</h3>
+        <!-- Search Foyer Form -->
+        <form>
+          <div class="mb-3 row">
+            <label for="table-filtering-search" class="col-xs-5 col-sm-auto col-form-label">Search:</label>
+            <div class="col-xs-3 col-sm-auto">
+              <input
+                type="text"
+                class="form-control"
+                id="table-filtering-search"
+                placeholder="Search by Foyer Name"
+                [(ngModel)]="searchQuery"
+                name="searchQuery"
+                (ngModelChange)="filterFoyers()"
+              />
+            </div>
+          </div>
+        </form>
     <table class="table table-striped">
       <thead>
         <tr>

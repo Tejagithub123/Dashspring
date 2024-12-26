@@ -10,6 +10,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import java.util.List;
 
 @Service
@@ -23,21 +26,27 @@ public class PersonnelService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public Personnel addPersonnel(Personnel personnel, Long foyerId) {
-        Optional<Foyer> foyer = foyerRepository.findById(foyerId);
+    @Autowired
+    private FoyerService foyerService;
 
-        if (foyer.isPresent()) {
+    public Personnel addPersonnel(Personnel personnel) {
+        // Hash the password before saving
+        String hashedPassword = passwordEncoder.encode(personnel.getMdp());
+        personnel.setMdp(hashedPassword);
 
-            String hashedPassword = passwordEncoder.encode(personnel.getMdp());
-            personnel.setMdp(hashedPassword);
+        // Set the role for the personnel
+        personnel.setRole(Utilisateur.Role.ROLE_PERSONNEL);
 
-            personnel.setFoyer(foyer.get());
-            personnel.setRole(Utilisateur.Role.ROLE_PERSONNEL);
-
-            return personnelRepository.save(personnel);
-        } else {
-            throw new IllegalArgumentException("Le foyer n'existe pas");
+        // If foyer_id is provided, assign the corresponding Foyer to the Personnel
+        if (personnel.getFoyer() != null && personnel.getFoyer().getId() != null) {
+            // Use the getFoyerById method here instead of findById
+            Foyer foyer = foyerService.getFoyerById(personnel.getFoyer().getId())
+                    .orElseThrow(() -> new IllegalArgumentException(
+                            "Foyer not found with ID: " + personnel.getFoyer().getId()));
+            personnel.setFoyer(foyer); // Associate the Foyer with Personnel
         }
+
+        return personnelRepository.save(personnel);
     }
 
     public List<Personnel> getAllPersonnels() {
@@ -47,18 +56,6 @@ public class PersonnelService {
 
     public Personnel getPersonnel(Long id) {
         return personnelRepository.findById(id).orElse(null);
-    }
-
-    public Personnel assignFoyerToPersonnel(Long personnelId, Long foyerId) {
-        Optional<Personnel> personnel = personnelRepository.findById(personnelId);
-        Optional<Foyer> foyer = foyerRepository.findById(foyerId);
-
-        if (personnel.isPresent() && foyer.isPresent()) {
-            personnel.get().setFoyer(foyer.get());
-            personnel.get().setRole(Utilisateur.Role.ROLE_PERSONNEL);
-            return personnelRepository.save(personnel.get());
-        }
-        throw new IllegalArgumentException("Personnel ou foyer non trouvés");
     }
 
     public Personnel updatePersonnel(Long id, Personnel updatedPersonnel) {
@@ -103,4 +100,24 @@ public class PersonnelService {
             throw new IllegalArgumentException("Personnel non trouvé");
         }
     }
+
+    public Personnel assignFoyerToPersonnel(Long personnelId, Long foyerId) {
+        Personnel personnel = personnelRepository.findById(personnelId)
+                .orElseThrow(() -> new IllegalArgumentException("Personnel non trouvé"));
+        Foyer foyer = foyerRepository.findById(foyerId)
+                .orElseThrow(() -> new IllegalArgumentException("Foyer non trouvé"));
+
+        // Validation : vérifier que le personnel n'a pas déjà un foyer
+        if (personnel.getFoyer() != null) {
+            throw new IllegalStateException("Ce personnel est déjà affecté à un foyer");
+        }
+
+        // Associer le personnel au foyer
+        personnel.setFoyer(foyer);
+        foyer.setPersonnel(personnel);
+
+        foyerRepository.save(foyer);
+        return personnelRepository.save(personnel);
+    }
+
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Personnel } from 'src/app/models/personnel.model';
 import { PersonnelService } from 'src/app/services/personnel/personnel.service';
-import { FoyerService } from 'src/app/services/foyer/foyer.service'; // Service to get foyers
+import { FoyerService } from 'src/app/services/foyer/foyer.service'; 
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-personnel-profile',
@@ -20,12 +20,12 @@ export class PersonnelComponent implements OnInit {
     cin : 0
   };
 
-  foyers: any[] = []; // List of foyers to populate the dropdown
+  foyers: any[] = []; 
 
   constructor(
     private personnelService: PersonnelService,
     private route: ActivatedRoute,
-    private foyerService: FoyerService ,// Inject the Foyer service
+    private foyerService: FoyerService ,
     private router: Router) {}
 
   ngOnInit(): void {
@@ -42,10 +42,10 @@ export class PersonnelComponent implements OnInit {
       );
     }
 
-    // Fetch foyers to populate the dropdown
+    
     this.foyerService.getAllFoyers().subscribe(
       (data) => {
-        // Filter foyers to only include those without any assigned personnel
+        
         this.foyers = data.filter(foyer => !foyer.personnel );
       },
       (error) => {
@@ -57,12 +57,16 @@ export class PersonnelComponent implements OnInit {
 
   save(): void {
     console.log('Saving personnel:', this.personnel);
-
+  
+    // Create a foyer object with just the id
+    const foyerObject = this.personnel.foyerId ? { id: this.personnel.foyerId } : null;
+    const personnelToSend = { ...this.personnel, foyer: foyerObject };
+  
     if (this.personnel && this.personnel.id) {
       // If the personnel already has an id, update the existing record
       console.log('Updating personnel with id:', this.personnel.id);
       
-      this.personnelService.update(this.personnel.id, this.personnel).subscribe(
+      this.personnelService.update(this.personnel.id, personnelToSend).subscribe(
         () => {
           console.log('Profile updated successfully!');
           alert('Profile updated successfully!');
@@ -74,27 +78,22 @@ export class PersonnelComponent implements OnInit {
       );
     } else {
       // If the personnel does not have an id, create a new record
-      const foyerId = this.personnel.foyerId;
-      console.log('Foyer ID:', foyerId);
-
-      if (foyerId !== undefined) {  // Check if foyerId is defined
-        console.log('Creating new personnel with foyerId:', foyerId);
-        
-        this.personnelService.create(this.personnel, foyerId).subscribe(
-          () => {
-            console.log('Personnel created successfully!');
-            alert('Personnel created successfully!');
-            this.router.navigate(['/liste-personnels']);
-          },
-          (error) => {
-            console.error('Error creating personnel:', error);
-            alert('Failed to create personnel.');
-          }
-        );
-      } else {
-        console.log('Foyer ID is missing, cannot create personnel');
-        alert('Foyer ID is required to create personnel.');
-      }
+      console.log('Creating new personnel with foyerId:', this.personnel.foyerId);
+      
+      this.personnelService.create(personnelToSend).subscribe(
+        () => {
+          console.log('Personnel created successfully!');
+          alert('Personnel created successfully!');
+          this.router.navigate(['/liste-personnels']);
+        },
+        (error) => {
+          console.error('Error creating personnel:', error);
+          alert('Failed to create personnel.');
+        }
+      );
     }
   }
+  
+  
+
 }

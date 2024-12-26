@@ -25,7 +25,7 @@ export class PersonnelListComponent implements OnInit {
     this.personnelService.getAll().subscribe(
       (data) => {
         this.personnels = data;
-        console.log(data)
+        console.log("data",data)
       },
       (error) => {
         console.error('Error fetching personnel list:', error);

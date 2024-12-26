@@ -26,8 +26,8 @@ public class AdminController {
 
     // Ajouter un nouveau personnel et l'affecter à un foyer
     @PostMapping("/personnels")
-    public ResponseEntity<Personnel> addPersonnel(@Valid @RequestBody Personnel personnel, @RequestParam Long foyerId) {
-        Personnel createdPersonnel = personnelService.addPersonnel(personnel, foyerId);
+    public ResponseEntity<Personnel> addPersonnel(@Valid @RequestBody Personnel personnel) {
+        Personnel createdPersonnel = personnelService.addPersonnel(personnel);
         return ResponseEntity.ok(createdPersonnel);
     }
 
@@ -42,6 +42,11 @@ public class AdminController {
     @PutMapping("/personnels/{personnelId}/foyer")
     public ResponseEntity<Personnel> assignFoyerToPersonnel(@PathVariable Long personnelId,
             @RequestParam Long foyerId) {
+        // Vérifie que les IDs sont valides
+        if (foyerId == null) {
+            throw new IllegalArgumentException("L'ID du foyer doit être fourni.");
+        }
+
         Personnel updatedPersonnel = personnelService.assignFoyerToPersonnel(personnelId, foyerId);
         return ResponseEntity.ok(updatedPersonnel);
     }
