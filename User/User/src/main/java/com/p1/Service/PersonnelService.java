@@ -80,14 +80,24 @@ public class PersonnelService {
                 personnel.setDateNaissance(updatedPersonnel.getDateNaissance());
             }
             if (updatedPersonnel.getMdp() != null) {
-
                 String hashedPassword = passwordEncoder.encode(updatedPersonnel.getMdp());
                 personnel.setMdp(hashedPassword);
             }
 
+            // Update the Foyer association if provided
+            if (updatedPersonnel.getFoyer() != null && updatedPersonnel.getFoyer().getId() != null) {
+                Foyer foyer = foyerService.getFoyerById(updatedPersonnel.getFoyer().getId())
+                        .orElseThrow(() -> new IllegalArgumentException(
+                                "Foyer not found with ID: " + updatedPersonnel.getFoyer().getId()));
+                personnel.setFoyer(foyer);
+            } else if (updatedPersonnel.getFoyer() == null) {
+                // If the `foyer` field is null, disassociate the existing foyer
+                personnel.setFoyer(null);
+            }
+
             return personnelRepository.save(personnel);
         } else {
-            throw new IllegalArgumentException("Personnel non trouvé");
+            throw new IllegalArgumentException("Personnel not found with ID: " + id);
         }
     }
 
