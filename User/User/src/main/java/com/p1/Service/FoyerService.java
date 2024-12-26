@@ -30,36 +30,28 @@ public class FoyerService {
     public Foyer updateFoyer(Long id, Foyer foyerDetails) {
         System.out.println("updating");
 
-        // Find the foyer by ID, throw an exception if not found
         Foyer foyer = foyerRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Foyer non trouvé"));
 
-        // Only update 'nom' if a new value is provided
         if (foyerDetails.getNom() != null && !foyerDetails.getNom().isEmpty()) {
             foyer.setNom(foyerDetails.getNom());
         }
 
-        // Only update latitude if a new value is provided
         if (foyerDetails.getLatitude() != 0.0) {
             foyer.setLatitude(foyerDetails.getLatitude());
         }
 
-        // Only update longitude if a new value is provided and it's not 0.0
         if (foyerDetails.getLongitude() != 0.0 && foyerDetails.getLongitude() != 0.0) {
             foyer.setLongitude(foyerDetails.getLongitude());
         }
 
-        // Save the updated foyer object
         return foyerRepository.save(foyer);
     }
-
-    // FoyerService.java
 
     public void deleteFoyer(Long id) {
         Foyer foyer = foyerRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Foyer non trouvé"));
 
-        // Check if the foyer has any personnel assigned
         if (foyer.getPersonnel() != null) {
             throw new IllegalArgumentException("Impossible de supprimer le foyer car il est associé à un personnel.");
         }
