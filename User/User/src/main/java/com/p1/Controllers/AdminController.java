@@ -3,6 +3,7 @@ package com.p1.Controllers;
 import com.p1.Model.Personnel;
 import com.p1.Service.PersonnelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.p1.Model.Foyer;
@@ -31,7 +32,7 @@ public class AdminController {
     }
 
     // Récupérer tous les personnels
-    @GetMapping("/Allpersonnels")
+    @GetMapping("/personnels/Allpersonnels")
     public ResponseEntity<List<Personnel>> getAllPersonnels() {
         List<Personnel> personnels = personnelService.getAllPersonnels();
         return ResponseEntity.ok(personnels); // Retourne la liste de tous les personnels avec un code HTTP 200 OK
@@ -100,10 +101,17 @@ public class AdminController {
         return ResponseEntity.ok(updatedFoyer);
     }
 
-    // Supprimer un foyer
+    // FoyerController.java
+
     @DeleteMapping("/foyers/{id}")
     public ResponseEntity<Void> deleteFoyer(@PathVariable Long id) {
-        foyerService.deleteFoyer(id);
-        return ResponseEntity.noContent().build(); // 204 No Content
+        try {
+            foyerService.deleteFoyer(id);
+            return ResponseEntity.noContent().build(); // 204 No Content if deleted successfully
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN) // 403 Forbidden if deletion is not allowed
+                    .body(null);
+        }
     }
+
 }

@@ -53,8 +53,17 @@ public class FoyerService {
         return foyerRepository.save(foyer);
     }
 
+    // FoyerService.java
+
     public void deleteFoyer(Long id) {
-        Foyer foyer = foyerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Foyer non trouvé"));
+        Foyer foyer = foyerRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Foyer non trouvé"));
+
+        // Check if the foyer has any personnel assigned
+        if (foyer.getPersonnel() != null) {
+            throw new IllegalArgumentException("Impossible de supprimer le foyer car il est associé à un personnel.");
+        }
+
         foyerRepository.delete(foyer);
     }
 }
