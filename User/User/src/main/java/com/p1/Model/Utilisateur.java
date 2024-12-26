@@ -3,6 +3,7 @@ package com.p1.Model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -13,11 +14,12 @@ import java.util.Date;
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.STRING)
 @EqualsAndHashCode
 public class Utilisateur implements UserDetails {
 
     public enum Role {
-        ADMIN, PERSONNEL, ETUDIANT, AGENT
+        ROLE_ADMIN, ROLE_PERSONNEL, ROLE_ETUDIANT, ROLE_AGENT
     }
 
     @Id
@@ -39,11 +41,12 @@ public class Utilisateur implements UserDetails {
     private String mdp;
 
     @Enumerated(EnumType.STRING)
+    @Column(insertable = false, updatable = false) // Managed by DiscriminatorColumn
     private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(() -> "ROLE_" + role.name());
+        return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override

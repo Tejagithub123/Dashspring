@@ -1,5 +1,6 @@
 package com.p1;
 
+import com.p1.Model.Admin;
 import com.p1.Model.Utilisateur;
 import com.p1.Repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,27 +27,25 @@ public class UserApplication {
 	}
 
 	@Bean
-	public CommandLineRunner run() {
+	public CommandLineRunner run(UtilisateurRepository utilisateurRepository, PasswordEncoder passwordEncoder) {
 		return args -> {
-
 			String adminEmail = "teja@example.com";
+
 			if (utilisateurRepository.findByEmail(adminEmail).isEmpty()) {
-
-				Utilisateur admin = new Utilisateur();
+				Admin admin = new Admin();
 				admin.setCin("12345674");
-				admin.setNom("teja");
-				admin.setPrenom("Doe");
+				admin.setNom("Admin");
+				admin.setPrenom("User");
 				admin.setEmail(adminEmail);
-				admin.setDateNaissance(new Date(2000, 3, 1));
-
+				admin.setDateNaissance(new Date(2000 - 1900, 1, 1)); // Adjust for zero-based months
 				admin.setMdp(passwordEncoder.encode("teja"));
 
-				admin.setRole(Utilisateur.Role.ADMIN);
 				utilisateurRepository.save(admin);
 				System.out.println("Admin user created successfully!");
 			} else {
-				System.out.println("Admin user with email " + adminEmail + " already exists.");
+				System.out.println("Admin user already exists.");
 			}
 		};
 	}
+
 }

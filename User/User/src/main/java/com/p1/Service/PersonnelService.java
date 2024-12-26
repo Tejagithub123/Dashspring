@@ -32,7 +32,7 @@ public class PersonnelService {
             personnel.setMdp(hashedPassword);
 
             personnel.setFoyer(foyer.get());
-            personnel.setRole(Utilisateur.Role.PERSONNEL);
+            personnel.setRole(Utilisateur.Role.ROLE_PERSONNEL);
 
             return personnelRepository.save(personnel);
         } else {
@@ -55,7 +55,7 @@ public class PersonnelService {
 
         if (personnel.isPresent() && foyer.isPresent()) {
             personnel.get().setFoyer(foyer.get());
-            personnel.get().setRole(Utilisateur.Role.PERSONNEL);
+            personnel.get().setRole(Utilisateur.Role.ROLE_PERSONNEL);
             return personnelRepository.save(personnel.get());
         }
         throw new IllegalArgumentException("Personnel ou foyer non trouvés");

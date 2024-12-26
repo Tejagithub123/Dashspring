@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Data
 @Entity
+@DiscriminatorValue("ROLE_PERSONNEL")
 @EqualsAndHashCode(callSuper = true)
+
 public class Personnel extends Utilisateur {
 
     @OneToOne
