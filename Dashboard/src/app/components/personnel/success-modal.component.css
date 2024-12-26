@@ -42,7 +42,7 @@ p {
 .btn-round-lg {
     border-radius: 22.5px;
     background-color: #eee;
-    color: #3D5AFE;
+    color: #68c86d;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.9px;
@@ -64,13 +64,13 @@ p {
 
 /* Modal content card background */
 .card {
-    background-color: #3D5AFE !important;
+    background-color: #68c86d !important;
     color: white;
 }
 
 /* Specific modal header styling */
 .modal-header {
-    background-color: #3D5AFE;
+    background-color: #68c86d;;
     color: white;
     border-bottom: 2px solid #eee;
     padding: 20px;
@@ -99,7 +99,7 @@ p {
 
 /* Button styling for closing the modal */
 .modal-footer .btn-secondary {
-    background-color: #3D5AFE;
+    background-color: #68c86d;;
     color: white;
     border: none;
     border-radius: 22.5px;
@@ -110,5 +110,5 @@ p {
 
 .modal-footer .btn-secondary:hover {
     background-color: #eee;
-    color: #3D5AFE;
+    color: #68c86d;;
 }
