@@ -20,6 +20,7 @@
         <th>Email</th>
         <th>Date de Naissance</th>
         <th>CIN</th>
+        <th>Foyer</th> <!-- Add Foyer Column -->
         <th>Actions</th>
       </tr>
     </thead>
@@ -31,14 +32,15 @@
         <td>{{ personnel.email }}</td>
         <td>{{ personnel.dateNaissance }}</td>
         <td>{{ personnel.cin }}</td>
+        <td>{{ personnel.foyerName }}</td> <!-- Display Foyer Name -->
         <td>
-          <!-- Update and Delete buttons with safety check for undefined id -->
           <button *ngIf="personnel.id" class="btn btn-primary" (click)="updatePersonnel(personnel.id)">Update</button>
           <button *ngIf="personnel.id" class="btn btn-danger" (click)="deletePersonnel(personnel.id)">Delete</button>
         </td>
       </tr>
     </tbody>
   </table>
+  
 </div>
 </div>
 

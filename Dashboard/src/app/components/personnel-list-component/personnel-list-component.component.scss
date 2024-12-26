@@ -62,4 +62,9 @@
   button {
     margin-right: 10px;
   }
-  
+  /* Responsive Design */
+@media (max-width: 768px) {
+  .col-md-6 {
+    margin-bottom: 20px; /* More space between fields on small screens */
+  }
+}

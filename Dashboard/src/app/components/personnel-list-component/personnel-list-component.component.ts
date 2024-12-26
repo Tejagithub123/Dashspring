@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonnelService } from 'src/app/services/personnel/personnel.service';
+import { FoyerService } from 'src/app/services/foyer/foyer.service'; // Import FoyerService
 import { Personnel } from 'src/app/models/personnel.model';
+import { Foyer } from 'src/app/models/foyer.model'; // Import Foyer model
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,23 +11,33 @@ import { Router } from '@angular/router';
   styleUrls: ['./personnel-list-component.component.scss'],
 })
 export class PersonnelListComponent implements OnInit {
-  personnels: Personnel[] = []; // List of personnel
+  personnels: Personnel[] = [];
+  foyers: Foyer[] = [];
 
   constructor(
     private personnelService: PersonnelService,
+    private foyerService: FoyerService, // Inject FoyerService
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.loadPersonnels();
+    this.loadPersonnelsAndFoyers();
   }
 
-  // Fetch all personnel from the service
-  loadPersonnels(): void {
+  // Fetch personnel and foyer data
+  loadPersonnelsAndFoyers(): void {
     this.personnelService.getAll().subscribe(
-      (data) => {
-        this.personnels = data;
-        console.log("data",data)
+      (personnelData) => {
+        this.personnels = personnelData;
+        this.foyerService.getAllFoyers().subscribe(
+          (foyerData) => {
+            this.foyers = foyerData;
+            this.mapFoyersToPersonnels(); // Map foyers to personnels
+          },
+          (error) => {
+            console.error('Error fetching foyers:', error);
+          }
+        );
       },
       (error) => {
         console.error('Error fetching personnel list:', error);
@@ -34,15 +46,28 @@ export class PersonnelListComponent implements OnInit {
     );
   }
 
+  // Match personnel with their corresponding foyers
+  mapFoyersToPersonnels(): void {
+    this.personnels.forEach((personnel) => {
+      const matchingFoyer = this.foyers.find(
+        (foyer) => foyer.personnel?.id === personnel.id
+      );
+      if (matchingFoyer) {
+        personnel.foyerName = matchingFoyer.nom; // Add foyer name to personnel
+      } else {
+        personnel.foyerName = 'Not Assigned';
+      }
+    });
+  }
+
   // Delete personnel by id
   deletePersonnel(id: number): void {
-    if (id !== undefined && id !== null) { // Make sure id is a valid number
+    if (id !== undefined && id !== null) {
       if (confirm('Are you sure you want to delete this personnel?')) {
         this.personnelService.delete(id).subscribe(
           () => {
-            console.log('Personnel deleted successfully!');
             alert('Personnel deleted successfully!');
-            this.loadPersonnels(); // Reload the personnel list after deletion
+            this.loadPersonnelsAndFoyers();
           },
           (error) => {
             console.error('Error deleting personnel:', error);
@@ -53,10 +78,10 @@ export class PersonnelListComponent implements OnInit {
     }
   }
 
-  // Navigate to the update form for the selected personnel
+  // Navigate to update form
   updatePersonnel(id: number): void {
-    if (id !== undefined && id !== null) { // Make sure id is a valid number
-      this.router.navigate([`/personnel/${id}`]); // Redirect to the personnel profile page for updating
+    if (id !== undefined && id !== null) {
+      this.router.navigate([`/personnel/${id}`]);
     }
   }
 }
