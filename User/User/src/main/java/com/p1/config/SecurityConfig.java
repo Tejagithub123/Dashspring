@@ -59,6 +59,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll() // Permit access to authentication routes (login/register)
                 .antMatchers("/admin/**").hasRole("ADMIN") // Protect admin routes
+                .antMatchers("/personnel/**").hasRole("PERSONNEL") // Protect admin routes
                 .anyRequest().authenticated() // Require authentication for any other route
                 .and()
                 .addFilterBefore(new JwtAuthFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class); // Add JWT

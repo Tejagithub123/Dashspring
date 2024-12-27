@@ -81,13 +81,18 @@ export class FoyerComponent implements OnInit {
 
 selectFoyerForEditing(foyer: Foyer): void {
   this.foyerToEdit = { ...foyer };
-  // Open the modal programmatically
+  if (this.foyerToEdit.personnel) {
+    // Ensure personnel object is being passed correctly
+    console.log('Personnel assigned:', this.foyerToEdit.personnel);
+  } else {
+    console.log('No personnel assigned.');
+  }
+
   const modalRef = this.modalService.open(EditFoyerModalComponent);
   modalRef.componentInstance.foyer = this.foyerToEdit;
 
-  // Listen for the saveFoyer event from the modal and update the foyer
   modalRef.componentInstance.saveFoyer.subscribe((updatedFoyer: Foyer) => {
-    this.foyerToEdit = updatedFoyer;  // Update the foyer in the parent
+    this.foyerToEdit = updatedFoyer;  // Update foyer in the parent
     this.editFoyer();  // Call the edit function to update via API
   });
 }

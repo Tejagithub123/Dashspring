@@ -15,7 +15,7 @@ export class EditFoyerModalComponent {
 
   saveChanges() {
     if (this.foyer) {
-      // Emit the updated foyer object to the parent component
+      console.log("Editing foyer modal:", this.foyer);
       this.saveFoyer.emit(this.foyer);
       this.activeModal.close();  // Close the modal
     } else {

@@ -1,5 +1,6 @@
 package com.p1.Controllers;
 
+import com.p1.Model.Chambre;
 import com.p1.Model.Personnel;
 import com.p1.Service.PersonnelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.p1.Model.Foyer;
+import com.p1.Service.ChambreService;
 import com.p1.Service.FoyerService;
 import java.util.List;
 import javax.validation.Valid;
@@ -23,6 +25,9 @@ public class AdminController {
 
     @Autowired
     private FoyerService foyerService;
+
+    @Autowired
+    private ChambreService chambreService;
 
     // Ajouter un nouveau personnel et l'affecter à un foyer
     @PostMapping("/personnels")
