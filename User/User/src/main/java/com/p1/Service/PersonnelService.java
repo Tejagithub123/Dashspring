@@ -8,7 +8,7 @@ import com.p1.Repository.FoyerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import com.p1.Service.EmailService;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -29,24 +29,36 @@ public class PersonnelService {
     @Autowired
     private FoyerService foyerService;
 
+    @Autowired
+    private EmailService emailService;
+
     public Personnel addPersonnel(Personnel personnel) {
-        // Hash the password before saving
-        String hashedPassword = passwordEncoder.encode(personnel.getMdp());
+
+        String plainPassword = personnel.getMdp();
+
+        String hashedPassword = passwordEncoder.encode(plainPassword);
         personnel.setMdp(hashedPassword);
 
-        // Set the role for the personnel
         personnel.setRole(Utilisateur.Role.ROLE_PERSONNEL);
 
-        // If foyer_id is provided, assign the corresponding Foyer to the Personnel
         if (personnel.getFoyer() != null && personnel.getFoyer().getId() != null) {
-            // Use the getFoyerById method here instead of findById
+
             Foyer foyer = foyerService.getFoyerById(personnel.getFoyer().getId())
                     .orElseThrow(() -> new IllegalArgumentException(
                             "Foyer not found with ID: " + personnel.getFoyer().getId()));
-            personnel.setFoyer(foyer); // Associate the Foyer with Personnel
+            personnel.setFoyer(foyer);
         }
 
-        return personnelRepository.save(personnel);
+        Personnel savedPersonnel = personnelRepository.save(personnel);
+
+        String emailSubject = "Bienvenue sur GestionRésidence!";
+        String emailBody = String.format(
+                "Bonjour %s,\n\nVotre compte a été créé avec succès sur la plateforme GestionRésidence.\n\nVoici vos identifiants de connexion :\nEmail: %s\nMot de passe: %s\n\nMerci de vous connecter à la plateforme.\n\nCordialement,\nL'équipe GestionRésidence",
+                personnel.getNom(), personnel.getEmail(), plainPassword);
+
+        emailService.sendEmail(personnel.getEmail(), emailSubject, emailBody);
+
+        return savedPersonnel;
     }
 
     public List<Personnel> getAllPersonnels() {
@@ -88,14 +100,13 @@ public class PersonnelService {
                 personnel.setCin(updatedPersonnel.getCin());
             }
 
-            // Update the Foyer association if provided
             if (updatedPersonnel.getFoyer() != null && updatedPersonnel.getFoyer().getId() != null) {
                 Foyer foyer = foyerService.getFoyerById(updatedPersonnel.getFoyer().getId())
                         .orElseThrow(() -> new IllegalArgumentException(
                                 "Foyer not found with ID: " + updatedPersonnel.getFoyer().getId()));
                 personnel.setFoyer(foyer);
             } else if (updatedPersonnel.getFoyer() == null) {
-                // If the `foyer` field is null, disassociate the existing foyer
+
                 personnel.setFoyer(null);
             }
 
@@ -121,12 +132,10 @@ public class PersonnelService {
         Foyer foyer = foyerRepository.findById(foyerId)
                 .orElseThrow(() -> new IllegalArgumentException("Foyer non trouvé"));
 
-        // Validation : vérifier que le personnel n'a pas déjà un foyer
         if (personnel.getFoyer() != null) {
             throw new IllegalStateException("Ce personnel est déjà affecté à un foyer");
         }
 
-        // Associer le personnel au foyer
         personnel.setFoyer(foyer);
         foyer.setPersonnel(personnel);
 

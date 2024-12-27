@@ -1,7 +1,6 @@
 <!-- Header Component HTML -->
 <header class="main-header">
   <div class="header-left">
-   
     <div class="brand">
       <img src="../../assets/images/logos/logoresidence.png" alt="Logo" class="logo">
     </div>
@@ -10,23 +9,15 @@
   <div class="header-right">
     <nav>
       <ul class="list-items">
-        <li class="item">
-          <a href="#" class="notification-icon">
-            <i class="fa fa-bell"></i>
-            <span class="badge badge-pill badge-warning">5</span>
-          </a>
-        </li>
-        <li class="item">
-          <a href="#" class="message-icon">
-            <i class="fa fa-envelope"></i>
-            <span class="badge badge-pill badge-success">7</span>
-          </a>
-        </li>
-        <li class="item user-profile">
+        <li class="item user-profile" (click)="toggleDropdown()">
           <a href="#">
             <img src="../../assets/img/user.jpg" alt="User" class="user-image">
             <span class="user-name">Admin</span>
           </a>
+          <ul class="dropdown-menu show" *ngIf="isDropdownVisible">
+            <li><button class="dropdown-item" (click)="logout()">Logout</button></li>
+          </ul>
+          
         </li>
       </ul>
     </nav>

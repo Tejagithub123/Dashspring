@@ -10,7 +10,7 @@ export class SidebarService {
 
   menus: MenuItem[] = [
     {
-      title: 'general',
+      title: 'Admin Dashboard',
       type: 'header',
     },
     {
@@ -20,7 +20,7 @@ export class SidebarService {
       type: 'simple',
     },
     {
-      title: 'Personnel',
+      title: 'Add personnel',
       icon: 'fa fa-users',  
       route: '/personnel',
       type: 'simple', 
@@ -29,11 +29,8 @@ export class SidebarService {
       title: 'list personnels',
       icon: 'fa fa-list',
       route : '/liste-personnels',
-      type: 'dropdown',
-      badge: {
-        text: 'New',
-        class: 'badge-warning',
-      },
+      type: 'simple', 
+    
      
     },
     {
@@ -41,10 +38,7 @@ export class SidebarService {
       icon: 'fa fa-shopping-cart',
       active: false,
       type: 'dropdown',
-      badge: {
-        text: '3',
-        class: 'badge-danger',
-      },
+    
       submenus: [
         {
           title: 'Products',

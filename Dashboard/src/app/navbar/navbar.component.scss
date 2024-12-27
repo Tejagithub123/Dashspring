@@ -184,4 +184,39 @@ $header-height: 64px;
 
 .badge {
   animation: pulse 2s infinite;
+} 
+
+.user-profile {
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #1d1d1d;
+  border: 1px solid #2b2b2b;
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+  display: block;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu li {
+  margin: 5px 0;
+}
+
+.dropdown-menu button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  text-align: left;
+  background-color: #1d1d1d;
+  border: 1px solid #2b2b2b;
+  color: #fff !important;
+  width: 100%;
 }
