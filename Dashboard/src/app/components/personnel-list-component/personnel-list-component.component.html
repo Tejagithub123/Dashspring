@@ -10,36 +10,137 @@
  <button class="btn btn-success float-right " [routerLink]="['/personnel']">Add Personnel   <i class="fa fa-plus" aria-hidden="true"></i></button>
  <div><br/></div>
  <div><br/></div>
-  <!-- Table displaying personnel records -->
-  <table class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Nom</th>
-        <th>Prenom</th>
-        <th>Email</th>
-        <th>Date de Naissance</th>
-        <th>CIN</th>
-        <th>Foyer</th> <!-- Add Foyer Column -->
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let personnel of personnels">
-        <td>{{ personnel.id }}</td>
-        <td>{{ personnel.nom }}</td>
-        <td>{{ personnel.prenom }}</td>
-        <td>{{ personnel.email }}</td>
-        <td>{{ personnel.dateNaissance }}</td>
-        <td>{{ personnel.cin }}</td>
-        <td>{{ personnel.foyerName }}</td> <!-- Display Foyer Name -->
-        <td>
-          <button *ngIf="personnel.id" class="btn btn-primary" (click)="updatePersonnel(personnel.id)">Update</button>
-          <button *ngIf="personnel.id" class="btn btn-danger" (click)="deletePersonnel(personnel.id)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+ <table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>Email</th>
+      <th>Date de Naissance</th>
+      <th>CIN</th>
+      <th>Foyer</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let personnel of personnels">
+      <td>{{ personnel.id }}</td>
+      <td>{{ personnel.nom }}</td>
+      <td>{{ personnel.prenom }}</td>
+      <td>{{ personnel.email }}</td>
+      <td>{{ personnel.dateNaissance }}</td>
+      <td>{{ personnel.cin }}</td>
+      <td>{{ personnel.foyerName }}</td>
+      <td>
+        <button
+          class="btn btn-primary"
+          (click)="openUpdateModal(updateModal, personnel)"
+        >
+          Update
+        </button>
+        <button
+          class="btn btn-danger"
+          (click)="personnel.id ? deletePersonnel(personnel.id) : null"
+          [disabled]="!personnel.id"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal for updating personnel -->
+<ng-template #updateModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Update Personnel</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.close()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <label for="nom" class="form-label">Nom</label>
+        <input
+          type="text"
+          id="nom"
+          [(ngModel)]="selectedPersonnel.nom"
+          name="nom"
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="prenom" class="form-label">Prenom</label>
+        <input
+          type="text"
+          id="prenom"
+          [(ngModel)]="selectedPersonnel.prenom"
+          name="prenom"
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="selectedPersonnel.email"
+          name="email"
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="dateNaissance" class="form-label">Date de Naissance</label>
+        <input
+          type="date"
+          id="dateNaissance"
+          [(ngModel)]="selectedPersonnel.dateNaissance"
+          name="dateNaissance"
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="cin" class="form-label">CIN</label>
+        <input
+          type="text"
+          id="cin"
+          [(ngModel)]="selectedPersonnel.cin"
+          name="cin"
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="foyer" class="form-label">Foyer</label>
+        <select
+          id="foyer"
+          [(ngModel)]="selectedPersonnel.foyerId"
+          name="foyer"
+          class="form-select"
+        >
+          <option
+            *ngFor="let foyer of unassignedFoyers"
+            [value]="foyer.id"
+          >
+            {{ foyer.nom }}
+          </option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close()">
+      Close
+    </button>
+    <button type="button" class="btn btn-primary" (click)="updatePersonnel()">
+      Save
+    </button>
+  </div>
+</ng-template>
   
 </div>
 </div>

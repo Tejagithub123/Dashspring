@@ -84,6 +84,10 @@ public class PersonnelService {
                 personnel.setMdp(hashedPassword);
             }
 
+            if (updatedPersonnel.getCin() != null) {
+                personnel.setCin(updatedPersonnel.getCin());
+            }
+
             // Update the Foyer association if provided
             if (updatedPersonnel.getFoyer() != null && updatedPersonnel.getFoyer().getId() != null) {
                 Foyer foyer = foyerService.getFoyerById(updatedPersonnel.getFoyer().getId())

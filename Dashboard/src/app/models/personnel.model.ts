@@ -7,5 +7,6 @@ export interface Personnel {
   mdp: string;
   foyerId?: number;
   cin: number; 
+  foyer?: { id: number } | null;
   foyerName?: string;  // Add cin field
 }
