@@ -61,23 +61,28 @@ export class FoyerComponent implements OnInit {
   }
   
 
- // Function to update foyer
- editFoyer(): void {
-  if (this.foyerToEdit.id !== undefined) {
-    console.log('Editing foyer:', this.foyerToEdit);
-    this.foyerService.updateFoyer(this.foyerToEdit.id, this.foyerToEdit).subscribe(
-      (updatedFoyer) => {
-        console.log('Foyer updated successfully:', updatedFoyer);
-        this.loadFoyers();
-      },
-      (error) => {
-        console.error('Error updating foyer:', error);
-      }
-    );
-  } else {
-    console.error('Foyer ID is undefined, cannot update.');
+  editFoyer(): void {
+    if (this.foyerToEdit.id !== undefined) {
+      // Remove personnel field from foyer before sending to the backend
+      const foyerToUpdate = { ...this.foyerToEdit }; // Create a shallow copy
+      foyerToUpdate.personnel = null; // Set personnel to null to prevent it from being sent
+  
+      console.log('Editing foyer:', foyerToUpdate);
+  
+      this.foyerService.updateFoyer(this.foyerToEdit.id, foyerToUpdate).subscribe(
+        (updatedFoyer) => {
+          console.log('Foyer updated successfully:', updatedFoyer);
+          this.loadFoyers(); // Reload the list of foyers after successful update
+        },
+        (error) => {
+          console.error('Error updating foyer:', error);
+        }
+      );
+    } else {
+      console.error('Foyer ID is undefined, cannot update.');
+    }
   }
-}
+  
 
 selectFoyerForEditing(foyer: Foyer): void {
   this.foyerToEdit = { ...foyer };
