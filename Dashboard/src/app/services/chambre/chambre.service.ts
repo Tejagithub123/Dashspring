@@ -6,8 +6,8 @@ import { Personnel } from '../../models/personnel.model';
 @Injectable({
   providedIn: 'root',
 })
-export class PersonnelService {
-  private baseUrl = 'http://localhost:8090/admin/personnels';
+export class ChambreService {
+  private baseUrl = 'http://localhost:8090/admin';
 
   constructor(private http: HttpClient) {}
 
@@ -24,32 +24,28 @@ export class PersonnelService {
 
   // Get all personnels
   getAll(): Observable<Personnel[]> {
-    return this.http.get<Personnel[]>(`${this.baseUrl}/Allpersonnels`, {
+    return this.http.get<Personnel[]>(`${this.baseUrl}/Allchambres`, {
       headers: this.getHeaders(),
     });
   }
-  getFoyerId(id: number): Observable<Personnel> {
-    return this.http.get<Personnel>(`http://localhost:8090/personnel/${id}`, {
-      headers: this.getHeaders(),
-    });
-  }
+
   // Get a personnel by ID
   getById(id: number): Observable<Personnel> {
-    return this.http.get<Personnel>(`${this.baseUrl}/${id}`, {
+    return this.http.get<Personnel>(`${this.baseUrl}/Onechambre/${id}`, {
       headers: this.getHeaders(),
     });
   }
 
   // Create a new personnel (no foyer assigned)
   create(personnel: Personnel): Observable<Personnel> {
-    return this.http.post<Personnel>(`${this.baseUrl}`, personnel, {
+    return this.http.post<Personnel>(`${this.baseUrl}/chambre`, personnel, {
       headers: this.getHeaders(),
     });
   }
 
   // Update a personnel
   update(id: number, personnel: Partial<Personnel>): Observable<Personnel> {
-    return this.http.patch<Personnel>(`${this.baseUrl}/${id}`, personnel, {
+    return this.http.patch<Personnel>(`${this.baseUrl}/chambres/${id}`, personnel, {
       headers: this.getHeaders(),
     });
   }

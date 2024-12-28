@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SidebarService } from './sidebar.service';
 import { MenuItem } from './MenuItem'; // Ensure the correct import path
+import { UserStorageService } from '../storage/user-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -18,11 +20,17 @@ import { MenuItem } from './MenuItem'; // Ensure the correct import path
 export class SidebarComponent implements OnInit {
   menus: MenuItem[] = []; // Explicitly type the menus array
 
-  constructor(public sidebarservice: SidebarService) {
+  constructor(public sidebarservice: SidebarService,public router: Router) {
     this.menus = sidebarservice.getMenuList();
   }
+  UserRole:String = "";
+  ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      
+        this.UserRole = UserStorageService.getUserRole();
 
-  ngOnInit() {}
+        // console.log(this.isUserRole)
+    });}
 
   getSideBarState(): boolean {
     return this.sidebarservice.getSidebarState();
@@ -50,5 +58,7 @@ export class SidebarComponent implements OnInit {
   toggleSidebar() {
     this.sidebarservice.toggle();
   }
+ 
+
   
 }
