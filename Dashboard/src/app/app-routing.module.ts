@@ -6,9 +6,11 @@ import { HomeComponent } from './home/home.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { FoyerComponent } from './components/foyer/foyer.component';
 import { PersonnelComponent } from './components/personnel/personnel.component';
+import { ChambreComponent } from './components/chambre/chambre.component';
 import { LoginComponent } from './components/login/login.component';
 
 import { PersonnelListComponent } from './components/personnel-list-component/personnel-list-component.component';
+import { ChambreListComponent } from './components/chambre-list-component/chambre-list-component.component';
 
 const routes: Routes = [  { path: '',  component:HomeComponent }, // Redirect to login page by default
 { path: 'login', component: LoginComponent },  // Define the login routev
@@ -35,8 +37,13 @@ const routes: Routes = [  { path: '',  component:HomeComponent }, // Redirect to
 
 { path: 'personnel', 
 component: PersonnelComponent },
+{ path: 'chambre', 
+  component: ChambreComponent },
 
+  { path: 'liste-chambres', 
+    component: ChambreListComponent },
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

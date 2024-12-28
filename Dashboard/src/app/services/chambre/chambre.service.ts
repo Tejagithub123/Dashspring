@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Personnel } from '../../models/personnel.model';
+import { Chambre } from 'src/app/models/chambre.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChambreService {
-  private baseUrl = 'http://localhost:8090/admin';
+  private baseUrl = 'http://localhost:8090/personnel';
 
   constructor(private http: HttpClient) {}
 
@@ -22,46 +22,46 @@ export class ChambreService {
     return headers;
   }
 
-  // Get all personnels
-  getAll(): Observable<Personnel[]> {
-    return this.http.get<Personnel[]>(`${this.baseUrl}/Allchambres`, {
+  // Get all chambres
+  getAll(id: number): Observable<Chambre[]> {
+    return this.http.get<Chambre[]>(`${this.baseUrl}/Allchambres/${id}`, {
       headers: this.getHeaders(),
     });
   }
 
-  // Get a personnel by ID
-  getById(id: number): Observable<Personnel> {
-    return this.http.get<Personnel>(`${this.baseUrl}/Onechambre/${id}`, {
+  // Get a chambre by ID
+  getById(id: number): Observable<Chambre> {
+    return this.http.get<Chambre>(`${this.baseUrl}/Onechambre/${id}`, {
       headers: this.getHeaders(),
     });
   }
 
-  // Create a new personnel (no foyer assigned)
-  create(personnel: Personnel): Observable<Personnel> {
-    return this.http.post<Personnel>(`${this.baseUrl}/chambre`, personnel, {
+  // Create a new chambre (no foyer assigned)
+  create(chambre: Chambre,foyerId: number): Observable<Chambre> {
+    return this.http.post<Chambre>(`${this.baseUrl}/chambre?foyerId=${foyerId}`, chambre, {
       headers: this.getHeaders(),
     });
   }
 
-  // Update a personnel
-  update(id: number, personnel: Partial<Personnel>): Observable<Personnel> {
-    return this.http.patch<Personnel>(`${this.baseUrl}/chambres/${id}`, personnel, {
+  // Update a chambre
+  update(id: number, chambre: Partial<Chambre>): Observable<Chambre> {
+    return this.http.patch<Chambre>(`${this.baseUrl}/chambres/${id}`, chambre, {
       headers: this.getHeaders(),
     });
   }
 
-  // Delete a personnel
+  // Delete a chambre
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`, {
+    return this.http.delete<void>(`${this.baseUrl}/deleteChambre/${id}`, {
       headers: this.getHeaders(),
     });
   }
 
-  // Assign a foyer to a personnel
-  assignFoyer(personnelId: number, foyerId: number): Observable<Personnel> {
+  // Assign a foyer to a chambre
+  assignFoyer(chambreId: number, foyerId: number): Observable<Chambre> {
     const params = new HttpParams().set('foyerId', foyerId.toString());
-    return this.http.put<Personnel>(
-      `${this.baseUrl}/${personnelId}/foyer`,
+    return this.http.put<Chambre>(
+      `${this.baseUrl}/${chambreId}/foyer`,
       null, // Sending empty body as required by the backend
       { params: params, headers: this.getHeaders() }
     );

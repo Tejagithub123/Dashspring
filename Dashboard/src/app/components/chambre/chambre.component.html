@@ -1,0 +1,111 @@
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div class="card">
+  <div class="card-header">
+    Chambre Settings
+  </div>
+  <div class="card-body">
+    <!-- Profile Settings Form -->
+    <div class="p-3 py-5">
+      <form #chambreForm="ngForm" (ngSubmit)="save()" novalidate>
+
+        <!-- Row 1: Name and Surname -->
+        <div class="row mt-3">
+          <div class="col-md-6">
+            <label class="labels">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Room Name"
+              [(ngModel)]="chambre.name"
+              name="name"
+              #name="ngModel"
+              required
+            />
+            <div *ngIf="name.invalid && name.touched" class="text-danger">
+              Name is required.
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <label for="type" class="form-label">Type</label>
+            <select
+              id="type"
+              [(ngModel)]="chambre.type"
+              name="type"
+              class="form-control"
+              required
+            >
+              <option value="SINGLE">Single</option>
+              <option value="DOUBLE">Double</option>
+            </select>
+            <div *ngIf="!chambre.type" class="text-danger">
+              Type is required.
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <label class="labels">Description</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Description"
+              [(ngModel)]="chambre.description"
+              name="description"
+              #description="ngModel"
+              required
+            />
+            <div *ngIf="description.invalid && description.touched" class="text-danger">
+              Description is required.
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <label for="availble" class="form-label">Available</label>
+            <select
+              id="availble"
+              [(ngModel)]="chambre.availble"
+              name="availble"
+              class="form-control"
+              required
+            >
+              <option value="true">True</option>
+              <option value="false">False</option>
+            </select>
+            <div *ngIf="!chambre.availble" class="text-danger">
+              Availability is required.
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2: Price -->
+        <div class="row mt-3">
+          <div class="col-md-6">
+            <label class="labels">Price</label>
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Price"
+              [(ngModel)]="chambre.price"
+              name="price"
+              #price="ngModel"
+              required
+              min="0"
+            />
+            <div *ngIf="price.invalid && price.touched" class="text-danger">
+              Price is required and must be a positive number.
+            </div>
+          </div>
+        </div>
+
+        <!-- Save Button -->
+        <div class="mt-6 text-center">
+          <button class="btn profile-button" [disabled]="chambreForm.invalid" type="submit">Save Profile</button>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+</div>

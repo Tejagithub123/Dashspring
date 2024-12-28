@@ -9,10 +9,10 @@ export class SidebarService {
   private _hasBackgroundImage = true;
 
   menus: MenuItem[] = [
+            //ADMIN//
     {
-      title: 'Admin Dashboard',
+      title: 'Menu',
       type: 'header',
-      condition: 'ROLE_ADMIN',
     },
     {
       title: 'Foyer',
@@ -35,9 +35,19 @@ export class SidebarService {
       type: 'simple', 
       condition: 'ROLE_ADMIN',
     },
+                   //PERSONNEL//
     {
-      title: 'Personnel Dashboard',
-      type: 'header',
+      title: 'Add chambre',
+      icon: 'fa fa-users',  
+      route: '/chambre',
+      type: 'simple', 
+      condition: 'ROLE_PERSONNEL',
+    },
+    {
+      title: 'list chambre',
+      icon: 'fa fa-list',
+      route : '//liste-chambres',
+      type: 'simple', 
       condition: 'ROLE_PERSONNEL',
     },
     // {

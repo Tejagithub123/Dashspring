@@ -1,8 +1,11 @@
-export interface Personnel {
+export interface Chambre {
   id?: number;
-  Description: string;
+  name: string;
+  description: string;
   type: string;
   availble: boolean;
   price: string;
-  foyer?: { id: number } | null;// Add cin field
+  foyerId?: number;
+  foyer?: { id: number } | null;
+  foyerName?: string;  //
 }
