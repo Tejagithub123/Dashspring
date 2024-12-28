@@ -12,7 +12,7 @@
         <li class="item user-profile" (click)="toggleDropdown()">
           <a href="#">
             <img src="../../assets/img/user.jpg" alt="User" class="user-image">
-            <span class="user-name">Admin</span>
+            <span class="user-name">{{userRole}}</span>
           </a>
           <ul class="dropdown-menu show" *ngIf="isDropdownVisible">
             <li><button class="dropdown-item" (click)="logout()">Logout</button></li>

@@ -1,0 +1,155 @@
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+
+<div class="card">
+  <div class="card-header">Chambre List</div>
+  <div class="card-body">
+    <!-- Add Personnel button -->
+    <button class="btn btn-success float-right " [routerLink]="['/chambre']">Add Personnel <i class="fa fa-plus" aria-hidden="true"></i></button>
+    <div><br/></div>
+    <div><br/></div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Room Name</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th>Available</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let chambre of chambres">
+          <td>{{ chambre.id }}</td>
+          <td>{{ chambre.name }}</td>
+          <td>{{ chambre.description }}</td>
+          <td>{{ chambre.type }}</td>
+          <td>{{ chambre.availble ? 'Yes' : 'No' }}</td>
+          <td>{{ chambre.price }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="openUpdateModal(updateModal, chambre)">Update</button>
+            <button class="btn btn-danger" (click)="chambre.id ? deletePersonnel(chambre.id) : null" [disabled]="!chambre.id">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Modal for updating chambre -->
+    <ng-template #updateModal let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">Update Personnel</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.close()"></button>
+      </div>
+      <div class="modal-body">
+        <form #updateForm="ngForm">
+          <!-- Name -->
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input
+              type="text"
+              id="name"
+              [(ngModel)]="selectedChambre.name"
+              name="name"
+              class="form-control"
+              required
+              #name="ngModel"
+            />
+            <div *ngIf="name.invalid && name.touched" class="text-danger">
+              Name is required.
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+              id="description"
+              [(ngModel)]="selectedChambre.description"
+              name="description"
+              class="form-control"
+              required
+              #description="ngModel"
+            ></textarea>
+            <div *ngIf="description.invalid && description.touched" class="text-danger">
+              Description is required.
+            </div>
+          </div>
+
+          <!-- Type -->
+          <div class="mb-3">
+            <label for="type" class="form-label">Type</label>
+            <select
+              id="type"
+              [(ngModel)]="selectedChambre.type"
+              name="type"
+              class="form-control"
+              required
+              #type="ngModel"
+            >
+              <option value="SINGLE">Single</option>
+              <option value="DOUBLE">Double</option>
+            </select>
+            <div *ngIf="type.invalid && type.touched" class="text-danger">
+              Type is required.
+            </div>
+          </div>
+
+          <!-- Available -->
+          <div class="mb-3">
+            <label class="form-label">Available</label>
+            <div class="form-check">
+              <input
+                type="radio"
+                id="availableYes"
+                [(ngModel)]="selectedChambre.availble"
+                name="availble"
+                [value]="true"
+                class="form-check-input"
+              />
+              <label for="availableYes" class="form-check-label">Yes</label>
+            </div>
+            <div class="form-check">
+              <input
+                type="radio"
+                id="availableNo"
+                [(ngModel)]="selectedChambre.availble"
+                name="availble"
+                [value]="false"
+                class="form-check-input"
+              />
+              <label for="availableNo" class="form-check-label">No</label>
+            </div>
+          </div>
+
+          <!-- Price -->
+          <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input
+              type="number"
+              id="price"
+              [(ngModel)]="selectedChambre.price"
+              name="price"
+              class="form-control"
+              required
+              min="0"
+              #price="ngModel"
+            />
+            <div *ngIf="price.invalid && price.touched" class="text-danger">
+              Price is required and must be a positive number.
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="updatePersonnel()" [disabled]="updateForm.invalid">
+          Save
+        </button>
+      </div>
+    </ng-template>
+  </div>
+</div>

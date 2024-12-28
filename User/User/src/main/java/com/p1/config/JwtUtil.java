@@ -3,6 +3,8 @@ package com.p1.config;
 import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
 
+import com.p1.Model.Foyer;
+
 import java.util.Date;
 
 @Component
@@ -11,10 +13,11 @@ public class JwtUtil {
     private final String SECRET_KEY = "yourlong256bitsecretkeygoesheree12345678901234567890123456789012"; // 32
                                                                                                           // characters
 
-    public String generateToken(String username, String role) {
+    public String generateToken(Long id, String username, String role) {
         return Jwts.builder()
                 .setSubject(username)
-                .claim("role", role) // Add role as a claim
+                .claim("role", role)
+                .claim("id", id) // Add role as a claim
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)

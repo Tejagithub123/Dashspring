@@ -1,6 +1,7 @@
 package com.p1.Controllers;
 
 import com.p1.config.JwtUtil;
+import com.p1.Model.Personnel;
 import com.p1.Model.Utilisateur;
 import com.p1.Service.CustomUserDetailsService;
 import com.p1.Service.UtilisateurService;
@@ -42,7 +43,8 @@ public class AuthController {
         Utilisateur utilisateur = (Utilisateur) userDetailsService.loadUserByUsername(email);
 
         // Generate the JWT token
-        String token = jwtUtil.generateToken(utilisateur.getEmail(), utilisateur.getRole().name());
+        String token = jwtUtil.generateToken(utilisateur.getId(), utilisateur.getEmail(),
+                utilisateur.getRole().name());
 
         // Return the token in a structured JSON response
         Map<String, String> response = new HashMap<>();

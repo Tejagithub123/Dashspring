@@ -1,7 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToggleService } from '../toggle.service';
-
+import { UserStorageService } from 'src/app/storage/user-storage.service';
+import {PersonnelService} from 'src/app/services/personnel/personnel.service'
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -21,10 +22,31 @@ export class NavbarComponent implements OnInit {
     toggle: this.showMenu,
     col: this.col
   };
+  userRole: String = ""
+  constructor(private toggleService: ToggleService, private router: Router,private personnelService: PersonnelService) {}
 
-  constructor(private toggleService: ToggleService, private router: Router) {}
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+   
+    // console.log("User role:", UserStorageService.getUserRole());
+    // console.log("Foyer ID:", UserStorageService.getFoyer_Id());
+  if (UserStorageService.getUserRole() == "ROLE_PERSONNEL"){
+    this.userRole = "Personnel";
+    if (UserStorageService.getFoyer_Id()==""){
+      this.personnelService.getFoyerId(Number(UserStorageService.getUserId())).subscribe(
+        (response) => {
+          UserStorageService.setFoyer_Id(String(response));
+          console.log(response)
+        },
+        (error) => {
+          console.error('Login failed', error);
+        }
+      );
+    }
+    }
+    else if (UserStorageService.getUserRole() == "ROLE_ADMIN"){
+      this.userRole = "Admin";
+    }
+  }
 
   toggleSideBar() {
     console.log("Inside toggleMenu");
@@ -41,7 +63,9 @@ export class NavbarComponent implements OnInit {
 
   // Logout functionality
   logout() {
-    localStorage.removeItem('token'); // Remove token from local storage
+    UserStorageService.SignOut()
+ // Remove token from local storage
     this.router.navigate(['/login']); // Redirect to login page
   }
+
 }

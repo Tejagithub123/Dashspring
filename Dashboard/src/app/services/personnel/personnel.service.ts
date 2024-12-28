@@ -28,7 +28,11 @@ export class PersonnelService {
       headers: this.getHeaders(),
     });
   }
-
+  getFoyerId(id: number): Observable<Personnel> {
+    return this.http.get<Personnel>(`http://localhost:8090/personnel/${id}`, {
+      headers: this.getHeaders(),
+    });
+  }
   // Get a personnel by ID
   getById(id: number): Observable<Personnel> {
     return this.http.get<Personnel>(`${this.baseUrl}/${id}`, {

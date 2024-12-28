@@ -69,8 +69,10 @@ public class ChambreService {
     }
 
     /////////////////////////////////// Done//////////////////////////////////////////
-    public List<Chambre> getAllChambre() {
-        return chambreRepository.findAll();
+    ///
+
+    public List<Chambre> getChambresByFoyerId(Long foyerId) {
+        return chambreRepository.findByFoyerId(foyerId);
     }
 
     /////////////////////////////////////// Done///////////////////////////////////////////////

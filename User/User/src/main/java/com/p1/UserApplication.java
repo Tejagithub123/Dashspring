@@ -29,22 +29,23 @@ public class UserApplication {
 	@Bean
 	public CommandLineRunner run(UtilisateurRepository utilisateurRepository, PasswordEncoder passwordEncoder) {
 		return args -> {
-			String adminEmail = "teja@example.com";
+			// String adminEmail = "teja@example.com";
 
-			if (utilisateurRepository.findByEmail(adminEmail).isEmpty()) {
-				Admin admin = new Admin();
-				admin.setCin("12345674");
-				admin.setNom("Admin");
-				admin.setPrenom("User");
-				admin.setEmail(adminEmail);
-				admin.setDateNaissance(new Date(2000 - 1900, 1, 1)); // Adjust for zero-based months
-				admin.setMdp(passwordEncoder.encode("teja"));
+			// if (utilisateurRepository.findByEmail(adminEmail).isEmpty()) {
+			// Admin admin = new Admin();
+			// admin.setCin("12345674");
+			// admin.setNom("Admin");
+			// admin.setPrenom("User");
+			// admin.setEmail(adminEmail);
+			// admin.setDateNaissance(new Date(2000 - 1900, 1, 1)); // Adjust for zero-based
+			// months
+			// admin.setMdp(passwordEncoder.encode("teja"));
 
-				utilisateurRepository.save(admin);
-				System.out.println("Admin user created successfully!");
-			} else {
-				System.out.println("Admin user already exists.");
-			}
+			// utilisateurRepository.save(admin);
+			// System.out.println("Admin user created successfully!");
+			// } else {
+			System.out.println("Admin user already exists.");
+			// }
 		};
 	}
 
