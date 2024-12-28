@@ -2,7 +2,9 @@ package com.p1.Controllers;
 
 import com.p1.Model.Chambre;
 import com.p1.Model.Personnel;
+
 import com.p1.Service.PersonnelService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,10 @@ import com.p1.Service.FoyerService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
+import com.p1.Model.AgentMaintenance;
+import com.p1.Service.AgentMaintenanceService;
+
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4300")
@@ -39,6 +45,12 @@ public class PersonnelController {
         return ResponseEntity.ok(chambres); // Retourne la liste de tous les personnels avec un code HTTP 200 OK
     }
 
+    @GetMapping("/Allchambres")
+    public ResponseEntity<List<Chambre>> getAllChambre() {
+        List<Chambre> chambres = chambreService.getAllChambre();
+        return ResponseEntity.ok(chambres); // Retourne la liste de tous les personnels avec un code HTTP 200 OK
+    }
+
     @PatchMapping("/chambres/{id}")
     public ResponseEntity<Chambre> updateChambre(@PathVariable Long id, @RequestBody Chambre updatedChambre) {
         Chambre updated = chambreService.updateChambre(id, updatedChambre);
@@ -58,15 +70,33 @@ public class PersonnelController {
     }
 
     @Autowired
-    private PersonnelService personnelService; // Instance of PersonnelService
+    private AgentMaintenanceService agentMaintenanceService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Long> getPersonnel(@PathVariable Long id) {
-        Personnel personnel = personnelService.getPersonnel(id); // Use the instance, not a static reference
-        if (personnel != null) {
-            return ResponseEntity.ok(personnel.getFoyer().getId());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @PostMapping("/agent")
+    public ResponseEntity<AgentMaintenance> addAgent(@RequestBody AgentMaintenance agent) {
+        return ResponseEntity.ok(agentMaintenanceService.addAgent(agent));
     }
+
+    @GetMapping("/agent/agentAll")
+    public ResponseEntity<List<AgentMaintenance>> getAllAgents() {
+        return ResponseEntity.ok(agentMaintenanceService.getAllAgents());
+    }
+
+    @GetMapping("/agent/{id}")
+    public ResponseEntity<AgentMaintenance> getAgentById(@PathVariable Long id) {
+        return ResponseEntity.ok(agentMaintenanceService.getAgentById(id));
+    }
+
+    @PutMapping("/agent/{id}")
+    public ResponseEntity<AgentMaintenance> updateAgent(@PathVariable Long id,
+            @RequestBody AgentMaintenance updatedAgent) {
+        return ResponseEntity.ok(agentMaintenanceService.updateAgent(id, updatedAgent));
+    }
+
+    @DeleteMapping("/agent/{id}")
+    public ResponseEntity<Void> deleteAgent(@PathVariable Long id) {
+        agentMaintenanceService.deleteAgent(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

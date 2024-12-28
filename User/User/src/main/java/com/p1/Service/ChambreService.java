@@ -88,4 +88,8 @@ public class ChambreService {
         chambreRepository.delete(chambre);
         return "Data Deleted Successfully";
     }
+
+    public List<Chambre> getAllChambre() {
+        return chambreRepository.findAll();
+    }
 }
