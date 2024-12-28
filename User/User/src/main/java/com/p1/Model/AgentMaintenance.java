@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 
 @Data
@@ -19,4 +20,8 @@ public class AgentMaintenance extends Utilisateur {
     @Enumerated(EnumType.STRING)
     private Specialite specialite;
 
+    // Relation One-to-Many via Plainte (un agent peut avoir plusieurs plaintes)
+    @OneToMany(mappedBy = "agent")
+    @JsonManagedReference("agent_plainte") // Propriétaire de la relation, sérialisé
+    private List<Plainte> plaintes;
 }

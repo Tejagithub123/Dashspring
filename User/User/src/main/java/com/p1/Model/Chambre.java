@@ -9,11 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Data
 @Entity
@@ -69,5 +72,9 @@ public class Chambre {
     public Boolean isAvailble() {
         return this.availble;
     }
+
+    @OneToMany(mappedBy = "chambre")
+    @JsonManagedReference("chambre_plainte")
+    private List<Plainte> plaintes;
 
 }

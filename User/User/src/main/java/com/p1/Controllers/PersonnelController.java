@@ -3,7 +3,10 @@ package com.p1.Controllers;
 import com.p1.Model.AgentMaintenance;
 import com.p1.Model.Chambre;
 import com.p1.Model.Personnel;
+import com.p1.Model.Plainte;
 import com.p1.Service.PersonnelService;
+import com.p1.Service.PlainteService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,7 @@ import com.p1.Service.FoyerService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4300")
@@ -101,4 +105,55 @@ public class PersonnelController {
         agentMaintenanceService.deleteAgent(id);
         return ResponseEntity.noContent().build();
     }
+
+    @Autowired
+    private PlainteService plainteService;
+
+    // Create a new Plainte
+    @PostMapping("plainte")
+    public ResponseEntity<Plainte> createPlainte(@RequestBody Plainte plainte) {
+        Plainte savedPlainte = plainteService.addPlainte(plainte);
+        return new ResponseEntity<>(savedPlainte, HttpStatus.CREATED);
+    }
+
+    // Get all Plaintes
+    @GetMapping("plainte/Allplaintes")
+    public ResponseEntity<List<Plainte>> getAllPlaintes() {
+        List<Plainte> plaintes = plainteService.getAllPlaintes();
+        return new ResponseEntity<>(plaintes, HttpStatus.OK);
+    }
+
+    // Get a Plainte by its ID
+    @GetMapping("plainte/{id}")
+    public ResponseEntity<Plainte> getPlainteById(@PathVariable Long id) {
+        Optional<Plainte> plainte = plainteService.getPlainteById(id);
+        if (plainte.isPresent()) {
+            return new ResponseEntity<>(plainte.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    // Update an existing Plainte
+    @PutMapping("plainte/{id}")
+    public ResponseEntity<Plainte> updatePlainte(@PathVariable Long id, @RequestBody Plainte updatedPlainte) {
+        try {
+            Plainte updated = plainteService.updatePlainte(id, updatedPlainte);
+            return new ResponseEntity<>(updated, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    // Delete a Plainte by its ID
+    @DeleteMapping("plainte/{id}")
+    public ResponseEntity<Void> deletePlainte(@PathVariable Long id) {
+        try {
+            plainteService.deletePlainte(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
