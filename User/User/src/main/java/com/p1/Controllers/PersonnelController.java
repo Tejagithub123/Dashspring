@@ -1,5 +1,6 @@
 package com.p1.Controllers;
 
+import com.p1.Model.AgentMaintenance;
 import com.p1.Model.Chambre;
 import com.p1.Model.Personnel;
 import com.p1.Service.PersonnelService;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.p1.Model.Foyer;
+import com.p1.Service.AgentMaintenanceService;
 import com.p1.Service.ChambreService;
 import com.p1.Service.FoyerService;
 import java.util.List;
@@ -68,5 +70,35 @@ public class PersonnelController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @Autowired
+    private AgentMaintenanceService agentMaintenanceService;
+
+    @PostMapping("/agent")
+    public ResponseEntity<AgentMaintenance> addAgent(@RequestBody AgentMaintenance agent) {
+        return ResponseEntity.ok(agentMaintenanceService.addAgent(agent));
+    }
+
+    @GetMapping("/agent/agentAll")
+    public ResponseEntity<List<AgentMaintenance>> getAllAgents() {
+        return ResponseEntity.ok(agentMaintenanceService.getAllAgents());
+    }
+
+    @GetMapping("/agent/{id}")
+    public ResponseEntity<AgentMaintenance> getAgentById(@PathVariable Long id) {
+        return ResponseEntity.ok(agentMaintenanceService.getAgentById(id));
+    }
+
+    @PutMapping("/agent/{id}")
+    public ResponseEntity<AgentMaintenance> updateAgent(@PathVariable Long id,
+            @RequestBody AgentMaintenance updatedAgent) {
+        return ResponseEntity.ok(agentMaintenanceService.updateAgent(id, updatedAgent));
+    }
+
+    @DeleteMapping("/agent/{id}")
+    public ResponseEntity<Void> deleteAgent(@PathVariable Long id) {
+        agentMaintenanceService.deleteAgent(id);
+        return ResponseEntity.noContent().build();
     }
 }
