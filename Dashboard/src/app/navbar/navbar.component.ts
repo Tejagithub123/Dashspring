@@ -22,14 +22,16 @@ export class NavbarComponent implements OnInit {
     toggle: this.showMenu,
     col: this.col
   };
-
+  userRole: String = ""
   constructor(private toggleService: ToggleService, private router: Router,private personnelService: PersonnelService) {}
 
   ngOnInit(): void {
+   
     // console.log("User role:", UserStorageService.getUserRole());
     // console.log("Foyer ID:", UserStorageService.getFoyer_Id());
-  
-    if (UserStorageService.getUserRole() == "ROLE_PERSONNEL" && UserStorageService.getFoyer_Id()==""){
+  if (UserStorageService.getUserRole() == "ROLE_PERSONNEL"){
+    this.userRole = "Personnel";
+    if (UserStorageService.getFoyer_Id()==""){
       this.personnelService.getFoyerId(Number(UserStorageService.getUserId())).subscribe(
         (response) => {
           UserStorageService.setFoyer_Id(String(response));
@@ -39,10 +41,10 @@ export class NavbarComponent implements OnInit {
           console.error('Login failed', error);
         }
       );
-      // String id =UserStorageService.getUserId;///////////////////////////getById
-      
-      
-
+    }
+    }
+    else if (UserStorageService.getUserRole() == "ROLE_ADMIN"){
+      this.userRole = "Admin";
     }
   }
 
@@ -61,11 +63,8 @@ export class NavbarComponent implements OnInit {
 
   // Logout functionality
   logout() {
-    
-    localStorage.removeItem('token');
-    window.localStorage.removeItem('user_id');
-    window.localStorage.removeItem('user_role');
-    window.localStorage.removeItem('foyer_id'); // Remove token from local storage
+    UserStorageService.SignOut()
+ // Remove token from local storage
     this.router.navigate(['/login']); // Redirect to login page
   }
 
