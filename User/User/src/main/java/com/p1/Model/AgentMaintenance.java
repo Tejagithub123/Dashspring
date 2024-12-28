@@ -19,7 +19,4 @@ public class AgentMaintenance extends Utilisateur {
     @Enumerated(EnumType.STRING)
     private Specialite specialite;
 
-    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true)
-
-    private List<Plainte> plaintes;
 }

@@ -74,8 +74,4 @@ public class Chambre {
         return this.availble;
     }
 
-    @OneToMany(mappedBy = "chambre", cascade = CascadeType.ALL, orphanRemoval = true)
-
-    private List<Plainte> plaintes;
-
 }
