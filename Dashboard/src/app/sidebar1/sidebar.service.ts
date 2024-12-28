@@ -50,6 +50,21 @@ export class SidebarService {
       type: 'simple', 
       condition: 'ROLE_PERSONNEL',
     },
+    {
+      title: 'Add Agent',
+      icon: 'fa fa-users',  
+      route: '/agent',
+      type: 'simple', 
+      condition: 'ROLE_PERSONNEL',
+    },
+
+    {
+      title: 'list agents',
+      icon: 'fa fa-list',  
+      route: '/liste-agents',
+      type: 'simple', 
+      condition: 'ROLE_PERSONNEL',
+    },
     // {
     //   title: 'E-commerce',
     //   icon: 'fa fa-shopping-cart',
