@@ -33,9 +33,9 @@ public class PersonnelController {
         return ResponseEntity.ok(createdChambre);
     }
 
-    @GetMapping("/Allchambres")
-    public ResponseEntity<List<Chambre>> getAllChambre() {
-        List<Chambre> chambres = chambreService.getAllChambre();
+    @GetMapping("/Allchambres/{id}")
+    public ResponseEntity<List<Chambre>> getAllChambre(@PathVariable Long id) {
+        List<Chambre> chambres = chambreService.getChambresByFoyerId(id);
         return ResponseEntity.ok(chambres); // Retourne la liste de tous les personnels avec un code HTTP 200 OK
     }
 
@@ -55,5 +55,18 @@ public class PersonnelController {
     public ResponseEntity<Void> deleteChambre(@PathVariable Long id) {
         chambreService.deleteChambre(id);
         return ResponseEntity.noContent().build(); // Retourner une réponse 204 No Content
+    }
+
+    @Autowired
+    private PersonnelService personnelService; // Instance of PersonnelService
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Long> getPersonnel(@PathVariable Long id) {
+        Personnel personnel = personnelService.getPersonnel(id); // Use the instance, not a static reference
+        if (personnel != null) {
+            return ResponseEntity.ok(personnel.getFoyer().getId());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

@@ -25,6 +25,7 @@ public class Chambre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
     private String Description;
     @Enumerated(EnumType.STRING)
     private TYPE type;
@@ -59,6 +60,10 @@ public class Chambre {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Boolean isAvailble() {
