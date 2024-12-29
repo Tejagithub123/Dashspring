@@ -1,0 +1,51 @@
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+
+<div class="card">
+  <div class="card-header">Etudiant List</div>
+  <div class="card-body">
+ <!-- Add Etudiant button -->
+ <button class="btn btn-success float-right " [routerLink]="['/etudiant']">Add Etudiant   <i class="fa fa-plus" aria-hidden="true"></i></button>
+ <div><br/></div>
+ <div><br/></div>
+ <table class="table">
+  <thead>
+    <tr>
+     
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>Email</th>
+      <th>Date de Naissance</th>
+      <th>CIN</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let etudiant of etudiants">
+    
+      <td>{{ etudiant.nom }}</td>
+      <td>{{ etudiant.prenom }}</td>
+      <td>{{ etudiant.email }}</td>
+      <td>{{ etudiant.dateNaissance }}</td>
+      <td>{{ etudiant.cin }}</td>
+      <td>
+       
+        <button
+          class="btn btn-danger"
+          (click)="etudiant.id ? deleteEtudiant(etudiant.id) : null"
+          [disabled]="!etudiant.id"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+  
+</div>
+</div>
+

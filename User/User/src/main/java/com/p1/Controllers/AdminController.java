@@ -1,6 +1,7 @@
 package com.p1.Controllers;
 
 import com.p1.Model.Chambre;
+import com.p1.Model.Etudiant;
 import com.p1.Model.Personnel;
 import com.p1.Service.PersonnelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.p1.Model.Foyer;
 import com.p1.Service.ChambreService;
+import com.p1.Service.EtudiantService;
 import com.p1.Service.FoyerService;
 import java.util.List;
 import javax.validation.Valid;
@@ -28,6 +30,8 @@ public class AdminController {
 
     @Autowired
     private ChambreService chambreService;
+    @Autowired
+    private EtudiantService etudiantService;
 
     // Ajouter un nouveau personnel et l'affecter à un foyer
     @PostMapping("/personnels")
@@ -122,6 +126,24 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN) // 403 Forbidden if deletion is not allowed
                     .body(null);
         }
+    }
+
+    @PostMapping("/etudiant")
+    public ResponseEntity<Etudiant> addEtudiant(@Valid @RequestBody Etudiant etudiant) {
+        Etudiant createdEtudiant = etudiantService.addEtudiant(etudiant);
+        return ResponseEntity.ok(createdEtudiant);
+    }
+
+    @GetMapping("/etudinat/Alletudiants")
+    public ResponseEntity<List<Etudiant>> getAllEtudiants() {
+        List<Etudiant> etudiants = etudiantService.getAllEtudiants();
+        return ResponseEntity.ok(etudiants); // Retourne la liste de tous les personnels avec un code HTTP 200 OK
+    }
+
+    @DeleteMapping("/etudiants/{id}")
+    public ResponseEntity<Void> deleteEtudiant(@PathVariable Long id) {
+        etudiantService.deleteEtudiant(id);
+        return ResponseEntity.noContent().build(); // Retourner une réponse 204 No Content
     }
 
 }

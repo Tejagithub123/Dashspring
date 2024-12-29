@@ -1,8 +1,10 @@
 package com.p1.Controllers;
 
 import com.p1.Model.Chambre;
+import com.p1.Model.Etudiant;
 import com.p1.Model.Personnel;
 import com.p1.Service.PersonnelService;
+import com.p1.Service.EtudiantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,8 @@ public class PersonnelController {
 
     @Autowired
     private ChambreService chambreService;
+    @Autowired
+    private EtudiantService etudiantService;
 
     // chambres
     @PostMapping("/chambre")
@@ -68,5 +72,11 @@ public class PersonnelController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PostMapping("/etudiant")
+    public ResponseEntity<Etudiant> addEtudiant(@Valid @RequestBody Etudiant etudiant) {
+        Etudiant createdEtudiant = etudiantService.addEtudiant(etudiant);
+        return ResponseEntity.ok(createdEtudiant);
     }
 }

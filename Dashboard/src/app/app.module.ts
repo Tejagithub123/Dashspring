@@ -27,6 +27,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { FoyerComponent } from './components/foyer/foyer.component';
 import { PersonnelComponent } from './components/personnel/personnel.component';
 import { ChambreComponent } from './components/chambre/chambre.component';
+import { EtudiantComponent } from './components/etudiant/etudiant.component';
 import { LoginComponent } from './components/login/login.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditFoyerModalComponent } from './components/foyer/EditFoyerModalComponent';
@@ -38,6 +39,7 @@ import { MatCardModule } from '@angular/material/card';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PersonnelListComponent } from './components/personnel-list-component/personnel-list-component.component';
 import { ChambreListComponent } from './components/chambre-list-component/chambre-list-component.component';
+import{EtudiantListComponent} from './components/etudiant-list-component/etudiant-list-component.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +57,9 @@ import { ChambreListComponent } from './components/chambre-list-component/chambr
     SuccessModalComponent,
     PersonnelListComponent,
     ChambreComponent,
-    ChambreListComponent 
+    ChambreListComponent, 
+    EtudiantComponent,
+    EtudiantListComponent
   ],
   imports: [
     BrowserModule,

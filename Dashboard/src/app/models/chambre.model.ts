@@ -3,9 +3,9 @@ export interface Chambre {
   name: string;
   description: string;
   type: string;
-  availble: boolean;
+  available: boolean;
   price: string;
   foyerId?: number;
   foyer?: { id: number } | null;
-  foyerName?: string;  //
+  foyerNom?: string;  //
 }
