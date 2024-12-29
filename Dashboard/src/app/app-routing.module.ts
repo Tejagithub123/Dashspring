@@ -11,8 +11,14 @@ import { LoginComponent } from './components/login/login.component';
 
 import { PersonnelListComponent } from './components/personnel-list-component/personnel-list-component.component';
 import { ChambreListComponent } from './components/chambre-list-component/chambre-list-component.component';
+
 import { AgentMaintenanceComponent } from './components/add-agent/add-agent.component';
 import { AgentListComponent } from './components/agent-list/agent-list.component';
+
+import { EtudiantComponent } from './components/etudiant/etudiant.component';
+import { EtudiantListComponent } from './components/etudiant-list-component/etudiant-list-component.component';
+
+
 const routes: Routes = [  { path: '',  component:HomeComponent }, // Redirect to login page by default
 { path: 'login', component: LoginComponent },  // Define the login routev
 
@@ -44,11 +50,18 @@ component: PersonnelComponent },
   { path: 'liste-chambres', 
     component: ChambreListComponent },
 
+
     { path: 'agent', 
     component: AgentMaintenanceComponent },
 
     { path: 'liste-agents', 
     component: AgentListComponent },
+
+    { path: 'etudiant', 
+      component: EtudiantComponent },
+      { path: 'liste-etudiants', 
+        component: EtudiantListComponent },
+
 ];
 
 

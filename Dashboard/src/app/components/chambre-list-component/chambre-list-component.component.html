@@ -6,10 +6,43 @@
 <div class="card">
   <div class="card-header">Chambre List</div>
   <div class="card-body">
-    <!-- Add Personnel button -->
-    <button class="btn btn-success float-right " [routerLink]="['/chambre']">Add Personnel <i class="fa fa-plus" aria-hidden="true"></i></button>
+    <!-- Add Chambre button -->
+    <button *ngIf="role === 'ROLE_PERSONNEL'" class="btn btn-success float-right" [routerLink]="['/chambre']">
+      Add Chambre <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
     <div><br/></div>
-    <div><br/></div>
+
+    <!-- Filter inputs -->
+    <div *ngIf="role === 'ROLE_ETUDIANT'" class="row mb-3">
+      <!-- Foyer Name Filter -->
+      <div class="col">
+        <label for="typeFilter" class="form-label">Filter by Foyer Name</label>
+        <input 
+          type="text" 
+          [(ngModel)]="foyerNameFilter" 
+          (input)="onFilterChange()" 
+          class="form-control" 
+          placeholder="Filter by Foyer Name"
+        />
+      </div>
+      
+      <!-- Type Filter Dropdown -->
+      <div class="col">
+        <label for="typeFilter" class="form-label">Filter by Type</label>
+        <select
+          id="typeFilter"
+          [(ngModel)]="typeFilter"
+          (change)="onFilterChange()"
+          class="form-control"
+        >
+          <option value="">All Types</option> <!-- Option to show all types -->
+          <option value="SINGLE">Single</option> <!-- Static options for types -->
+          <option value="DOUBLE">Double</option>
+        </select>
+      </div>
+    </div>
+    
+
     <table class="table">
       <thead>
         <tr>
@@ -19,20 +52,22 @@
           <th>Type</th>
           <th>Available</th>
           <th>Price</th>
-          <th>Actions</th>
+          <th *ngIf="role === 'ROLE_ETUDIANT'">Foyer Name</th>
+          <th *ngIf="role === 'ROLE_PERSONNEL'">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let chambre of chambres">
+        <tr *ngFor="let chambre of filteredChambres">
           <td>{{ chambre.id }}</td>
           <td>{{ chambre.name }}</td>
           <td>{{ chambre.description }}</td>
           <td>{{ chambre.type }}</td>
-          <td>{{ chambre.availble ? 'Yes' : 'No' }}</td>
+          <td>{{ chambre.availble === true ? "Yes":"No"}}</td>
           <td>{{ chambre.price }}</td>
-          <td>
+          <td *ngIf="role === 'ROLE_ETUDIANT'" >{{ chambre.foyerNom }}</td>
+          <td *ngIf="role === 'ROLE_PERSONNEL'">
             <button class="btn btn-primary" (click)="openUpdateModal(updateModal, chambre)">Update</button>
-            <button class="btn btn-danger" (click)="chambre.id ? deletePersonnel(chambre.id) : null" [disabled]="!chambre.id">Delete</button>
+            <button class="btn btn-danger" (click)="chambre.id ? deleteChambre(chambre.id) : null" [disabled]="!chambre.id">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -41,7 +76,7 @@
     <!-- Modal for updating chambre -->
     <ng-template #updateModal let-modal>
       <div class="modal-header">
-        <h4 class="modal-title">Update Personnel</h4>
+        <h4 class="modal-title">Update Chambre</h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.close()"></button>
       </div>
       <div class="modal-body">
@@ -146,7 +181,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="modal.close()">Close</button>
-        <button type="button" class="btn btn-primary" (click)="updatePersonnel()" [disabled]="updateForm.invalid">
+        <button type="button" class="btn btn-primary" (click)="updateChambre()" [disabled]="updateForm.invalid">
           Save
         </button>
       </div>

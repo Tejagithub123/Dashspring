@@ -46,6 +46,10 @@ export class NavbarComponent implements OnInit {
     else if (UserStorageService.getUserRole() == "ROLE_ADMIN"){
       this.userRole = "Admin";
     }
+    else if (UserStorageService.getUserRole() == "ROLE_ETUDIANT"){
+      this.userRole = "Student";
+    }
+ 
   }
 
   toggleSideBar() {

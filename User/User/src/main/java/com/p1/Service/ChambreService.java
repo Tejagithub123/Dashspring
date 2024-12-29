@@ -1,5 +1,6 @@
 package com.p1.Service;
 
+import com.p1.Dto.ChambreDTO;
 import com.p1.Model.Chambre;
 import com.p1.Model.Foyer;
 import com.p1.Repository.ChambreRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ChambreService {
@@ -73,6 +75,25 @@ public class ChambreService {
 
     public List<Chambre> getChambresByFoyerId(Long foyerId) {
         return chambreRepository.findByFoyerId(foyerId);
+    }
+
+    public List<ChambreDTO> getAllChambres() {
+        List<Chambre> chambres = chambreRepository.findAll();
+        return chambres.stream().map(chambre -> {
+            ChambreDTO dto = new ChambreDTO();
+            dto.setId(chambre.getId());
+            dto.setName(chambre.getName());
+            dto.setDescription(chambre.getDescription());
+            dto.setType(chambre.getType().toString()); // Convert enum to String
+            dto.setAvailble(chambre.isAvailble());
+            dto.setPrice(chambre.getPrice());
+            // Check if foyer is present and set both foyerId and foyerNom
+            if (chambre.getFoyer() != null) {
+                dto.setFoyerId(chambre.getFoyer().getId());
+                dto.setFoyerNom(chambre.getFoyer().getNom());
+            }
+            return dto;
+        }).collect(Collectors.toList());
     }
 
     /////////////////////////////////////// Done///////////////////////////////////////////////

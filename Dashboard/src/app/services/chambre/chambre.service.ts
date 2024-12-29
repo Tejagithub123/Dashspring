@@ -2,14 +2,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Chambre } from 'src/app/models/chambre.model';
+import { UserStorageService } from 'src/app/storage/user-storage.service'; // Make sure to import the user storage service
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root', // Ensures the service is provided at the root level
 })
 export class ChambreService {
-  private baseUrl = 'http://localhost:8090/personnel';
+  private baseUrl: string ="";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    // Set the base URL based on the user's role
+    const role = UserStorageService.getUserRole();
+    if (role === 'ROLE_ETUDIANT') {
+      this.baseUrl = 'http://localhost:8090/etudiant';
+    } else if (role === 'ROLE_PERSONNEL')  {
+      this.baseUrl = 'http://localhost:8090/personnel';
+    } 
+  }
 
   // Helper method to get headers with Bearer Token
   private getHeaders(): HttpHeaders {
@@ -29,6 +38,12 @@ export class ChambreService {
     });
   }
 
+  getAllChambre(): Observable<Chambre[]> {
+    return this.http.get<Chambre[]>(`${this.baseUrl}/Allchambres`, {
+      headers: this.getHeaders(),
+    });
+  }
+
   // Get a chambre by ID
   getById(id: number): Observable<Chambre> {
     return this.http.get<Chambre>(`${this.baseUrl}/Onechambre/${id}`, {
@@ -37,7 +52,7 @@ export class ChambreService {
   }
 
   // Create a new chambre (no foyer assigned)
-  create(chambre: Chambre,foyerId: number): Observable<Chambre> {
+  create(chambre: Chambre, foyerId: number): Observable<Chambre> {
     return this.http.post<Chambre>(`${this.baseUrl}/chambre?foyerId=${foyerId}`, chambre, {
       headers: this.getHeaders(),
     });

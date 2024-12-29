@@ -3,7 +3,7 @@ export interface MenuItem {
   title: string;
   type: 'header' | 'dropdown' | 'simple';
   icon?: string;
-  condition?: string;
+  condition?: String [];
   active?: boolean;
   badge?: {
     text: string;
