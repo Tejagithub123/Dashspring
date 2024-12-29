@@ -65,7 +65,7 @@ import{EtudiantListComponent} from './components/etudiant-list-component/etudian
 
     ChambreListComponent,
     AgentMaintenanceComponent,
-    AgentListComponent
+    AgentListComponent,
 
    
     EtudiantComponent,
