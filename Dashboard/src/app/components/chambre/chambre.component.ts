@@ -15,7 +15,7 @@ export class ChambreComponent implements OnInit {
     name:'',
     description: '',
     type: 'SINGLE',
-    available: true,
+    availble: true,
     price: '',
   };
 

@@ -63,18 +63,18 @@
           </div>
           
           <div class="col-md-6">
-            <label for="available" class="form-label">Available</label>
+            <label for="availble" class="form-label">Available</label>
             <select
-              id="available"
-              [(ngModel)]="chambre.available"
-              name="available"
+              id="availble"
+              [(ngModel)]="chambre.availble"
+              name="availble"
               class="form-control"
               required
             >
               <option value="true">True</option>
               <option value="false">False</option>
             </select>
-            <div *ngIf="!chambre.available" class="text-danger">
+            <div *ngIf="!chambre.availble" class="text-danger">
               Availability is required.
             </div>
           </div>

@@ -6,7 +6,7 @@ public class ChambreDTO {
     private String name;
     private String description;
     private String type;
-    private boolean available;
+    private boolean availble;
     private String price;
     private Long foyerId; // ID of the associated Foyer
     private String foyerNom; // Name of the associated Foyer
@@ -44,12 +44,12 @@ public class ChambreDTO {
         this.type = type;
     }
 
-    public boolean isAvailable() {
-        return available;
+    public boolean isAvailble() {
+        return availble;
     }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
+    public void setAvailble(boolean available) {
+        this.availble = available;
     }
 
     public String getPrice() {

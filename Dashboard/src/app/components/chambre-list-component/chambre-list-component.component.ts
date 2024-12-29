@@ -53,7 +53,7 @@ export class ChambreListComponent implements OnInit {
       
       // Only filter based on availability if the role is not 'ROLE_PERSONNEL'
       if (this.role !== 'ROLE_PERSONNEL') {
-        const isAvailable = chambre.available === true;
+        const isAvailable = chambre.availble === true;
         return matchesFoyerName && matchesType && isAvailable;
       } else {
         // For ROLE_PERSONNEL, no availability filter applied
@@ -85,8 +85,8 @@ export class ChambreListComponent implements OnInit {
       if (this.selectedChambre.type !== this.originalChambre.type) {
         updatePayload.type = this.selectedChambre.type;
       }
-      if (this.selectedChambre.available !== this.originalChambre.available) {
-        updatePayload.available = this.selectedChambre.available;
+      if (this.selectedChambre.availble !== this.originalChambre.availble) {
+        updatePayload.availble = this.selectedChambre.availble;
       }
       if (this.selectedChambre.price !== this.originalChambre.price) {
         updatePayload.price = this.selectedChambre.price;

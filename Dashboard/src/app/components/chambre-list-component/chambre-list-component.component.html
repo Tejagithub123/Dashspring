@@ -52,7 +52,7 @@
           <th>Type</th>
           <th>Available</th>
           <th>Price</th>
-          <th>Foyer Name</th>
+          <th *ngIf="role === 'ROLE_ETUDIANT'">Foyer Name</th>
           <th *ngIf="role === 'ROLE_PERSONNEL'">Actions</th>
         </tr>
       </thead>
@@ -62,9 +62,9 @@
           <td>{{ chambre.name }}</td>
           <td>{{ chambre.description }}</td>
           <td>{{ chambre.type }}</td>
-          <td>{{ chambre.available === true ? 'Yes' : 'No' }}</td>
+          <td>{{ chambre.availble === true ? "Yes":"No"}}</td>
           <td>{{ chambre.price }}</td>
-          <td>{{ chambre.foyerNom }}</td>
+          <td *ngIf="role === 'ROLE_ETUDIANT'" >{{ chambre.foyerNom }}</td>
           <td *ngIf="role === 'ROLE_PERSONNEL'">
             <button class="btn btn-primary" (click)="openUpdateModal(updateModal, chambre)">Update</button>
             <button class="btn btn-danger" (click)="chambre.id ? deleteChambre(chambre.id) : null" [disabled]="!chambre.id">Delete</button>
@@ -140,8 +140,8 @@
               <input
                 type="radio"
                 id="availableYes"
-                [(ngModel)]="selectedChambre.available"
-                name="available"
+                [(ngModel)]="selectedChambre.availble"
+                name="availble"
                 [value]="true"
                 class="form-check-input"
               />
@@ -151,8 +151,8 @@
               <input
                 type="radio"
                 id="availableNo"
-                [(ngModel)]="selectedChambre.available"
-                name="available"
+                [(ngModel)]="selectedChambre.availble"
+                name="availble"
                 [value]="false"
                 class="form-check-input"
               />

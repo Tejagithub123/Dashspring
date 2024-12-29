@@ -3,7 +3,7 @@ export interface Chambre {
   name: string;
   description: string;
   type: string;
-  available: boolean;
+  availble: boolean;
   price: string;
   foyerId?: number;
   foyer?: { id: number } | null;
