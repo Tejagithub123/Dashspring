@@ -1,0 +1,104 @@
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div class="card">
+    <div class="card-header">Agent Maintenance Profile Settings</div>
+    <div class="card-body">
+      <!-- Profile Settings Form -->
+      <div class="p-3 py-5">
+        <!-- Row 1: Name and Surname -->
+        <div class="row mt-3">
+          <div class="col-md-6">
+            <label class="labels">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="First name"
+              [(ngModel)]="agent.nom"
+              name="nom"
+            />
+          </div>
+  
+          <div class="col-md-6">
+            <label class="labels">Surname</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Surname"
+              [(ngModel)]="agent.prenom"
+              name="prenom"
+            />
+          </div>
+        </div>
+  
+        <!-- Row 2: Speciality and CIN -->
+        <div class="row mt-3">
+          <div class="col-md-6">
+            <label class="labels">Speciality</label>
+            <select
+              class="form-control"
+              [(ngModel)]="agent.specialite"
+              name="specialite"
+            >
+              <option value="MENUISERIE">Menuiserie</option>
+              <option value="CHAUD">Chaud</option>
+              <option value="FROID">Froid</option>
+              <option value="ELECTRICITE">Électricité</option>
+            </select>
+          </div>
+  
+          <div class="col-md-6">
+            <label class="labels">CIN</label>
+            <input
+              type="number"
+              class="form-control"
+              placeholder="CIN"
+              [(ngModel)]="agent.cin"
+              name="cin"
+            />
+          </div>
+        </div>
+  
+        <!-- Row 3: Email -->
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <label class="labels">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Enter email"
+              [(ngModel)]="agent.email"
+              name="email"
+            />
+          </div>
+        </div>
+  
+        <!-- Row 4: Password -->
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <label class="labels">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Enter password"
+              [(ngModel)]="agent.mdp"
+              name="mdp"
+            />
+          </div>
+        </div>
+  
+        <!-- Save Button -->
+        <div class="mt-6 text-center">
+          <button
+            class="btn profile-button"
+            (click)="saveAgent()"
+            type="button"
+          >
+            Save Agent
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

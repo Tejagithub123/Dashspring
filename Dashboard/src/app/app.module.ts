@@ -39,7 +39,12 @@ import { MatCardModule } from '@angular/material/card';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PersonnelListComponent } from './components/personnel-list-component/personnel-list-component.component';
 import { ChambreListComponent } from './components/chambre-list-component/chambre-list-component.component';
+
+import { AgentMaintenanceComponent } from './components/add-agent/add-agent.component';
+import { AgentListComponent } from './components/agent-list/agent-list.component';
+
 import{EtudiantListComponent} from './components/etudiant-list-component/etudiant-list-component.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,9 +62,15 @@ import{EtudiantListComponent} from './components/etudiant-list-component/etudian
     SuccessModalComponent,
     PersonnelListComponent,
     ChambreComponent,
-    ChambreListComponent, 
+
+    ChambreListComponent,
+    AgentMaintenanceComponent,
+    AgentListComponent
+
+   
     EtudiantComponent,
     EtudiantListComponent
+
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,120 @@
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div class="card">
+  <div class="card-header">Agent List</div>
+  <div class="card-body">
+    <!-- Add Agent button -->
+    <button class="btn btn-success float-right" [routerLink]="['/agent']">
+      Add Agent <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+    <div><br /></div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Speciality</th>
+          <th>CIN</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let agent of agents">
+          <td>{{ agent.nom }}</td>
+          <td>{{ agent.prenom }}</td>
+          <td>{{ agent.email }}</td>
+          <td>{{ agent.specialite }}</td>
+          <td>{{ agent.cin }}</td>
+          <td>
+            <button
+              class="btn btn-primary"
+              (click)="openUpdateModal(updateModal, agent)"
+            >
+              Update
+            </button>
+            <button
+              class="btn btn-danger"
+              (click)="agent.id ? deleteAgent(agent.id) : null"
+              [disabled]="!agent.id"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Modal for updating agent -->
+    <ng-template #updateModal let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">Update Agent</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.close()"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="nom" class="form-label">Nom</label>
+            <input
+              type="text"
+              id="nom"
+              [(ngModel)]="selectedAgent.nom"
+              name="nom"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="prenom" class="form-label">Prenom</label>
+            <input
+              type="text"
+              id="prenom"
+              [(ngModel)]="selectedAgent.prenom"
+              name="prenom"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              id="email"
+              [(ngModel)]="selectedAgent.email"
+              name="email"
+              class="form-control"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="specialite" class="form-label">Speciality</label>
+            <select
+              id="specialite"
+              [(ngModel)]="selectedAgent.specialite"
+              name="specialite"
+              class="form-select"
+            >
+              <option value="MENUISERIE">MENUISERIE</option>
+              <option value="CHAUD">CHAUD</option>
+              <option value="FROID">FROID</option>
+              <option value="ELECTRICITE">ELECTRICITE</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="cin" class="form-label">CIN</label>
+            <input
+              type="text"
+              id="cin"
+              [(ngModel)]="selectedAgent.cin"
+              name="cin"
+              class="form-control"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="updateAgent()">Save</button>
+      </div>
+    </ng-template>
+  </div>
+</div>
