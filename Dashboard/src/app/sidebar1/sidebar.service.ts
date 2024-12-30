@@ -79,6 +79,14 @@ export class SidebarService {
       type: 'simple', 
       condition: ['ROLE_PERSONNEL'],
     },
+
+    {
+      title: 'add plainte',
+      icon: 'fa fa-book',  
+      route: '/plainte',
+      type: 'simple', 
+      condition: ['ROLE_PERSONNEL'],
+    },
     // {
     //   title: 'E-commerce',
     //   icon: 'fa fa-shopping-cart',

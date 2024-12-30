@@ -44,6 +44,10 @@ import { AgentMaintenanceComponent } from './components/add-agent/add-agent.comp
 import { AgentListComponent } from './components/agent-list/agent-list.component';
 
 import{EtudiantListComponent} from './components/etudiant-list-component/etudiant-list-component.component';
+import { PlaintesComponent } from './components/plaintes/plaintes.component';
+
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -69,7 +73,8 @@ import{EtudiantListComponent} from './components/etudiant-list-component/etudian
 
    
     EtudiantComponent,
-    EtudiantListComponent
+    EtudiantListComponent,
+    PlaintesComponent
 
   ],
   imports: [
@@ -93,7 +98,9 @@ import{EtudiantListComponent} from './components/etudiant-list-component/etudian
     MatInputModule,
     MatFormFieldModule,
     MatCardModule,
-    PerfectScrollbarModule 
+    PerfectScrollbarModule ,
+    ReactiveFormsModule,  // Ajoutez ReactiveFormsModule ici
+    
 
   ],
   providers: [UserService, ToggleService],

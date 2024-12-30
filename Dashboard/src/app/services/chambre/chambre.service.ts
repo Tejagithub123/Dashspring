@@ -80,5 +80,11 @@ export class ChambreService {
       null, // Sending empty body as required by the backend
       { params: params, headers: this.getHeaders() }
     );
-  }
+  } 
+
+
+
+  
+  
+
 }

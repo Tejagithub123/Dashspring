@@ -21,15 +21,19 @@ export class UserStorageService {
             const userDetails = {
                 id: decodedToken.id,   // Extract id from decoded token
                 role: decodedToken.role,  // Extract role from decoded token
+                foyerId: decodedToken.foyerId // Extract foyerId from token if present
             };
-            // Save id and role to localStorage
+    
+            // Save id, role, and foyer_id to localStorage
             window.localStorage.setItem('user_id', userDetails.id);
             window.localStorage.setItem('user_role', userDetails.role);
-            window.localStorage.setItem('foyer_id', "");
+            window.localStorage.setItem('foyer_id', userDetails.foyerId || ''); // Save foyerId or empty string
+    
         } catch (error) {
             console.error('Token decoding failed:', error);
         }
     }
+    
 
     static setFoyer_Id(foyer_id: string) {
         window.localStorage.setItem('foyer_id', foyer_id);

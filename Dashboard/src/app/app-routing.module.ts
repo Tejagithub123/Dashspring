@@ -18,7 +18,7 @@ import { AgentListComponent } from './components/agent-list/agent-list.component
 import { EtudiantComponent } from './components/etudiant/etudiant.component';
 import { EtudiantListComponent } from './components/etudiant-list-component/etudiant-list-component.component';
 
-
+import { PlaintesComponent } from './components/plaintes/plaintes.component';
 const routes: Routes = [  { path: '',  component:HomeComponent }, // Redirect to login page by default
 { path: 'login', component: LoginComponent },  // Define the login routev
 
@@ -61,6 +61,9 @@ component: PersonnelComponent },
       component: EtudiantComponent },
       { path: 'liste-etudiants', 
         component: EtudiantListComponent },
+
+        { path: 'plainte', 
+        component: PlaintesComponent  },
 
 ];
 

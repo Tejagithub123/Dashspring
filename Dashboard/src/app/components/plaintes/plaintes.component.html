@@ -1,0 +1,48 @@
+<div class="plaintes-form">
+  <h2>Soumettre une plainte</h2>
+  <form [formGroup]="plainteForm" (ngSubmit)="submitPlainte()">
+    
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea formControlName="description" class="form-control" id="description" rows="3"></textarea>
+      <div *ngIf="plainteForm.controls['description'].invalid && plainteForm.controls['description'].touched" class="text-danger">
+        La description est requise.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="agentId">Agent</label>
+      <select formControlName="agentId" class="form-control" id="agentId">
+        <option *ngFor="let agent of agents" [value]="agent.id">
+          {{ agent.nom }} {{ agent.prenom }} <!-- Display agent's nom and prenom -->
+        </option>
+      </select>
+      <div *ngIf="plainteForm.controls['agentId'].invalid && plainteForm.controls['agentId'].touched" class="text-danger">
+        L'agent est requis.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="chambreId">Chambre</label>
+      <input type="number" formControlName="chambreId" class="form-control" id="chambreId">
+      <div *ngIf="plainteForm.controls['chambreId'].invalid && plainteForm.controls['chambreId'].touched" class="text-danger">
+        La chambre est requise.
+      </div>
+    </div>
+
+    <!-- Champ pour la date -->
+    <div class="form-group">
+      <label for="date">Date</label>
+      <input type="date" formControlName="date" class="form-control" id="date">
+      <div *ngIf="plainteForm.controls['date'].invalid && plainteForm.controls['date'].touched" class="text-danger">
+        La date est requise.
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="mt-6 text-center d-flex justify-content-center">
+      <button type="submit" class="btn btn-primary" [disabled]="plainteForm.invalid">Soumettre</button>
+    </div>
+  </form>
+
+</div>
