@@ -2,6 +2,9 @@ package com.p1.Model;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -26,5 +29,18 @@ public class Foyer {
 
     @Column(nullable = false)
     private double longitude;
+
+    // Example: Store Etudiant IDs as a list
+    @ElementCollection
+    private List<Long> etudiantIds = new ArrayList<>();
+
+    @OneToMany
+    @JoinColumn(name = "foyer_id")
+    @JsonManagedReference
+    private List<Etudiant> etudiants;
+
+    public void addEtudiantId(Long etudiantId) {
+        etudiantIds.add(etudiantId);
+    }
 
 }

@@ -8,8 +8,7 @@ import com.p1.Model.Plainte;
 import com.p1.Service.PersonnelService;
 
 import com.p1.Service.PlainteService;
-
-
+import com.p1.Service.ReservationService;
 import com.p1.Service.EtudiantService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,7 +81,6 @@ public class PersonnelController {
             return ResponseEntity.notFound().build();
         }
     }
-
 
     @Autowired
     private AgentMaintenanceService agentMaintenanceService;
@@ -164,11 +162,28 @@ public class PersonnelController {
         }
     }
 
-
     @PostMapping("/etudiant")
     public ResponseEntity<Etudiant> addEtudiant(@Valid @RequestBody Etudiant etudiant) {
         Etudiant createdEtudiant = etudiantService.addEtudiant(etudiant);
         return ResponseEntity.ok(createdEtudiant);
+    }
+
+    @Autowired
+    private ReservationService reservationService;
+
+    @PutMapping("/{id}/approve")
+    public void approveReservation(@PathVariable Long id) {
+        reservationService.approveReservation(id);
+    }
+
+    @PutMapping("/{id}/reject")
+    public void rejectReservation(@PathVariable Long id) {
+        reservationService.rejectReservation(id);
+    }
+
+    @GetMapping("/getEtudiantofFoyer/{foyerId}")
+    public Foyer getFoyerWithEtudiants(@PathVariable Long foyerId) {
+        return foyerService.getFoyerWithEtudiants(foyerId);
     }
 
 }

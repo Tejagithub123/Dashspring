@@ -113,4 +113,24 @@ export class ChambreListComponent implements OnInit {
       });
     }
   }
+
+  // New method for "ETUDIANT" to reserve a chambre
+  reserveChambre(chambre: Chambre): void {
+    if (confirm(`Are you sure you want to reserve the chambre: ${chambre.name}?`)) {
+      if (chambre.id !== undefined) {
+        this.chambreService.reserveChambre(chambre.id).subscribe(
+          () => {
+            alert('Chambre reserved successfully!');
+            this.loadChambres(); 
+          },
+          (error) => {
+            console.error('Reservation failed:', error);
+            alert('Failed to reserve chambre');
+          }
+        );
+      } else {
+        console.error('Chambre ID is undefined');
+      }
+    }
+  }
 }

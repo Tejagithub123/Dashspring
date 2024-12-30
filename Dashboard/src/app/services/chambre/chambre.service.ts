@@ -81,4 +81,7 @@ export class ChambreService {
       { params: params, headers: this.getHeaders() }
     );
   }
+  reserveChambre(chambreId: number): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/reserve/${chambreId}`, {});
+  }
 }

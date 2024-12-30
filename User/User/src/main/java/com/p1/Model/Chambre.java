@@ -1,6 +1,9 @@
 
 package com.p1.Model;
 
+import lombok.Data;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,9 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import lombok.Data;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Data
@@ -36,10 +36,15 @@ public class Chambre {
     private String price;
 
     @OneToOne
-    @ManyToOne
     @JoinColumn(name = "foyer_id", nullable = true)
     @JsonBackReference
     private Foyer foyer;
+
+    @OneToMany(mappedBy = "chambre", cascade = CascadeType.ALL, orphanRemoval = true)
+
+    public void toggleAvailability(boolean availability) {
+        this.availble = availability;
+    }
 
     public void setId(Long id) {
         this.id = id;

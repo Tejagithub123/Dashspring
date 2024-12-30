@@ -87,12 +87,11 @@ public class AdminController {
 
     // Ajouter un nouveau foyer
     @PostMapping("/foyers")
-    public ResponseEntity<Foyer> addFoyer(@RequestBody Foyer foyer) {
-        Foyer createdFoyer = foyerService.addFoyer(foyer);
+    public ResponseEntity<Foyer> createFoyer(@RequestBody Foyer foyer) {
+        Foyer createdFoyer = foyerService.saveFoyer(foyer);
         return ResponseEntity.ok(createdFoyer);
     }
 
-    @CrossOrigin(origins = "http://localhost:4300")
     // liste de foyers
     @GetMapping("/foyers")
     public ResponseEntity<List<Foyer>> getAllFoyers() {

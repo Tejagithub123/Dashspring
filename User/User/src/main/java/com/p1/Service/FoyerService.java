@@ -1,6 +1,8 @@
 package com.p1.Service;
 
+import com.p1.Model.Etudiant;
 import com.p1.Model.Foyer;
+import com.p1.Repository.EtudiantRepository;
 import com.p1.Repository.FoyerRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,6 @@ public class FoyerService {
 
     @Autowired
     private FoyerRepository foyerRepository;
-
-    public Foyer addFoyer(Foyer foyer) {
-        return foyerRepository.save(foyer);
-    }
 
     public List<Foyer> getAllFoyers() {
         return foyerRepository.findAll();
@@ -57,5 +55,26 @@ public class FoyerService {
         }
 
         foyerRepository.delete(foyer);
+    }
+
+    @Autowired
+    private EtudiantRepository etudiantRepository;
+
+    public Foyer getFoyerWithEtudiants(Long foyerId) {
+        // Fetch the Foyer from the database
+        Foyer foyer = foyerRepository.findById(foyerId)
+                .orElseThrow(() -> new IllegalArgumentException("Foyer not found."));
+
+        // If using IDs stored in a list, retrieve the Etudiants
+        List<Etudiant> etudiants = etudiantRepository.findAllById(foyer.getEtudiantIds());
+
+        // If you use @OneToMany, you can also simply fetch etudiants like this
+        foyer.setEtudiants(etudiants);
+
+        return foyer;
+    }
+
+    public Foyer saveFoyer(Foyer foyer) {
+        return foyerRepository.save(foyer);
     }
 }

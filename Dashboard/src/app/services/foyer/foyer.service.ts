@@ -28,7 +28,6 @@ export class FoyerService {
   getFoyerById(id: number): Observable<Foyer> {
     return this.http.get<Foyer>(`${this.baseUrl}/${id}`, { headers: this.getHeaders() });
   }
-
   addFoyer(foyer: Foyer): Observable<Foyer> {
     return this.http.post<Foyer>(this.baseUrl, foyer, { headers: this.getHeaders() });
   }

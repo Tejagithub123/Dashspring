@@ -42,7 +42,6 @@
       </div>
     </div>
     
-
     <table class="table">
       <thead>
         <tr>
@@ -54,6 +53,7 @@
           <th>Price</th>
           <th *ngIf="role === 'ROLE_ETUDIANT'">Foyer Name</th>
           <th *ngIf="role === 'ROLE_PERSONNEL'">Actions</th>
+          <th *ngIf="role === 'ROLE_ETUDIANT'">Action</th> <!-- Added column for ETUDIANT actions -->
         </tr>
       </thead>
       <tbody>
@@ -68,6 +68,11 @@
           <td *ngIf="role === 'ROLE_PERSONNEL'">
             <button class="btn btn-primary" (click)="openUpdateModal(updateModal, chambre)">Update</button>
             <button class="btn btn-danger" (click)="chambre.id ? deleteChambre(chambre.id) : null" [disabled]="!chambre.id">Delete</button>
+          </td>
+          <td *ngIf="role === 'ROLE_ETUDIANT'">
+            <button class="btn btn-warning" (click)="reserveChambre(chambre)" [disabled]="!chambre.availble">
+              Reserve
+            </button>
           </td>
         </tr>
       </tbody>
@@ -170,19 +175,23 @@
               name="price"
               class="form-control"
               required
-              min="0"
               #price="ngModel"
             />
             <div *ngIf="price.invalid && price.touched" class="text-danger">
-              Price is required and must be a positive number.
+              Price is required.
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="modal.close()">Close</button>
-        <button type="button" class="btn btn-primary" (click)="updateChambre()" [disabled]="updateForm.invalid">
-          Save
+        <button
+          type="button"
+          class="btn btn-primary"
+          [disabled]="updateForm.invalid"
+          (click)="updateChambre()"
+        >
+          Save changes
         </button>
       </div>
     </ng-template>
