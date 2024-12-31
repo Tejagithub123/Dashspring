@@ -7,5 +7,6 @@ export interface Chambre {
   price: string;
   foyerId?: number;
   foyer?: { id: number } | null;
-  foyerNom?: string;  //
+  foyerNom?: string;
+  enMaintenance?: boolean;  //
 }

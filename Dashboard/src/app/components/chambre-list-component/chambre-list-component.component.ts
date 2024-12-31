@@ -35,10 +35,12 @@ export class ChambreListComponent implements OnInit {
     if (this.role === 'ROLE_PERSONNEL') {
       this.chambreService.getAll(Number(UserStorageService.getFoyer_Id())).subscribe((chambres) => {
         this.chambres = chambres;
+        console.log(chambres); 
         this.filteredChambres = [...this.chambres]; // No filter for personnel
       });
     } else {
       this.chambreService.getAllChambre().subscribe((chambres) => {
+        console.log(chambres); 
         this.chambres = chambres;
         this.applyFilters(); // Apply filters when loading data for other roles
       });

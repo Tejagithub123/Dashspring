@@ -109,4 +109,11 @@ public class ChambreService {
         chambreRepository.delete(chambre);
         return "Data Deleted Successfully";
     }
+
+    public Chambre setChambreEnMaintenance(Long id, boolean enMaintenance) {
+        Chambre chambre = chambreRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Chambre not found"));
+        chambre.setEnMaintenance(enMaintenance);
+        return chambreRepository.save(chambre);
+    }
 }

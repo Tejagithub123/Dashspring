@@ -34,6 +34,7 @@ public class Chambre {
     private TYPE type;
     private boolean availble;
     private String price;
+    private boolean enMaintenance = false;
 
     @OneToOne
     @ManyToOne
@@ -71,6 +72,14 @@ public class Chambre {
 
     public Boolean isAvailble() {
         return this.availble;
+    }
+
+    public void setEnMaintenance(boolean enMaintenance) {
+        this.enMaintenance = enMaintenance;
+    }
+
+    public boolean isEnMaintenance() {
+        return this.enMaintenance;
     }
 
     @OneToMany(mappedBy = "chambre")

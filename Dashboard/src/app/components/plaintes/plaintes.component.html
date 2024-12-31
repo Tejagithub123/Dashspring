@@ -1,5 +1,9 @@
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
 <div class="plaintes-form">
-  <h2>Soumettre une plainte</h2>
+  <h2>Add plainte</h2>
   <form [formGroup]="plainteForm" (ngSubmit)="submitPlainte()">
     
     <div class="form-group">
@@ -41,7 +45,7 @@
 
     <!-- Submit Button -->
     <div class="mt-6 text-center d-flex justify-content-center">
-      <button type="submit" class="btn btn-primary" [disabled]="plainteForm.invalid">Soumettre</button>
+      <button type="submit" class="btn btn-success" [disabled]="plainteForm.invalid">Save</button>
     </div>
   </form>
 
