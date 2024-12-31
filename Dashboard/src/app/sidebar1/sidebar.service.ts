@@ -52,17 +52,17 @@ export class SidebarService {
     },
     {
       title: 'Add etudiant',
-      icon: 'fa fa-users',  
+      icon: 'fa fa-university',  
       route: '/etudiant',
       type: 'simple', 
-      condition: ['ROLE_PERSONNEL','ROLE_ADMIN'],
+      condition: ['ROLE_ADMIN','ROLE_PERSONNEL'],
     },
     {
-      title: 'Add etudiant',
-      icon: 'fa fa-users',  
+      title: 'liste etudiants',
+      icon: 'fa fa-university',  
       route: '/liste-etudiants',
       type: 'simple', 
-      condition: ['ROLE_ADMIN'],
+      condition: ['ROLE_PERSONNEL','ROLE_ADMIN'],
     },
     {
       title: 'Add Agent',
@@ -86,7 +86,17 @@ export class SidebarService {
       route: '/plainte',
       type: 'simple', 
       condition: ['ROLE_PERSONNEL'],
+    }, 
+
+    {
+      title: 'liste plainte',
+      icon: 'fa fa-book',  
+      route: '/liste-plainte',
+      type: 'simple', 
+      condition: ['ROLE_PERSONNEL'],
     },
+
+
     // {
     //   title: 'E-commerce',
     //   icon: 'fa fa-shopping-cart',

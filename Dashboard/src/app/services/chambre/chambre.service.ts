@@ -82,7 +82,11 @@ export class ChambreService {
     );
   } 
 
-
+  getListeChambres(): Observable<Chambre[]> {
+    return this.http.get<Chambre[]>(`${this.baseUrl}/listechambres`, {
+      headers: this.getHeaders(),
+    });
+  }
 
   
   

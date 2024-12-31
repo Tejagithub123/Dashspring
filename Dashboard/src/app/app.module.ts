@@ -47,6 +47,7 @@ import{EtudiantListComponent} from './components/etudiant-list-component/etudian
 import { PlaintesComponent } from './components/plaintes/plaintes.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { PlaintesListComponent } from './components/plaintes-list/plaintes-list.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { ReactiveFormsModule } from '@angular/forms';
    
     EtudiantComponent,
     EtudiantListComponent,
-    PlaintesComponent
+    PlaintesComponent,
+    PlaintesListComponent
 
   ],
   imports: [

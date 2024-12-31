@@ -1,3 +1,5 @@
+import { Plainte } from "./plainte.model";
+
 export interface Chambre {
   id?: number;
   name: string;
@@ -8,5 +10,6 @@ export interface Chambre {
   foyerId?: number;
   foyer?: { id: number } | null;
   foyerNom?: string;
-  enMaintenance?: boolean;  //
+  enMaintenance?: boolean; 
+  plaintes?: Plainte[];
 }

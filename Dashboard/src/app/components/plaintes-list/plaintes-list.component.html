@@ -1,0 +1,64 @@
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div class="container">
+  <h2>Liste des plaintes</h2>
+    <!-- Add Agent button -->
+    <button class="btn btn-success float-right" [routerLink]="['/plainte']">
+      Add plainte <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+    <div><br/></div>
+    <div><br/></div>
+<div><br/></div>
+
+  <!-- Table for displaying plaintes with associated agents and chambres -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Clôturée</th>
+        <th>Agent</th>
+        <th>Chambre</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let plainte of plaintes">
+        <td>{{ plainte.id }}</td>
+        <td>{{ plainte.description }}</td>
+        <td>{{ plainte.date | date:'shortDate' }}</td>
+        <td>{{ plainte.cloturee ? 'Oui' : 'Non' }}</td>
+
+        <!-- Display associated Agent -->
+        <td>
+          <ng-container *ngIf="agents.length > 0">
+            <ng-container *ngFor="let agent of agents">
+              <span *ngIf="isPlainteAssignedToAgent(agent, plainte)">
+                {{ agent.nom }} {{ agent.prenom }}
+              </span>
+            </ng-container>
+          </ng-container>
+        </td>
+
+        <!-- Display associated Chambre -->
+        <td>
+          <ng-container *ngIf="chambres.length > 0">
+            <ng-container *ngFor="let chambre of chambres">
+              <span *ngIf="isPlainteAssignedToChambre(chambre, plainte)">
+                {{ chambre.name }}
+              </span>
+            </ng-container>
+          </ng-container>
+        </td>
+
+        <td>
+          <button (click)="deletePlainte(plainte.id || 0)" class="btn btn-danger">Delete</button>
+        </td>
+        
+      </tr>
+    </tbody>
+  </table>
+</div>

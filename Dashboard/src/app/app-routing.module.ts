@@ -17,9 +17,10 @@ import { AgentListComponent } from './components/agent-list/agent-list.component
 
 import { EtudiantComponent } from './components/etudiant/etudiant.component';
 import { EtudiantListComponent } from './components/etudiant-list-component/etudiant-list-component.component';
-
+import { AuthGuard } from './guards/auth.guard';
 import { PlaintesComponent } from './components/plaintes/plaintes.component';
-const routes: Routes = [  { path: '',  component:HomeComponent }, // Redirect to login page by default
+import { PlaintesListComponent } from './components/plaintes-list/plaintes-list.component';
+const routes: Routes = [  { path: '',  component:HomeComponent , canActivate: [AuthGuard]}, // Redirect to login page by default
 { path: 'login', component: LoginComponent },  // Define the login routev
 
 
@@ -63,7 +64,13 @@ component: PersonnelComponent },
         component: EtudiantListComponent },
 
         { path: 'plainte', 
-        component: PlaintesComponent  },
+        component: PlaintesComponent  }, 
+
+        { path: 'liste-plainte', 
+        component: PlaintesListComponent  }, 
+
+
+        
 
 ];
 

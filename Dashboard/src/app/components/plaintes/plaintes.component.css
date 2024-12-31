@@ -1,94 +1,160 @@
-/* Background */
+
 body {
     background: rgb(23, 195, 66);
-    font-family: Arial, sans-serif; /* Added font for better readability */
+    font-family: Arial, sans-serif;
   }
   
-  /* Focused Input Fields */
+ 
   .form-control:focus {
-    box-shadow: 0 0 5px rgba(104, 200, 109, 0.8); /* More visible focus state */
-    border-color: #68c86d; /* Light green border when focused */
+    box-shadow: 0 0 5px rgba(104, 200, 109, 0.8);
+    border-color: #68c86d;
   }
   
-  /* Profile Button */
+ 
   .profile-button {
-    background: rgb(23, 195, 66); /* Matching the background color */
-    color: #fff; /* White text color */
+    background: rgb(23, 195, 66);
+    color: #fff;
     box-shadow: none;
     border: none;
     
     padding: 10px 30px;
     font-size: 14px;
-    border-radius: 5px; /* Rounded corners */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
   }
   
-  /* Profile Button Hover */
+ 
   .profile-button:hover {
-    background: #68c86d; /* Slightly darker green on hover */
+    background: #68c86d;
    
   }
   
-  /* Labels */
+ 
   .labels {
-    font-size: 12px; /* Increased font size for better readability */
-    color: #333; /* Darker color for labels */
-    font-weight: 600; /* Slightly bolder labels */
+    font-size: 12px;
+    color: #333;
+    font-weight: 600;
   }
   
-  /* Input Fields */
+ 
   .form-control {
-    border-radius: 5px; /* Rounded input fields */
-    padding: 10px; /* Better padding for inputs */
-    font-size: 14px; /* Adjusted font size for better readability */
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
   }
   
-  /* Overall Form Layout */
+ 
   .col-md-6, .col-md-12 {
-    margin-bottom: 15px; /* Added margin for better spacing between fields */
+    margin-bottom: 15px;
   }
   
-  /* Responsive Design */
+ 
   @media (max-width: 768px) {
     .col-md-6 {
-      margin-bottom: 20px; /* More space between fields on small screens */
+      margin-bottom: 20px;
     }
   }
-  /* Card Styling */
+
+ 
+@media (max-width: 1200px) {
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .plaintes-form {
+    padding: 15px;
+  }
+
+  .form-group label {
+    font-size: 1rem;
+  }
+
+  .form-control {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+ 
+  .col-md-6 {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .plaintes-form {
+    padding: 10px;
+    max-width: 100%;
+  }
+
+ 
+  .btn {
+    width: 100%;
+    padding: 12px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .plaintes-form {
+    margin-left: 10px;
+    margin-right: 10px;
+    max-width: 100%;
+  }
+
+  .col-md-6 {
+    width: 100%;
+  }
+
+ 
+  .form-group label {
+    text-align: center;
+  }
+
+  .form-control {
+    font-size: 0.9rem;
+  }
+}
+ 
   .card {
-    border: none; /* Remove default card border */
-    border-radius: 8px; /* Rounded corners for the card */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for card */
-    background-color: #fff; /* White background for the card */
-    overflow: hidden; /* Ensure content doesn't overflow */
-    margin-bottom: 20px; /* Space between cards */
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    overflow: hidden;
+    margin-bottom: 20px;
   }
   
-  /* Card Header */
+ 
   .card-header {
-    background-color: #343a40; /* Dark background for header */
-    color: white; /* White text for header */
-    font-size: 1.25rem; /* Font size for header */
-    padding: 15px 20px; /* Padding for header */
-    text-align: center; /* Center header text */
-    font-weight: bold; /* Bold header text */
+    background-color: #343a40;
+    color: white;
+    font-size: 1.25rem;
+    padding: 15px 20px;
+    text-align: center;
+    font-weight: bold;
   }
   
-  /* Card Body */
+ 
   .card-body {
-    padding: 20px; /* Padding for card body */
-    font-size: 1rem; /* Font size for body */
-    color: #333; /* Dark text color for readability */
-    line-height: 1.6; /* Increase line height for better text spacing */
+    padding: 20px;
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.6;
   }
   
-  /* Card Footer (Optional if you want a footer in the card) */
+ 
   .card-footer {
-    background-color: #f8f9fa; /* Light background for footer */
-    padding: 10px 20px; /* Padding for footer */
-    text-align: center; /* Center content in footer */
-    font-size: 0.875rem; /* Smaller font size for footer */
-    color: #6c757d; /* Light text color for footer */
-    border-top: 1px solid #dee2e6; /* Border at the top of footer */
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #6c757d;
+    border-top: 1px solid #dee2e6;
   } 
   

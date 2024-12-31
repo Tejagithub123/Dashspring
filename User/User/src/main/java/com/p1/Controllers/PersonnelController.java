@@ -69,6 +69,12 @@ public class PersonnelController {
         return ResponseEntity.noContent().build(); // Retourner une réponse 204 No Content
     }
 
+    @GetMapping("/listechambres")
+    public ResponseEntity<List<Chambre>> getChambresliste() {
+        List<Chambre> chambres = chambreService.getlisteChambre(); // Fetch all chambres
+        return ResponseEntity.ok(chambres); // Return list of chambres in the response
+    }
+
     @Autowired
     private PersonnelService personnelService; // Instance of PersonnelService
 
@@ -166,6 +172,12 @@ public class PersonnelController {
     public ResponseEntity<Etudiant> addEtudiant(@Valid @RequestBody Etudiant etudiant) {
         Etudiant createdEtudiant = etudiantService.addEtudiant(etudiant);
         return ResponseEntity.ok(createdEtudiant);
+    }
+
+    @GetMapping("/etudinat/Alletudiants")
+    public ResponseEntity<List<Etudiant>> getAllEtudiants() {
+        List<Etudiant> etudiants = etudiantService.getAllEtudiants();
+        return ResponseEntity.ok(etudiants); // Retourne la liste de tous les personnels avec un code HTTP 200 OK
     }
 
     @PatchMapping("/{id}/maintenance")

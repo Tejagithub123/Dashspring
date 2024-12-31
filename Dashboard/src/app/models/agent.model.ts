@@ -1,3 +1,5 @@
+import { Plainte } from "./plainte.model";
+
 export interface Agent {
     id?: number; // Optional, as it will be generated on the backend
     nom: string;
@@ -7,5 +9,6 @@ export interface Agent {
     mdp:string;
     cin?: number; // Make this optional
     dateNaissance: string;
+    plaintes?: Plainte[];
   }
   

@@ -4,7 +4,7 @@ import { Plainte } from '../../models/plainte.model';
 import { PlainteService } from '../../services/plainte/plainte.service';
 import { AgentMaintenanceService } from 'src/app/services/agent/agent-maintenance.service'; // Import AgentMaintenanceService
 import { Agent } from '../../models/agent.model'; // Import Agent model
-
+import { Router } from '@angular/router'; 
 @Component({
   selector: 'app-plaintes',
   templateUrl: './plaintes.component.html',
@@ -17,6 +17,7 @@ export class PlaintesComponent implements OnInit {
   agents: Agent[] = []; // Add agents array for dropdown
 
   constructor(
+    private router: Router ,
     private fb: FormBuilder,
     private plainteService: PlainteService,
     private agentService: AgentMaintenanceService // Inject AgentMaintenanceService
@@ -71,11 +72,13 @@ export class PlaintesComponent implements OnInit {
     this.plainteService.createPlainte(plainteData).subscribe(
       response => {
         console.log('Plainte soumise avec succès', response);
+        window.alert('Plainte soumise avec succès'); 
         this.resetForm();
         this.loadPlaintes();
       },
       error => {
         console.error('Erreur lors de la soumission de la plainte', error);
+        window.alert('Erreur lors de la soumission de la plainte'); 
       }
     );
   }
@@ -94,5 +97,8 @@ export class PlaintesComponent implements OnInit {
 
   resetForm(): void {
     this.plainteForm.reset();
-  }
+  } 
+
+
+
 }

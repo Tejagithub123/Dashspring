@@ -116,4 +116,8 @@ public class ChambreService {
         chambre.setEnMaintenance(enMaintenance);
         return chambreRepository.save(chambre);
     }
+
+    public List<Chambre> getlisteChambre() {
+        return chambreRepository.findAll();
+    }
 }
