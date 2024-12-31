@@ -50,7 +50,7 @@ export class SidebarService {
       type: 'simple', 
       condition: ['ROLE_PERSONNEL','ROLE_ETUDIANT'],
     },
-    {
+    { 
       title: 'Add etudiant',
       icon: 'fa fa-university',  
       route: '/etudiant',
@@ -59,7 +59,7 @@ export class SidebarService {
     },
     {
       title: 'liste etudiants',
-      icon: 'fa fa-university',  
+      icon: 'fa fa-graduation-cap',  
       route: '/liste-etudiants',
       type: 'simple', 
       condition: ['ROLE_PERSONNEL','ROLE_ADMIN'],
@@ -90,7 +90,7 @@ export class SidebarService {
 
     {
       title: 'liste plainte',
-      icon: 'fa fa-book',  
+      icon: 'fa fa-envelope-open',  
       route: '/liste-plainte',
       type: 'simple', 
       condition: ['ROLE_PERSONNEL'],

@@ -44,12 +44,12 @@ export class ChambreComponent implements OnInit {
       
       this.chambreService.update(this.chambre.id, chambreToSend).subscribe(
         () => {
-          console.log('Profile updated successfully!');
-          alert('Profile updated successfully!');
+          console.log('chambre updated successfully!');
+          alert('chambre updated successfully!');
         },
         (error) => {
-          console.error('Error updating profile:', error);
-          alert('Failed to update profile.');
+          console.error('Error updating chambre:', error);
+          alert('Failed to update chambre.');
         }
       );
     } else {
@@ -58,8 +58,8 @@ export class ChambreComponent implements OnInit {
       
       this.chambreService.create(chambreToSend,Number(UserStorageService.getFoyer_Id())).subscribe(
         () => {
-          console.log('Personnel created successfully!');
-          alert('Personnel created successfully!');
+          console.log('chambre created successfully!');
+          alert('chambre created successfully!');
           this.router.navigate(['/liste-chambres']);
         },
         (error) => {

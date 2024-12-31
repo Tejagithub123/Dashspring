@@ -187,4 +187,9 @@ public class PersonnelController {
         return ResponseEntity.ok(updatedChambre);
     }
 
+    @DeleteMapping("/etudiants/{id}")
+    public ResponseEntity<Void> deleteEtudiant(@PathVariable Long id) {
+        etudiantService.deleteEtudiant(id);
+        return ResponseEntity.noContent().build(); // Retourner une réponse 204 No Content
+    }
 }
