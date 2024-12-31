@@ -128,6 +128,7 @@ $header-height: 64px;
               height: 32px;
               border-radius: 50%;
               margin-right: 10px;
+              display: block; /* Ensure image is a block element to prevent stretching */
             }
 
             .user-name {

@@ -11,7 +11,7 @@ export class SidebarService {
   menus: MenuItem[] = [
             //ADMIN//
     {
-      title: 'Menu',
+      title: 'Sidebar',
       type: 'header',
     },
     {

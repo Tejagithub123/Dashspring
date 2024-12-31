@@ -1,0 +1,72 @@
+/* Dashboard Container Styling */
+.dashboard-container {
+  padding: 20px;
+  background-color: #f4f4f9; /* Light gray background for contrast */
+  min-height: 100vh; /* Full-height layout */
+}
+
+/* Dashboard Header */
+.dashboard-header {
+  border-bottom: 2px solid #ddd; /* Optional: Add a subtle divider */
+  padding-bottom: 10px;
+}
+
+.dashboard-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333; /* Dark text for readability */
+  text-transform: capitalize;
+}
+
+/* Spacer for layout spacing */
+.spacer {
+  margin: 20px 0;
+}
+
+/* Image Styling */
+.footer-image-container {
+  text-align: center;
+  margin: 20px 0; /* Add spacing around the image */
+}
+
+.footer-image {
+  width: 100%;
+  max-width: 600px; /* Restrict the maximum size */
+  border-radius: 15px; /* Rounded corners for a modern look */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.footer-image:hover {
+  transform: scale(1.05); /* Slightly enlarge the image on hover */
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Footer Styling */
+.sticky-footer {
+  background-color: #ffffff;
+  padding: 20px 0;
+  border-top: 1px solid #ddd; /* Optional: Add a top border for separation */
+  text-align: center;
+  color: #6c757d; /* Muted text color */
+}
+
+.sticky-footer span {
+  font-size: 14px;
+}
+.dashboard-header {
+  display: flex; /* Enable flexbox */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  border-bottom: 2px solid #ddd; /* Optional: Add a subtle divider */
+  padding-bottom: 10px;
+
+}
+
+.dashboard-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333; /* Dark text for readability */
+  text-transform: capitalize;
+ 
+}
