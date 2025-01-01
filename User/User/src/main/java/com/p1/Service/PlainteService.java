@@ -59,9 +59,22 @@ public class PlainteService {
     }
 
     public void deletePlainte(Long id) {
-        Plainte plainte = getPlainteById(id)
+
+        Plainte plainte = plainteRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Plainte not found with ID: " + id));
+
+        Chambre chambre = plainte.getChambre();
+
         plainteRepository.delete(plainte);
+
+        if (chambre != null) {
+            boolean hasOtherPlaintes = plainteRepository.existsByChambre(chambre);
+
+            if (!hasOtherPlaintes) {
+                chambre.setEnMaintenance(false);
+                chambreRepository.save(chambre);
+            }
+        }
     }
 
     public Plainte cloturerPlainte(Long id) {

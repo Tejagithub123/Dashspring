@@ -63,7 +63,13 @@ export class UserStorageService {
     static isPersonnelLoggedIn(): boolean {
         const role = this.getUserRole();
         return role === 'PERSONNEL';
+    } 
+
+    static isAgentLoggedIn(): boolean {
+        const role = this.getUserRole();
+        return role === 'AGENT';
     }
+    
     static SignOut():void{
         localStorage.removeItem('token');
         window.localStorage.removeItem('user_id');
