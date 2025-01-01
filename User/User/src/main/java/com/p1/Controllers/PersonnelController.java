@@ -89,36 +89,6 @@ public class PersonnelController {
     }
 
     @Autowired
-    private AgentMaintenanceService agentMaintenanceService;
-
-    @PostMapping("/agent")
-    public ResponseEntity<AgentMaintenance> addAgent(@RequestBody AgentMaintenance agent) {
-        return ResponseEntity.ok(agentMaintenanceService.addAgent(agent));
-    }
-
-    @GetMapping("/agent/agentAll")
-    public ResponseEntity<List<AgentMaintenance>> getAllAgents() {
-        return ResponseEntity.ok(agentMaintenanceService.getAllAgents());
-    }
-
-    @GetMapping("/agent/{id}")
-    public ResponseEntity<AgentMaintenance> getAgentById(@PathVariable Long id) {
-        return ResponseEntity.ok(agentMaintenanceService.getAgentById(id));
-    }
-
-    @PutMapping("/agent/{id}")
-    public ResponseEntity<AgentMaintenance> updateAgent(@PathVariable Long id,
-            @RequestBody AgentMaintenance updatedAgent) {
-        return ResponseEntity.ok(agentMaintenanceService.updateAgent(id, updatedAgent));
-    }
-
-    @DeleteMapping("/agent/{id}")
-    public ResponseEntity<Void> deleteAgent(@PathVariable Long id) {
-        agentMaintenanceService.deleteAgent(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @Autowired
     private PlainteService plainteService;
 
     // Create a new Plainte

@@ -69,7 +69,7 @@ export class SidebarService {
       icon: 'fa fa-users',  
       route: '/agent',
       type: 'simple', 
-      condition: ['ROLE_PERSONNEL'],
+      condition: ['ROLE_ADMIN'],
     },
 
     {
@@ -77,7 +77,7 @@ export class SidebarService {
       icon: 'fa fa-list',  
       route: '/liste-agents',
       type: 'simple', 
-      condition: ['ROLE_PERSONNEL'],
+      condition: ['ROLE_ADMIN'],
     },
 
     {

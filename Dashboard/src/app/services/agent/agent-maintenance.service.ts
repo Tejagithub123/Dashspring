@@ -8,7 +8,7 @@ import { AuthService } from '../auth/auth.service'; // Import AuthService
   providedIn: 'root',
 })
 export class AgentMaintenanceService {
-  private baseUrl = 'http://localhost:8090/personnel/agent'; // Backend API URL
+  private baseUrl = 'http://localhost:8090/admin/agent'; // Backend API URL
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
