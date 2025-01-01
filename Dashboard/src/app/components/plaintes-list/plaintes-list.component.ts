@@ -44,7 +44,7 @@ export class PlaintesListComponent implements OnInit {
 
   
   loadAgents(): void {
-    this.agentMaintenanceService.getAllAgents().subscribe(
+    this.agentMaintenanceService.getAllAgentsPersonnels().subscribe(
       (data: Agent[]) => {
         this.agents = data;
       },

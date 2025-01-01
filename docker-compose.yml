@@ -1,0 +1,53 @@
+services:
+  # MySQL Service
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: mkt123  # Root password
+      MYSQL_DATABASE: sample       # Create this database
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    networks:
+      - app-network
+
+  # Spring Boot Backend Service
+  spring-backend:
+    build:
+      context: ./User/User/
+      dockerfile: Dockerfile
+    container_name: spring-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/sample?serverTimezone=Africa/Lagos
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: mkt123
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    ports:
+      - "8090:8090"  # Spring Boot app on port 8090
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  # Angular Frontend Service
+  angular-frontend:
+    build:
+      context: ./Dashboard  # Path to your Angular project
+      dockerfile: Dockerfile
+    container_name: angular-frontend
+    ports:
+      - "4300:80"  # Expose Angular app on port 4300
+    depends_on:
+      - spring-backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local

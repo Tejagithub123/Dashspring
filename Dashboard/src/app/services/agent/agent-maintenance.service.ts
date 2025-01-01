@@ -46,4 +46,10 @@ export class AgentMaintenanceService {
   deleteAgent(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`, { headers: this.getHeaders() });
   }
+
+  getAllAgentsPersonnels(): Observable<Agent[]> {
+    const personnelUrl = 'http://localhost:8090/personnel/agent/agentAll';
+    return this.http.get<Agent[]>(personnelUrl, { headers: this.getHeaders() });
+  }
+  
 }

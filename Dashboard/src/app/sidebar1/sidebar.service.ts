@@ -55,14 +55,14 @@ export class SidebarService {
       icon: 'fa fa-university',  
       route: '/etudiant',
       type: 'simple', 
-      condition: ['ROLE_ADMIN','ROLE_PERSONNEL'],
+      condition: ['ROLE_ADMIN'],
     },
     {
       title: 'liste etudiants',
       icon: 'fa fa-graduation-cap',  
       route: '/liste-etudiants',
       type: 'simple', 
-      condition: ['ROLE_PERSONNEL','ROLE_ADMIN'],
+      condition: ['ROLE_ADMIN'],
     },
     {
       title: 'Add Agent',

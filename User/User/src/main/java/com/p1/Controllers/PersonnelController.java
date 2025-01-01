@@ -23,6 +23,7 @@ import java.util.List;
 import javax.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import java.util.Optional;
+import com.p1.Service.AgentMaintenanceService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4300")
@@ -162,4 +163,13 @@ public class PersonnelController {
         etudiantService.deleteEtudiant(id);
         return ResponseEntity.noContent().build(); // Retourner une réponse 204 No Content
     }
+
+    @Autowired
+    private AgentMaintenanceService agentMaintenanceService;
+
+    @GetMapping("/agent/agentAll")
+    public ResponseEntity<List<AgentMaintenance>> getAllAgents() {
+        return ResponseEntity.ok(agentMaintenanceService.getAllAgents());
+    }
+
 }
