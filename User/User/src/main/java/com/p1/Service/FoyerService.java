@@ -50,10 +50,6 @@ public class FoyerService {
         Foyer foyer = foyerRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Foyer non trouvé"));
 
-        if (foyer.getPersonnel() != null) {
-            throw new IllegalArgumentException("Impossible de supprimer le foyer car il est associé à un personnel.");
-        }
-
         foyerRepository.delete(foyer);
     }
 

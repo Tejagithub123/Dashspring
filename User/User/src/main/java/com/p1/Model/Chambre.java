@@ -1,26 +1,15 @@
-
 package com.p1.Model;
 
 import lombok.Data;
+import javax.persistence.*;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Data
 @Entity
 public class Chambre {
+
     public enum TYPE {
         SINGLE, DOUBLE
     }
@@ -28,11 +17,15 @@ public class Chambre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
-    private String Description;
+    private String description;
+
     @Enumerated(EnumType.STRING)
     private TYPE type;
-    private boolean availble;
+
+    private boolean available;
+
     private String price;
 
     @OneToOne
@@ -41,45 +34,15 @@ public class Chambre {
     private Foyer foyer;
 
     @OneToMany(mappedBy = "chambre", cascade = CascadeType.ALL, orphanRemoval = true)
-
-    public void toggleAvailability(boolean availability) {
-        this.availble = availability;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setDescription(String Description) {
-        this.Description = Description;
-    }
-
-    public void setType(TYPE type) {
-        this.type = type;
-    }
-
-    public void setAvailble(Boolean availble) {
-        this.availble = availble;
-    }
-
-    public Boolean getAvailble(Boolean availble) {
-        return this.availble;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Boolean isAvailble() {
-        return this.availble;
-    }
-
-    @OneToMany(mappedBy = "chambre")
     @JsonManagedReference("chambre_plainte")
     private List<Plainte> plaintes;
+    // private Boolean available;
 
+    public Boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
+    }
 }

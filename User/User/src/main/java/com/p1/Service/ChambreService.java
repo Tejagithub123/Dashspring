@@ -49,8 +49,8 @@ public class ChambreService {
             }
 
             // Only update Availble if it's provided in the request
-            if (updatedChambre.isAvailble() != null) {
-                existingChambre.setAvailble(updatedChambre.isAvailble());
+            if (updatedChambre.isAvailable() != null) {
+                existingChambre.setAvailable(updatedChambre.isAvailable());
             }
 
             // Only update Price if it's provided in the request
@@ -85,7 +85,7 @@ public class ChambreService {
             dto.setName(chambre.getName());
             dto.setDescription(chambre.getDescription());
             dto.setType(chambre.getType().toString()); // Convert enum to String
-            dto.setAvailble(chambre.isAvailble());
+            dto.setAvailble(chambre.isAvailable());
             dto.setPrice(chambre.getPrice());
             // Check if foyer is present and set both foyerId and foyerNom
             if (chambre.getFoyer() != null) {

@@ -67,12 +67,12 @@ public class ReservationService {
         Chambre chambre = reservation.getChambre();
 
         // Check if the chambre is available
-        if (!chambre.isAvailble()) {
+        if (!chambre.isAvailable()) {
             throw new IllegalStateException("The chambre is already reserved and unavailable.");
         }
 
         // Set chambre as unavailable
-        chambre.setAvailble(false);
+        chambre.setAvailable(false);
         chambreRepository.save(chambre);
 
         // Assign the Etudiant's ID to the corresponding Foyer
@@ -83,7 +83,7 @@ public class ReservationService {
             // Perform the association, assuming `Foyer` has a method to store Etudiant IDs
             // Example: Add the student to a list or set a reference
             // Assuming Foyer has a method like `addEtudiantId` or similar
-            foyer.addEtudiantId(etudiant.getId()); // Ensure such a method exists in Foyer
+            foyer.addEtudiantById(etudiant.getId()); // Ensure such a method exists in Foyer
             foyerRepository.save(foyer);
         }
 

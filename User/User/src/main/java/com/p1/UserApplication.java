@@ -38,7 +38,7 @@ public class UserApplication {
 			// admin.setPrenom("User");
 			// admin.setEmail(adminEmail);
 			// admin.setDateNaissance(new Date(2000 - 1900, 1, 1)); // January 1, 2000
-			// (zero-based months)
+
 			// admin.setMdp(passwordEncoder.encode("teja"));
 
 			// utilisateurRepository.save(admin);

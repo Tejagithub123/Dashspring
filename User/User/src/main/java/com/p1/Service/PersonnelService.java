@@ -137,7 +137,6 @@ public class PersonnelService {
         }
 
         personnel.setFoyer(foyer);
-        foyer.setPersonnel(personnel);
 
         foyerRepository.save(foyer);
         return personnelRepository.save(personnel);

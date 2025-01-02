@@ -1,12 +1,9 @@
 package com.p1.Model;
 
 import lombok.Data;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Data
 @Entity
@@ -22,7 +19,7 @@ public class Reservation {
 
     @ManyToOne
     @JoinColumn(name = "etudiant_id", nullable = false)
-    @JsonBackReference // Prevent recursion when serializing Etudiant
+    @JsonBackReference
     private Etudiant etudiant;
 
     @ManyToOne
