@@ -49,6 +49,9 @@ export class NavbarComponent implements OnInit {
     else if (UserStorageService.getUserRole() == "ROLE_ETUDIANT"){
       this.userRole = "Student";
     }
+    else if (UserStorageService.getUserRole() == "ROLE_AGENT"){
+      this.userRole = "AGENT";
+    }
  
   }
 
