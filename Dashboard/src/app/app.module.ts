@@ -49,7 +49,7 @@ import { PlaintesComponent } from './components/plaintes/plaintes.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PlaintesListComponent } from './components/plaintes-list/plaintes-list.component';
 import { AgentPlainteComponent } from './components/agent-plainte/agent-plainte.component';
-
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -78,8 +78,9 @@ import { AgentPlainteComponent } from './components/agent-plainte/agent-plainte.
     EtudiantListComponent,
     PlaintesComponent,
     PlaintesListComponent,
-    AgentPlainteComponent
-
+    AgentPlainteComponent,
+    ResetPasswordComponent,
+   
   ],
   imports: [
     BrowserModule,

@@ -21,6 +21,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { PlaintesComponent } from './components/plaintes/plaintes.component';
 import { PlaintesListComponent } from './components/plaintes-list/plaintes-list.component';
 import { AgentPlainteComponent } from './components/agent-plainte/agent-plainte.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 const routes: Routes = [  { path: '',  component:HomeComponent , canActivate: [AuthGuard]}, // Redirect to login page by default
 { path: 'login', component: LoginComponent },  // Define the login routev
 
@@ -72,6 +73,8 @@ component: PersonnelComponent },
 
         { path: 'gérer-plainte', 
         component:  AgentPlainteComponent  }, 
+        
+        { path: 'reset-password', component: ResetPasswordComponent },
 
 
 

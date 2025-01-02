@@ -1,11 +1,11 @@
-<app-navbar *ngIf="!isLoginRoute" (menuState)="burgerClicked($event)"></app-navbar>
+<app-navbar *ngIf="!isLoginRoute && !isResetPasswordRoute " (menuState)="burgerClicked($event)"></app-navbar>
 
 <div class="container-fluid ml-0">
   <div class="row">
     <!-- Sidebar -->
     <div 
       class="col-12 col-md-3 pl-0 side" 
-      [hidden]="subMenuState.toggle || isLoginRoute">
+      [hidden]="subMenuState.toggle || isLoginRoute || isResetPasswordRoute">
       <app-sidebar></app-sidebar>
     </div>
 

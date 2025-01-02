@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';  // <-- Add this import
 export class AuthService {
 
   private loginUrl = 'http://localhost:8090/auth/login'; // Your backend API for login
-
+  private resetPasswordUrl = 'http://localhost:8090/auth';
   constructor(private http: HttpClient) {}
 
   login(loginData: { email: string, password: string }): Observable<any> {
@@ -45,4 +45,13 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');  // Remove token from localStorage
   }
+
+
+
+  resetPassword(email: string): Observable<any> {
+    return this.http.post(`${this.resetPasswordUrl}/reset-password`, null, {
+      params: new HttpParams().set('email', email)
+    });
+  }
+  
 }

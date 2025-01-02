@@ -9,7 +9,7 @@ import { Router, NavigationEnd } from '@angular/router';
 export class AppComponent implements OnInit {
   subMenuState = { toggle: false }; // Example state management
   isLoginRoute = false;
-
+  isResetPasswordRoute = false;
   constructor(private router: Router) {}
 
   ngOnInit(): void {
@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         // Check if the current route is '/login'
         this.isLoginRoute = event.url === '/login' || event.urlAfterRedirects === '/login';
+        this.isResetPasswordRoute = event.url === '/reset-password' || event.urlAfterRedirects === '/reset-password';
       }
     });
   }
