@@ -97,6 +97,15 @@ export class SidebarService {
     },
 
 
+    {
+      title: 'gérer plainte',
+      icon: 'fa fa-envelope-open',  
+      route: '/gérer-plainte',
+      type: 'simple', 
+      condition: ['ROLE_AGENT'],
+    },
+
+
     // {
     //   title: 'E-commerce',
     //   icon: 'fa fa-shopping-cart',

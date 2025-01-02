@@ -21,6 +21,19 @@ export class PlainteService {
     });
   }
 
+ 
+
+
+    // Méthode pour récupérer toutes les plaintes
+    getAllPlaintesAgent(): Observable<Plainte[]> {
+      return this.http.get<Plainte[]>(` http://localhost:8090/agent/plainte/Allplaintes`, {
+        headers: new HttpHeaders({
+          'Authorization': `Bearer ${this.getToken()}`
+        })
+      });
+    }
+
+
   // Méthode pour récupérer une plainte spécifique par ID
   getPlainteById(id: number): Observable<Plainte> {
     return this.http.get<Plainte>(`${this.apiUrl}/${id}`, {
@@ -60,5 +73,14 @@ export class PlainteService {
   // Récupérer le token de l'utilisateur
   private getToken(): string {
     return localStorage.getItem('token') || ''; // récupère le token de localStorage
+  } 
+  
+  cloturerPlainte(id: number): Observable<Plainte> {
+    const token = localStorage.getItem('token'); // Assume token is stored in localStorage
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.patch<Plainte>(`http://localhost:8090/agent/plainte/${id}/cloturer`, {}, { headers });
   }
+
+
+
 }

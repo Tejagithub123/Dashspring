@@ -1,0 +1,33 @@
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div class="card">
+  <div class="card-header">Etudiant List</div>
+  <div class="card-body">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th>Clôturée</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let plainte of plaintes">
+          <td>{{ plainte.id }}</td>
+          <td>{{ plainte.description }}</td>
+          <td>{{ plainte.date }}</td>
+          <td>{{ plainte.cloturee ? 'Oui' : 'Non' }}</td>
+          <td>
+            <button type="button" class="btn btn-outline-warning" *ngIf="plainte.id !== undefined" (click)="cloturerPlainte(plainte.id)">Clôturer</button>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+  

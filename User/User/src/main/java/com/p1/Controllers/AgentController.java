@@ -1,7 +1,9 @@
 package com.p1.Controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +27,13 @@ public class AgentController {
     public ResponseEntity<Plainte> cloturerPlainte(@PathVariable Long id) {
         Plainte updatedPlainte = plainteService.cloturerPlainte(id);
         return ResponseEntity.ok(updatedPlainte);
+    }
+
+    // Get all Plaintes
+    @GetMapping("plainte/Allplaintes")
+    public ResponseEntity<List<Plainte>> getAllPlaintes() {
+        List<Plainte> plaintes = plainteService.getAllPlaintes();
+        return new ResponseEntity<>(plaintes, HttpStatus.OK);
     }
 
 }
