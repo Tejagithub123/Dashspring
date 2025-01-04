@@ -1,0 +1,72 @@
+
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div><!-- profile.component.html -->
+<div class="page-content page-container" id="page-content">
+    <div class="padding">
+      <div class="row container-fluid">
+        <div class="col-xl-12 col-md-12">
+          <div class="card user-card-full">
+            <div class="row m-l-0 m-r-0">
+              <!-- Left profile section -->
+              <div class="col-sm-4 bg-c-lite-green user-profile">
+                <div class="card-block text-center text-white">
+                  <h6 class="f-w-600">{{ user?.nom }} {{ user?.prenom }}</h6>
+                  <p>{{ user?.role }}</p>
+                  <i class="mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                </div>
+              </div>
+  
+              <!-- Right information section -->
+              <div class="col-sm-8">
+                <div class="card-block">
+                  <!-- User Information Section -->
+                  <h1 class="m-b-20 p-b-5 b-b-default f-w-300">Informations</h1>
+                  <div class="row">
+                    <!-- Email Section -->
+                    <div *ngIf="user?.email" class="col-sm-6">
+                      <p class="m-b-10 f-w-600">Email</p>
+                      <h6 class="text-muted f-w-400">{{ user?.email }}</h6>
+                    </div>
+                    <!-- CIN Section -->
+                    <div *ngIf="user?.cin" class="col-sm-6">
+                      <p class="m-b-10 f-w-600">CIN</p>
+                      <h6 class="text-muted f-w-400">{{ user?.cin }}</h6>
+                    </div>
+                  </div>
+                  <div class="row">
+                 
+                    <!-- Date of Birth Section -->
+                    <div *ngIf="user?.dateNaissance" class="col-sm-6">
+                      <p class="m-b-10 f-w-600">Date of Birth</p>
+                      <h6 class="text-muted f-w-400">{{ user?.dateNaissance | date }}</h6>
+                    </div>
+                  </div>
+                  <!-- Speciality Section (only show if not null) -->
+                  <div *ngIf="user?.specialite" class="row">
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600">Speciality</p>
+                      <h6 class="text-muted f-w-400">{{ user?.specialite }}</h6>
+                    </div>
+                  </div>
+                  <!-- Foyer Section (only show if not null) -->
+                  <div *ngIf="user?.foyer_id" class="row">
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600">Foyer ID</p>
+                      <h6 class="text-muted f-w-400">{{ user?.foyer_id }}</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  

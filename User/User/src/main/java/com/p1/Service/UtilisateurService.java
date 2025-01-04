@@ -25,4 +25,8 @@ public class UtilisateurService {
         utilisateur.setMdp(passwordEncoder.encode(utilisateur.getMdp()));
         return utilisateurRepository.save(utilisateur);
     }
+
+    public Utilisateur getUtilisateurById(Long id) {
+        return utilisateurRepository.findById(id).orElse(null); // Returns null if not found
+    }
 }

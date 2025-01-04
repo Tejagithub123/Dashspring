@@ -50,6 +50,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PlaintesListComponent } from './components/plaintes-list/plaintes-list.component';
 import { AgentPlainteComponent } from './components/agent-plainte/agent-plainte.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     PlaintesListComponent,
     AgentPlainteComponent,
     ResetPasswordComponent,
+    ProfileComponent,
    
   ],
   imports: [

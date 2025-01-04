@@ -105,6 +105,14 @@ export class SidebarService {
       condition: ['ROLE_AGENT'],
     },
 
+    {
+      title: 'profil',
+      icon: 'fa fa-address-card',  
+      route: '/profil',
+      type: 'simple', 
+      condition: ['ROLE_AGENT','ROLE_ADMIN','ROLE_PERSONNEL','ROLE_ETUDIANT'],
+    },
+
 
     // {
     //   title: 'E-commerce',

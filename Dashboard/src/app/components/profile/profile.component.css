@@ -1,0 +1,102 @@
+
+  
+  .card.user-card-full {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+  }
+  
+  .user-profile {
+    background-color: #4caf50;
+    color: white;
+    border-radius: 10px 0 0 10px;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .card-block {
+    padding: 20px;
+  }
+  
+  .card-block h6 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .card-block p {
+    font-size: 14px;
+   
+  }
+  
+  .card-block .row {
+    margin-bottom: 15px;
+  }
+  
+  .card-block .col-sm-6 {
+    margin-bottom: 20px;
+  }
+  
+  .card-block .col-sm-6 p {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  
+  .card-block .col-sm-6 h6 {
+    font-size: 14px;
+    font-weight: 400;
+   
+  }
+  
+  .card-block .f-w-600 {
+    font-weight: 600;
+  }
+  
+  .card-block .f-w-400 {
+    font-weight: 400;
+  }
+  
+  .card-block .b-b-default {
+    border-bottom: 2px solid #eee;
+  }
+  
+  .user-profile h6 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .user-profile p {
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 0;
+  }
+  
+  .user-profile i {
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+    margin-top: 15px;
+  }
+  
+  /* Removing the image */
+  .user-profile img {
+    display: none;
+  }
+  
+  /* Adjusting layout for responsiveness */
+  @media (max-width: 768px) {
+    .col-sm-4, .col-sm-8 {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+  
+    .user-profile {
+      padding: 15px;
+    }
+  
+    .card-block {
+      padding: 15px;
+    }
+  }
+  

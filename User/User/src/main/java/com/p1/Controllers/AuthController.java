@@ -3,6 +3,7 @@ package com.p1.Controllers;
 import com.p1.config.JwtUtil;
 import com.p1.Model.Personnel;
 import com.p1.Model.Utilisateur;
+import com.p1.Repository.UtilisateurRepository;
 import com.p1.Service.CustomUserDetailsService;
 import com.p1.Service.EmailService;
 import com.p1.Service.UtilisateurService;
@@ -95,6 +96,11 @@ public class AuthController {
     // Helper method to generate a random password
     private String generateRandomPassword() {
         return UUID.randomUUID().toString().substring(0, 8); // 8-character password
+    }
+
+    @GetMapping("/{id}")
+    public Utilisateur getUtilisateur(@PathVariable Long id) {
+        return utilisateurService.getUtilisateurById(id);
     }
 
 }
