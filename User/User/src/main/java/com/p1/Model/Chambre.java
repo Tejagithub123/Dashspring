@@ -1,6 +1,7 @@
 
 package com.p1.Model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -36,7 +37,6 @@ public class Chambre {
     private String price;
     private boolean enMaintenance = false;
 
-    @OneToOne
     @ManyToOne
     @JoinColumn(name = "foyer_id", nullable = true)
     @JsonBackReference
@@ -85,5 +85,9 @@ public class Chambre {
     @OneToMany(mappedBy = "chambre")
     @JsonManagedReference("chambre_plainte")
     private List<Plainte> plaintes;
+
+    @OneToMany(mappedBy = "chambre", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("chambre_reservation") // Managed from the `Chambre` side
+    private List<Reservation> reservations;
 
 }

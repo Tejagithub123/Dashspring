@@ -111,6 +111,14 @@ export class SidebarService {
       route: '/profil',
       type: 'simple', 
       condition: ['ROLE_AGENT','ROLE_ADMIN','ROLE_PERSONNEL','ROLE_ETUDIANT'],
+    }, 
+
+    {
+      title: 'reservation',
+      icon: 'fa fa-list',
+      route : '/reservation',
+      type: 'simple', 
+      condition: ['ROLE_ETUDIANT'],
     },
 
 

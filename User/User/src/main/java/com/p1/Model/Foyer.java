@@ -2,6 +2,8 @@ package com.p1.Model;
 
 import lombok.Data;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;

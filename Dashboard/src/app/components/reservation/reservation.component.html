@@ -1,0 +1,40 @@
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+
+<div class="reservation-container">
+  <h2>Make a Reservation</h2>
+
+  <!-- Reservation Form -->
+  <form (ngSubmit)="createReservation()" #reservationForm="ngForm">
+
+    <!-- Chambre Selection -->
+    <div class="form-group">
+      <label for="chambre">Choose a Chambre</label>
+      <select 
+        id="chambre" 
+        class="form-control" 
+        [(ngModel)]="reservation.chambre.id" 
+        (change)="onChambreSelect($event)" 
+        name="chambre" 
+        required>
+        
+        <option value="" disabled selected>Select a chambre</option>
+        <option *ngFor="let chambre of chambres" [value]="chambre.id">
+          {{ chambre.name }} <!-- Assuming chambre has a name field -->
+        </option>
+      </select>
+    </div>
+
+
+    <!-- Submit Button -->
+    <button 
+      type="submit" 
+      class="btn btn-primary" 
+      [disabled]="!reservationForm.form.valid">
+      Create Reservation
+    </button>
+  </form>
+
+</div>
