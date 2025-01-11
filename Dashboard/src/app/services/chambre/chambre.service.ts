@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Chambre } from 'src/app/models/chambre.model';
 import { UserStorageService } from 'src/app/storage/user-storage.service'; // Make sure to import the user storage service
+import { Reservation } from 'src/app/models/reservation.model';
 
 @Injectable({
   providedIn: 'root', // Ensures the service is provided at the root level
@@ -26,7 +27,7 @@ export class ChambreService {
     const token = localStorage.getItem('token');
     
     // If no token is found, we send the request without the Authorization header
-    const headers = token ? new HttpHeaders().set('Authorization', `Bearer ${token}`) : new HttpHeaders();
+    const headers = token ? new HttpHeaders().set('Authorization', `Bearer ${token}`).set( 'Content-Type', 'application/json') : new HttpHeaders();
     
     return headers;
   }
@@ -71,6 +72,28 @@ export class ChambreService {
       headers: this.getHeaders(),
     });
   }
+  // Add résérvation
+   
+  AddReservation(id_user: number, id_chambre: number): Observable<Reservation> {
+    const url = `${this.baseUrl}/reservation?chambreId=${id_chambre}&etudiantId=${id_user}`;
+    const headers = this.getHeaders();
+  
+    return this.http.post<Reservation>(url, null, { headers });
+  }
+
+  getReservationsByEtudiantId(etudiantId: number): Observable<Reservation[]> {
+    const url = `${this.baseUrl}/reservation/${etudiantId}`;
+    const headers = this.getHeaders();
+
+    return this.http.get<Reservation[]>(url,{ headers });
+  }
+  getReservationsByFoyer(foyerId: number): Observable<Reservation[]> {
+    const url = `http://localhost:8090/personnel/reservationByFoyer/${foyerId}`;
+    const headers = this.getHeaders();
+
+    return this.http.get<Reservation[]>(url,{ headers });
+  }
+
 
   // Assign a foyer to a chambre
   assignFoyer(chambreId: number, foyerId: number): Observable<Chambre> {

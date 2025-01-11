@@ -51,7 +51,8 @@ import { PlaintesListComponent } from './components/plaintes-list/plaintes-list.
 import { AgentPlainteComponent } from './components/agent-plainte/agent-plainte.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { ReservationComponent } from './components/reservation/reservation.component';
+
+import { ReservationListComponent } from './components/reservation-list-component/reservation-list-component.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { ReservationComponent } from './components/reservation/reservation.compo
     ChambreComponent,
 
     ChambreListComponent,
+    ReservationListComponent,
     AgentMaintenanceComponent,
     AgentListComponent,
 
@@ -83,7 +85,6 @@ import { ReservationComponent } from './components/reservation/reservation.compo
     AgentPlainteComponent,
     ResetPasswordComponent,
     ProfileComponent,
-    ReservationComponent,
    
   ],
   imports: [

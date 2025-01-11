@@ -53,9 +53,11 @@
           <th>Available</th>
     
           <th>Price</th>
-          <th>Maintenance</th>
+          
 
           <th *ngIf="role === 'ROLE_ETUDIANT'">Foyer Name</th>
+          <th>Maintenance</th>
+          <th *ngIf="role === 'ROLE_ETUDIANT'">Résserver</th>
           <th *ngIf="role === 'ROLE_PERSONNEL'">Actions</th>
         </tr>
       </thead>
@@ -73,6 +75,9 @@
           <td *ngIf="role === 'ROLE_PERSONNEL'">
             <button class="btn btn-primary" (click)="openUpdateModal(updateModal, chambre)">Update</button>
             <button class="btn btn-danger" (click)="chambre.id ? deleteChambre(chambre.id) : null" [disabled]="!chambre.id">Delete</button>
+          </td>
+          <td *ngIf="role === 'ROLE_ETUDIANT'">
+             <button class="btn btn-danger" (click)="chambre.id ? addReservation(chambre.id) : null" [disabled]="!chambre.id">Réserver</button>
           </td>
         </tr>
       </tbody>

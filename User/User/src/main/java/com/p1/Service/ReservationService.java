@@ -16,7 +16,6 @@ import java.util.Optional;
 
 @Service
 public class ReservationService {
-
     @Autowired
     private ReservationRepository reservationRepository;
 
@@ -26,26 +25,27 @@ public class ReservationService {
     @Autowired
     private EtudiantRepository etudiantRepository;
 
-    public Reservation addReservation(Reservation reservation) {
-        Chambre chambre = chambreRepository.findById(reservation.getChambre().getId())
+    public Reservation addReservation(Long chambreId, Long etudiantId) {
+        // Fetch chambre from the database
+        Chambre chambre = chambreRepository.findById(chambreId)
                 .orElseThrow(() -> new IllegalArgumentException("Chambre not found"));
-
-        Etudiant etudiant = etudiantRepository.findById(reservation.getEtudiant().getId())
+        // Fetch etudiant from the database
+        Etudiant etudiant = etudiantRepository.findById(etudiantId)
                 .orElseThrow(() -> new IllegalArgumentException("Etudiant not found"));
 
         // Check if the student already reserved the same chambre
-        Optional<Reservation> existingReservation = reservationRepository.findByEtudiantAndChambre(
-                etudiant, chambre);
+        Optional<Reservation> existingReservation = reservationRepository.findByEtudiantAndChambre(etudiant, chambre);
 
-        // If an existing reservation is found, throw an exception or return a response
         if (existingReservation.isPresent()) {
             throw new IllegalArgumentException("Student has already reserved this chambre.");
         }
 
-        reservation.setChambre(chambre);
-        reservation.setEtudiant(etudiant);
+        // Create a new reservation
+        Reservation reservation = new Reservation();
+        reservation.setChambre(chambre); // Set the chambre object
+        reservation.setEtudiant(etudiant); // Set the etudiant object
         reservation.setReservationDate(new Date());
-
+        reservation.setFoyerId();
         // Save the new reservation
         return reservationRepository.save(reservation);
     }
@@ -63,10 +63,8 @@ public class ReservationService {
         Reservation existingReservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Reservation not found"));
 
-        if (updatedReservation.isConfirmed()) {
-            existingReservation.setConfirmed(true);
-        }
-
+        existingReservation.setConfirmed(updatedReservation.getConfirmed());
+        existingReservation.setConfirmed(updatedReservation.getConfirmed());
         return reservationRepository.save(existingReservation);
     }
 
@@ -82,5 +80,10 @@ public class ReservationService {
 
     public List<Reservation> getReservationsByEtudiant(Long etudiantId) {
         return reservationRepository.findByEtudiantId(etudiantId);
+    }
+
+    // Add a method to find reservations by Foyer ID
+    public List<Reservation> findByFoyerId(Long idFoyer) {
+        return reservationRepository.findByFoyerId(idFoyer);
     }
 }
