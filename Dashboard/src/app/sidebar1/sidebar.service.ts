@@ -126,7 +126,7 @@ export class SidebarService {
       icon: 'fa fa-line-chart',  
       route: '/statistics',
       type: 'simple', 
-      condition: ['ROLE_PERSONNEL'],
+      condition: ['ROLE_ADMIN'],
     },
     
     

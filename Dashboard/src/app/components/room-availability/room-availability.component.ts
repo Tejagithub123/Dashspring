@@ -72,7 +72,7 @@ export class RoomAvailabilityComponent implements OnInit {
   };
 
   token = this.authService.getToken();
-  private apiUrl = 'http://localhost:8090/personnel/statistics';
+  private apiUrl = 'http://localhost:8090/admin/statistics';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 

@@ -4,6 +4,7 @@ import com.p1.Model.AgentMaintenance;
 import com.p1.Model.Chambre;
 import com.p1.Model.Etudiant;
 import com.p1.Model.Personnel;
+import com.p1.Repository.ChambreRepository;
 import com.p1.Service.PersonnelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,9 @@ import com.p1.Service.FoyerService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4300")
@@ -176,6 +180,48 @@ public class AdminController {
     public ResponseEntity<Void> deleteAgent(@PathVariable Long id) {
         agentMaintenanceService.deleteAgent(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @Autowired
+    ChambreRepository chambreRepository;
+
+    @GetMapping("/statistics")
+    public Map<String, Object> getRoomStatistics() {
+        List<Chambre> chambres = chambreRepository.findAll();
+        int totalRooms = chambres.size();
+        int totalSingle = 0;
+        int totalDouble = 0;
+        int availableRooms = 0;
+        int unavailableRooms = 0;
+
+        // Count Single, Double, Available, and Unavailable rooms
+        for (Chambre chambre : chambres) {
+            if (chambre.getType() == Chambre.TYPE.SINGLE) {
+                totalSingle++;
+            } else if (chambre.getType() == Chambre.TYPE.DOUBLE) {
+                totalDouble++;
+            }
+
+            if (chambre.isAvailble()) {
+                availableRooms++;
+            } else {
+                unavailableRooms++;
+            }
+        }
+
+        double singlePercentage = totalRooms > 0 ? (double) totalSingle / totalRooms * 100 : 0;
+        double doublePercentage = totalRooms > 0 ? (double) totalDouble / totalRooms * 100 : 0;
+
+        double availablePercentage = totalRooms > 0 ? (double) availableRooms / totalRooms * 100 : 0;
+        double unavailablePercentage = totalRooms > 0 ? (double) unavailableRooms / totalRooms * 100 : 0;
+
+        Map<String, Object> roomStats = new HashMap<>();
+        roomStats.put("SINGLE", singlePercentage);
+        roomStats.put("DOUBLE", doublePercentage);
+        roomStats.put("AVAILABLE", availablePercentage);
+        roomStats.put("UNAVAILABLE", unavailablePercentage);
+
+        return roomStats;
     }
 
 }

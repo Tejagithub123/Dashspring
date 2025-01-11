@@ -180,45 +180,4 @@ public class PersonnelController {
         return ResponseEntity.ok(agentMaintenanceService.getAllAgents());
     }
 
-    @GetMapping("/statistics")
-    public Map<String, Object> getRoomStatistics() {
-        List<Chambre> chambres = chambreRepository.findAll();
-        int totalRooms = chambres.size();
-        int totalSingle = 0;
-        int totalDouble = 0;
-        int availableRooms = 0;
-        int unavailableRooms = 0;
-
-        // Count Single, Double, Available, and Unavailable rooms
-        for (Chambre chambre : chambres) {
-            if (chambre.getType() == Chambre.TYPE.SINGLE) {
-                totalSingle++;
-            } else if (chambre.getType() == Chambre.TYPE.DOUBLE) {
-                totalDouble++;
-            }
-
-            if (chambre.isAvailble()) {
-                availableRooms++;
-            } else {
-                unavailableRooms++;
-            }
-        }
-
-        // Calculate type-based percentages
-        double singlePercentage = totalRooms > 0 ? (double) totalSingle / totalRooms * 100 : 0;
-        double doublePercentage = totalRooms > 0 ? (double) totalDouble / totalRooms * 100 : 0;
-
-        // Calculate availability percentages
-        double availablePercentage = totalRooms > 0 ? (double) availableRooms / totalRooms * 100 : 0;
-        double unavailablePercentage = totalRooms > 0 ? (double) unavailableRooms / totalRooms * 100 : 0;
-
-        // Prepare the response
-        Map<String, Object> roomStats = new HashMap<>();
-        roomStats.put("SINGLE", singlePercentage);
-        roomStats.put("DOUBLE", doublePercentage);
-        roomStats.put("AVAILABLE", availablePercentage);
-        roomStats.put("UNAVAILABLE", unavailablePercentage);
-
-        return roomStats;
-    }
 }
