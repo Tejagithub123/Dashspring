@@ -119,7 +119,17 @@ export class SidebarService {
       route : '/reservation',
       type: 'simple', 
       condition: ['ROLE_ETUDIANT'],
+    }, 
+
+    {
+      title: 'statistics',
+      icon: 'fa fa-line-chart',  
+      route: '/statistics',
+      type: 'simple', 
+      condition: ['ROLE_PERSONNEL'],
     },
+    
+    
 
 
     // {

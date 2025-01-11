@@ -24,6 +24,7 @@ import { AgentPlainteComponent } from './components/agent-plainte/agent-plainte.
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ReservationComponent } from './components/reservation/reservation.component';
+import { RoomAvailabilityComponent } from './components/room-availability/room-availability.component';
 const routes: Routes = [  { path: '',  component:HomeComponent , canActivate: [AuthGuard]}, // Redirect to login page by default
 { path: 'login', component: LoginComponent },  // Define the login routev
 
@@ -83,6 +84,7 @@ component: PersonnelComponent },
 
         { path: 'reservation', component: ReservationComponent },
 
+        { path: 'statistics', component: RoomAvailabilityComponent },
 
 
        

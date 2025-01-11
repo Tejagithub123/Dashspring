@@ -5,6 +5,7 @@ import com.p1.Model.Chambre;
 import com.p1.Model.Etudiant;
 import com.p1.Model.Personnel;
 import com.p1.Model.Plainte;
+import com.p1.Repository.ChambreRepository;
 import com.p1.Service.PersonnelService;
 
 import com.p1.Service.PlainteService;
@@ -19,7 +20,11 @@ import com.p1.Model.Foyer;
 import com.p1.Service.AgentMaintenanceService;
 import com.p1.Service.ChambreService;
 import com.p1.Service.FoyerService;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import java.util.Optional;
@@ -38,6 +43,9 @@ public class PersonnelController {
     private ChambreService chambreService;
     @Autowired
     private EtudiantService etudiantService;
+
+    @Autowired
+    ChambreRepository chambreRepository;
 
     // chambres
     @PostMapping("/chambre")
@@ -170,6 +178,34 @@ public class PersonnelController {
     @GetMapping("/agent/agentAll")
     public ResponseEntity<List<AgentMaintenance>> getAllAgents() {
         return ResponseEntity.ok(agentMaintenanceService.getAllAgents());
+    }
+
+    @GetMapping("/statistics")
+    public Map<String, Double> getRoomTypePercentage() {
+        List<Chambre> chambres = chambreRepository.findAll();
+        int totalRooms = chambres.size();
+        int totalSingle = 0;
+        int totalDouble = 0;
+
+        // Count Single and Double rooms
+        for (Chambre chambre : chambres) {
+            if (chambre.getType() == Chambre.TYPE.SINGLE) {
+                totalSingle++;
+            } else if (chambre.getType() == Chambre.TYPE.DOUBLE) {
+                totalDouble++;
+            }
+        }
+
+        // Calculate percentages
+        double singlePercentage = totalRooms > 0 ? (double) totalSingle / totalRooms * 100 : 0;
+        double doublePercentage = totalRooms > 0 ? (double) totalDouble / totalRooms * 100 : 0;
+
+        // Prepare response
+        Map<String, Double> roomTypeStats = new HashMap<>();
+        roomTypeStats.put("SINGLE", singlePercentage);
+        roomTypeStats.put("DOUBLE", doublePercentage);
+
+        return roomTypeStats;
     }
 
 }
