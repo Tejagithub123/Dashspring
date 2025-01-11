@@ -172,6 +172,12 @@ public class PersonnelController {
         return ResponseEntity.noContent().build(); // Retourner une réponse 204 No Content
     }
 
+    @PatchMapping("/etudiants/{id}")
+    public ResponseEntity<Etudiant> updateEtudiant(@PathVariable Long id, @RequestBody Etudiant updatedEtudiant) {
+        Etudiant etudiant = etudiantService.updateEtudiant(id, updatedEtudiant);
+        return ResponseEntity.ok(etudiant);
+    }
+
     @Autowired
     private AgentMaintenanceService agentMaintenanceService;
 

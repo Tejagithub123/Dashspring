@@ -33,17 +33,42 @@ export class EtudiantListComponent implements OnInit {
     });
   }
 
-
-
   openUpdateModal(content: any, etudiant: Etudiant): void {
     this.originalEtudiant = { ...etudiant };
-    console.log('Original Etudiant:', this.originalEtudiant);
-
     this.selectedEtudiant = { ...etudiant };
-
     this.modalService.open(content, { size: 'lg' });
   }
 
+  updateEtudiant(): void {
+    if (this.selectedEtudiant.id) {
+      // Create a payload with only the updated fields
+      const payload: Partial<Etudiant> = {
+        nom: this.selectedEtudiant.nom,
+        prenom: this.selectedEtudiant.prenom,
+        email: this.selectedEtudiant.email,
+        dateNaissance: this.selectedEtudiant.dateNaissance,
+        cin: this.selectedEtudiant.cin,
+      };
+  
+      this.etudiantService.update(this.selectedEtudiant.id, payload).subscribe(
+        (updatedEtudiant) => {
+          // Update the etudiant in the list
+          const index = this.etudiants.findIndex(e => e.id === updatedEtudiant.id);
+          if (index !== -1) {
+            this.etudiants[index] = updatedEtudiant;
+          }
+          // Close the modal
+          this.modalService.dismissAll();
+          alert('Etudiant updated successfully!');
+        },
+        (error) => {
+          console.error('Error updating etudiant:', error);
+          alert('Failed to update etudiant.');
+        }
+      );
+    }
+  }
+  
 
   deleteEtudiant(id: number): void {
     if (confirm('Are you sure you want to delete this etudiant?')) {

@@ -67,9 +67,7 @@ public class EtudiantService {
             if (updatedEtudiant.getEmail() != null) {
                 etudiant.setEmail(updatedEtudiant.getEmail());
             }
-            if (updatedEtudiant.getRole() != null) {
-                etudiant.setRole(updatedEtudiant.getRole());
-            }
+
             if (updatedEtudiant.getDateNaissance() != null) {
                 etudiant.setDateNaissance(updatedEtudiant.getDateNaissance());
             }

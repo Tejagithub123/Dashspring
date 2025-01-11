@@ -38,12 +38,93 @@
           [disabled]="!etudiant.id"
         >
           Delete
-        </button>
+        </button> 
+
+        <button
+        class="btn btn-primary mr-2"
+        (click)="openUpdateModal(updateModal, etudiant)"
+      >
+        Update
+      </button>
+
+
+
       </td>
     </tr>
   </tbody>
 </table>
-
+<!-- Update Modal -->
+<ng-template #updateModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Update Etudiant</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #updateForm="ngForm">
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nom"
+          name="nom"
+          [(ngModel)]="selectedEtudiant.nom"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="prenom">Prénom</label>
+        <input
+          type="text"
+          class="form-control"
+          id="prenom"
+          name="prenom"
+          [(ngModel)]="selectedEtudiant.prenom"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          [(ngModel)]="selectedEtudiant.email"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="dateNaissance">Date de Naissance</label>
+        <input
+          type="date"
+          class="form-control"
+          id="dateNaissance"
+          name="dateNaissance"
+          [(ngModel)]="selectedEtudiant.dateNaissance"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="cin">CIN</label>
+        <input
+          type="text"
+          class="form-control"
+          id="cin"
+          name="cin"
+          [(ngModel)]="selectedEtudiant.cin"
+          required
+        />
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="updateEtudiant()">Save Changes</button>
+  </div>
+</ng-template>
 
   
 </div>

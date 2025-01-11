@@ -55,5 +55,11 @@ export class EtudiantService {
     return this.http.delete<void>(`${this.baseUrl}/etudiants/${id}`, {
       headers: this.getHeaders(),
     });
+  } 
+
+  update(id: number, etudiant: Partial<Etudiant>): Observable<Etudiant> {
+    return this.http.patch<Etudiant>(`${this.baseUrl}/etudiants/${id}`, etudiant, {
+      headers: this.getHeaders(),
+    });
   }
 }
