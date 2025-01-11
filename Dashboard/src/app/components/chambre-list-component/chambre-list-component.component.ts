@@ -63,7 +63,22 @@ export class ChambreListComponent implements OnInit {
       }
     });
   }
+  addReservation(id: number) {
+    const userId = Number(UserStorageService.getUserId());
+    
+    this.chambreService.AddReservation(userId, id).subscribe({
+      next: () => {
+        alert('Chambre added successfully!');
+        this.loadChambres();
+      },
+      error: (err) => {
+          alert('This chambre is already reserved by you.');        
+      }
+    });
+  }
+  
 
+ 
   // Update filter whenever input changes
   onFilterChange(): void {
     this.applyFilters();
@@ -75,7 +90,7 @@ export class ChambreListComponent implements OnInit {
     this.modalService.open(content, { size: 'lg' });
   }
 
-  updateChambre(): void {
+  public updateChambre(): void {
     if (this.selectedChambre.id) {
       const updatePayload: any = {};
       if (this.selectedChambre.name !== this.originalChambre.name) {

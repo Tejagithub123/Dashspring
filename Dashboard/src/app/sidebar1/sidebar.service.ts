@@ -112,13 +112,12 @@ export class SidebarService {
       type: 'simple', 
       condition: ['ROLE_AGENT','ROLE_ADMIN','ROLE_PERSONNEL','ROLE_ETUDIANT'],
     }, 
-
     {
-      title: 'reservation',
+      title: 'liste des reservations',
       icon: 'fa fa-list',
-      route : '/reservation',
+      route : '/liste-reservations',
       type: 'simple', 
-      condition: ['ROLE_ETUDIANT'],
+      condition: ['ROLE_ETUDIANT','ROLE_PERSONNEL'],
     }, 
 
     {
@@ -127,6 +126,7 @@ export class SidebarService {
       route: '/statistics',
       type: 'simple', 
       condition: ['ROLE_ADMIN'],
+      
     },
     
     

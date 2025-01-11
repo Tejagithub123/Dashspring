@@ -87,6 +87,7 @@ public class ChambreService {
             dto.setType(chambre.getType().toString()); // Convert enum to String
             dto.setAvailble(chambre.isAvailble());
             dto.setPrice(chambre.getPrice());
+            dto.setenMaintenance(chambre.isEnMaintenance());
             // Check if foyer is present and set both foyerId and foyerNom
             if (chambre.getFoyer() != null) {
                 dto.setFoyerId(chambre.getFoyer().getId());

@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.p1.Service.ChambreService;
+
+import java.sql.Date;
 import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
 import com.p1.Model.Reservation;
@@ -37,20 +39,15 @@ public class EtudiantController {
     private ReservationService reservationService;
 
     @PostMapping("/reservation")
-    public ResponseEntity<Reservation> addReservation(@RequestBody Reservation reservation) {
+    public ResponseEntity<Reservation> addReservation(
+            @RequestParam Long chambreId,
+            @RequestParam Long etudiantId) {
         try {
-            Reservation createdReservation = reservationService.addReservation(reservation);
-            return new ResponseEntity<>(createdReservation, HttpStatus.CREATED);
+            Reservation reservation = reservationService.addReservation(chambreId, etudiantId);
+            return new ResponseEntity<>(reservation, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
-            // Handle the exception if the reservation already exists
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST); // Or customize the response message
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
-    }
-
-    @GetMapping("/reservation")
-    public ResponseEntity<List<Reservation>> getAllReservations() {
-        List<Reservation> reservations = reservationService.getAllReservations();
-        return new ResponseEntity<>(reservations, HttpStatus.OK);
     }
 
     @GetMapping("reservation/getone/{id}")
@@ -64,6 +61,12 @@ public class EtudiantController {
             @RequestBody Reservation updatedReservation) {
         Reservation updatedRes = reservationService.updateReservation(id, updatedReservation);
         return new ResponseEntity<>(updatedRes, HttpStatus.OK);
+    }
+
+    @GetMapping("reservation/{id}")
+    public ResponseEntity<List<Reservation>> GetReservationsByEtudiant(@PathVariable Long id) {
+        List<Reservation> reservations = reservationService.getReservationsByEtudiant(id);
+        return new ResponseEntity<>(reservations, HttpStatus.OK);
     }
 
     @DeleteMapping("reservation/{id}")

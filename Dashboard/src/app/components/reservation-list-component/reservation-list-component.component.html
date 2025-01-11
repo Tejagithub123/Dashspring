@@ -1,0 +1,48 @@
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div class="card">
+  <div class="card-body">
+    <!-- Chambre List -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Reservation Date</th>
+          <th>Status</th>
+          <th *ngIf="role === 'ROLE_PERSONNEL'">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of reservations">
+          <td>{{ reservation.id }}</td>
+          <td>{{ reservation.reservationDate | date: 'medium' }}</td>
+          <td>
+            <!-- Display status using enum values -->
+            <span [ngClass]="{
+              'text-success': reservation.confirmed === 'VALID',
+              'text-danger': reservation.confirmed === 'REJECTED',
+              'text-warning': reservation.confirmed === 'PENDING'
+            }">
+              {{ reservation.confirmed === 'VALID' ? 'Approved' :
+                 reservation.confirmed === 'REJECTED' ? 'Rejected' :
+                 'Pending' }}
+            </span>
+          </td>
+          <td *ngIf="role === 'ROLE_PERSONNEL'">
+            <button
+              (click)="approveReservation(reservation.id)">
+              Approve
+            </button>
+            <button
+              (click)="rejectReservation(reservation.id)"
+            >
+              Reject
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

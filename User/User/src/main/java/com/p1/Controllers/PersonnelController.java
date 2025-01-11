@@ -5,11 +5,13 @@ import com.p1.Model.Chambre;
 import com.p1.Model.Etudiant;
 import com.p1.Model.Personnel;
 import com.p1.Model.Plainte;
+import com.p1.Model.Reservation;
+import com.p1.Repository.ReservationRepository;
 import com.p1.Repository.ChambreRepository;
 import com.p1.Service.PersonnelService;
 
 import com.p1.Service.PlainteService;
-
+import com.p1.Service.ReservationService;
 import com.p1.Service.EtudiantService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,15 @@ public class PersonnelController {
     private ChambreService chambreService;
     @Autowired
     private EtudiantService etudiantService;
+    @Autowired
+    private ReservationService reservationService;
+    @Autowired
+    private ReservationRepository reservationRepository;
+
+    // Add a method to find reservations by Foyer ID
+    public List<Reservation> findByFoyerId(Long idFoyer) {
+        return reservationRepository.findByFoyerId(idFoyer);
+    }
 
     @Autowired
     ChambreRepository chambreRepository;
@@ -184,6 +195,19 @@ public class PersonnelController {
     @GetMapping("/agent/agentAll")
     public ResponseEntity<List<AgentMaintenance>> getAllAgents() {
         return ResponseEntity.ok(agentMaintenanceService.getAllAgents());
+    }
+
+    @GetMapping("reservationByFoyer/{idFoyer}")
+    public ResponseEntity<List<Reservation>> getAllReservationsByFoyerID(@PathVariable Long idFoyer) {
+        List<Reservation> reservations = reservationService.findByFoyerId(idFoyer);
+        return new ResponseEntity<>(reservations, HttpStatus.OK);
+    }
+
+    @PutMapping("reservation/{id}")
+    public ResponseEntity<Reservation> updateReservation(@PathVariable Long id,
+            @RequestBody Reservation updatedReservation) {
+        Reservation updatedRes = reservationService.updateReservation(id, updatedReservation);
+        return new ResponseEntity<>(updatedRes, HttpStatus.OK);
     }
 
 }

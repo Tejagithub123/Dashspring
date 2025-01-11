@@ -15,6 +15,8 @@ import { ChambreListComponent } from './components/chambre-list-component/chambr
 import { AgentMaintenanceComponent } from './components/add-agent/add-agent.component';
 import { AgentListComponent } from './components/agent-list/agent-list.component';
 
+import { ReservationListComponent } from './components/reservation-list-component/reservation-list-component.component';
+
 import { EtudiantComponent } from './components/etudiant/etudiant.component';
 import { EtudiantListComponent } from './components/etudiant-list-component/etudiant-list-component.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -23,7 +25,7 @@ import { PlaintesListComponent } from './components/plaintes-list/plaintes-list.
 import { AgentPlainteComponent } from './components/agent-plainte/agent-plainte.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { ReservationComponent } from './components/reservation/reservation.component';
+
 import { RoomAvailabilityComponent } from './components/room-availability/room-availability.component';
 const routes: Routes = [  { path: '',  component:HomeComponent , canActivate: [AuthGuard]}, // Redirect to login page by default
 { path: 'login', component: LoginComponent },  // Define the login routev
@@ -55,7 +57,8 @@ component: PersonnelComponent },
 
   { path: 'liste-chambres', 
     component: ChambreListComponent },
-
+    { path: 'liste-reservations', 
+      component: ReservationListComponent },
 
     { path: 'agent', 
     component: AgentMaintenanceComponent },
@@ -82,7 +85,6 @@ component: PersonnelComponent },
         { path: 'profil', component: ProfileComponent },
      
 
-        { path: 'reservation', component: ReservationComponent },
 
         { path: 'statistics', component: RoomAvailabilityComponent },
 

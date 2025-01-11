@@ -10,6 +10,7 @@ public class ChambreDTO {
     private String price;
     private Long foyerId; // ID of the associated Foyer
     private String foyerNom; // Name of the associated Foyer
+    private boolean enMaintenance;
 
     // Getters and Setters
     public Long getId() {
@@ -50,6 +51,14 @@ public class ChambreDTO {
 
     public void setAvailble(boolean available) {
         this.availble = available;
+    }
+
+    public boolean isenMaintenance() {
+        return enMaintenance;
+    }
+
+    public void setenMaintenance(boolean enMaintenance) {
+        this.enMaintenance = enMaintenance;
     }
 
     public String getPrice() {
