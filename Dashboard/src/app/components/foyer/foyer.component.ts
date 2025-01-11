@@ -3,7 +3,16 @@ import { FoyerService } from '../../services/foyer/foyer.service';
 import { Foyer } from '../../models/foyer.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';  // Import NgbModal
 import { EditFoyerModalComponent } from './EditFoyerModalComponent';
-
+import Map from 'ol/Map';
+import View from 'ol/View';
+import TileLayer from 'ol/layer/Tile';
+import OSM from 'ol/source/OSM'; // OpenStreetMap as the base layer
+import { fromLonLat } from 'ol/proj'; // Helper to convert coordinates
+import Feature from 'ol/Feature';
+import Point from 'ol/geom/Point';
+import { Style, Icon } from 'ol/style';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
 @Component({
   selector: 'app-foyer',
   templateUrl: './foyer.component.html',
@@ -15,7 +24,9 @@ export class FoyerComponent implements OnInit {
   newFoyer: Foyer = { id: 0, nom: '', latitude: 0, longitude: 0, personnel: null };  
   foyerToEdit: Foyer = { id: 0, nom: '', latitude: 0, longitude: 0, personnel: null };
 
-  searchQuery = ''; 
+  searchQuery = '';  
+  map: Map | undefined;
+
 
   constructor(
     private foyerService: FoyerService,
@@ -24,20 +35,77 @@ export class FoyerComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadFoyers();
+    this.initializeMap();
+  }
+
+  initializeMap(): void {
+    // Create the map
+    this.map = new Map({
+      target: 'map', // The ID of the div element in the template
+      layers: [
+        new TileLayer({
+          source: new OSM() // OpenStreetMap as the base layer
+        })
+      ],
+      view: new View({
+        center: fromLonLat([10.1815, 36.8065]), // Center the map on Tunisia
+        zoom: 6 // Adjust the zoom level
+      })
+    });
   }
 
   loadFoyers(): void {
     this.foyerService.getAllFoyers().subscribe((data) => {
       this.foyers = data;
-      this.filteredFoyers = data;  
+      this.filteredFoyers = data;
+      this.addFoyersToMap(); 
     });
   }
+
+  addFoyersToMap(): void {
+    if (!this.map) return;
+  
+    // Clear existing markers
+    this.map.getLayers().forEach(layer => {
+      if (layer instanceof VectorLayer) {
+        this.map!.removeLayer(layer); // Remove all vector layers
+      }
+    });
+  
+    // Create a new vector source and layer
+    const vectorSource = new VectorSource();
+    const vectorLayer = new VectorLayer({
+      source: vectorSource
+    });
+    this.map.addLayer(vectorLayer);
+  
+    // Add a marker for each foyer
+    this.foyers.forEach((foyer) => {
+      if (foyer.latitude && foyer.longitude) {
+        const marker = new Feature({
+          geometry: new Point(fromLonLat([foyer.longitude, foyer.latitude]))
+        });
+        marker.setStyle(
+          new Style({
+            image: new Icon({
+              src: 'assets/marker-icon.png', // Ensure this path is correct
+              scale: 0.09 // Adjust the size of the marker
+            })
+          })
+        );
+        vectorSource.addFeature(marker);
+      }
+    });
+  }
+  
 
   addFoyer(): void {
     this.foyerService.addFoyer(this.newFoyer).subscribe((createdFoyer) => {
       this.foyers.push(createdFoyer); 
       this.newFoyer = { id: 0, nom: '', latitude: 0, longitude: 0 , personnel: null  }; 
       this.filterFoyers();  
+      this.addFoyersToMap(); 
+
     });
   }
 
@@ -46,6 +114,7 @@ export class FoyerComponent implements OnInit {
       this.foyerService.deleteFoyer(id).subscribe({
         next: () => {
           this.loadFoyers(); // Reload the list of foyers after successful deletion
+          this.addFoyersToMap(); // Update the map after deletion
         },
         error: (err) => {
           if (err.status === 403) {
@@ -73,6 +142,7 @@ export class FoyerComponent implements OnInit {
         (updatedFoyer) => {
           console.log('Foyer updated successfully:', updatedFoyer);
           this.loadFoyers(); // Reload the list of foyers after successful update
+          this.addFoyersToMap();
         },
         (error) => {
           console.error('Error updating foyer:', error);
