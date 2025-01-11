@@ -1,16 +1,30 @@
 <div><br/></div>
 <div><br/></div>
-<div><br/></div>
-<div><br/></div>
 <div class="container">
-    <h2>Room Single Double</h2>
-    <div>
-      <canvas
-        baseChart
-        [datasets]="barChartData"
-        [labels]="barChartLabels"
-        [chartType]="barChartType"
-        [options]="barChartOptions"
-      ></canvas>
-    </div>
+  <h2>Room Statistics</h2>
+
+  <!-- Bar Chart for Room Types -->
+  <div>
+    <h3>Room Type Distribution</h3>
+    <canvas
+      baseChart
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [chartType]="barChartType"
+      [options]="barChartOptions"
+    ></canvas>
   </div>
+
+  <!-- Pie Chart for Availability -->
+  <div>
+    <h3>Room Availability Percentage</h3>
+    <canvas
+      baseChart
+      [datasets]="pieChartData"
+      [labels]="pieChartLabels"
+      [chartType]="pieChartType"
+      [options]="pieChartOptions"
+    ></canvas>
+  </div>
+  <div><br/></div>
+</div>

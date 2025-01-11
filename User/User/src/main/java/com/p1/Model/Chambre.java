@@ -82,6 +82,10 @@ public class Chambre {
         return this.enMaintenance;
     }
 
+    public double getAvailability() {
+        return availble ? 100.0 : 0.0;
+    }
+
     @OneToMany(mappedBy = "chambre")
     @JsonManagedReference("chambre_plainte")
     private List<Plainte> plaintes;

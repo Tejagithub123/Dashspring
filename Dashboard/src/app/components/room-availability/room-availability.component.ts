@@ -8,16 +8,16 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./room-availability.component.css']
 })
 export class RoomAvailabilityComponent implements OnInit {
-  // Chart data and options
+  // Bar Chart Data for Room Types
   public barChartData: any[] = [
     {
-      label: 'Rooms by single double',
+      label: 'Room Types',
       data: [0, 0], // Initialize with default values
-      backgroundColor: ['#36A2EB', '#FF6384']
+      backgroundColor: ['#36A2EB', '#FF6384'] // Colors for Single and Double
     }
   ];
-  public barChartLabels: string[] = ['Single', 'Double']; // Initialize with default labels
-  public barChartType: 'bar' | 'line' | 'pie' | 'doughnut' | 'radar' | 'polarArea' = 'bar';
+  public barChartLabels: string[] = ['Single', 'Double']; // Labels for the bar chart
+  public barChartType: 'bar' = 'bar'; // Bar chart type
   public barChartOptions: any = {
     responsive: true,
     scales: {
@@ -26,7 +26,7 @@ export class RoomAvailabilityComponent implements OnInit {
         max: 100,
         title: {
           display: true,
-          text: 'Availability (%)'
+          text: 'Percentage (%)'
         }
       },
       x: {
@@ -42,6 +42,30 @@ export class RoomAvailabilityComponent implements OnInit {
       },
       title: {
         display: true,
+        text: 'Room Type Distribution'
+      }
+    }
+  };
+
+  // Pie Chart Data for Availability
+  public pieChartData: any[] = [
+    {
+      label: 'Room Availability',
+      data: [0, 0], // Initialize with default values
+      backgroundColor: ['#4CAF50', '#FF5252'] // Colors for Available and Unavailable
+    }
+  ];
+  public pieChartLabels: string[] = ['Available', 'Unavailable']; // Labels for the pie chart
+  public pieChartType: 'pie' = 'pie'; // Pie chart type
+  public pieChartOptions: any = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top'
+      },
+      title: {
+        display: true,
         text: 'Room Availability Percentage'
       }
     }
@@ -53,31 +77,41 @@ export class RoomAvailabilityComponent implements OnInit {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.fetchRoomAvailability();
+    this.fetchRoomStatistics();
   }
 
-  fetchRoomAvailability(): void {
+  fetchRoomStatistics(): void {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
 
     this.http.get<any>(this.apiUrl, { headers }).subscribe(
       (data) => {
         console.log('Data from API:', data);
 
-        // Update the chart with the response data
+        // Update Bar Chart (Room Types)
         this.barChartLabels = ['Single', 'Double'];
         this.barChartData = [
           {
-            label: 'Room Availability',
+            label: 'Room Types',
             data: [data.SINGLE ?? 0, data.DOUBLE ?? 0],
             backgroundColor: ['#36A2EB', '#FF6384']
           }
         ];
 
-        console.log('Chart Labels:', this.barChartLabels);
-        console.log('Chart Data:', this.barChartData);
+        // Update Pie Chart (Availability)
+        this.pieChartLabels = ['Available', 'Unavailable'];
+        this.pieChartData = [
+          {
+            label: 'Room Availability',
+            data: [data.AVAILABLE ?? 0, data.UNAVAILABLE ?? 0],
+            backgroundColor: ['#4CAF50', '#FF5252']
+          }
+        ];
+
+        console.log('Bar Chart Data:', this.barChartData);
+        console.log('Pie Chart Data:', this.pieChartData);
       },
       (error) => {
-        console.error('Error fetching room availability data:', error);
+        console.error('Error fetching room statistics:', error);
       }
     );
   }
