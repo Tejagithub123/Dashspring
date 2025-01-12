@@ -57,7 +57,7 @@ public class AdminController {
     @PutMapping("/personnels/{personnelId}/foyer")
     public ResponseEntity<Personnel> assignFoyerToPersonnel(@PathVariable Long personnelId,
             @RequestParam Long foyerId) {
-        // Vérifie que les IDs sont valides
+
         if (foyerId == null) {
             throw new IllegalArgumentException("L'ID du foyer doit être fourni.");
         }
@@ -121,8 +121,6 @@ public class AdminController {
         return ResponseEntity.ok(updatedFoyer);
     }
 
-    // FoyerController.java
-
     @DeleteMapping("/foyers/{id}")
     public ResponseEntity<Void> deleteFoyer(@PathVariable Long id) {
         try {
@@ -143,13 +141,13 @@ public class AdminController {
     @GetMapping("/etudinat/Alletudiants")
     public ResponseEntity<List<Etudiant>> getAllEtudiants() {
         List<Etudiant> etudiants = etudiantService.getAllEtudiants();
-        return ResponseEntity.ok(etudiants); // Retourne la liste de tous les personnels avec un code HTTP 200 OK
+        return ResponseEntity.ok(etudiants);
     }
 
     @DeleteMapping("/etudiants/{id}")
     public ResponseEntity<Void> deleteEtudiant(@PathVariable Long id) {
         etudiantService.deleteEtudiant(id);
-        return ResponseEntity.noContent().build(); // Retourner une réponse 204 No Content
+        return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/etudiants/{id}")
@@ -200,7 +198,6 @@ public class AdminController {
         int availableRooms = 0;
         int unavailableRooms = 0;
 
-        // Count Single, Double, Available, and Unavailable rooms
         for (Chambre chambre : chambres) {
             if (chambre.getType() == Chambre.TYPE.SINGLE) {
                 totalSingle++;

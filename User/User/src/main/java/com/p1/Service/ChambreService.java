@@ -21,7 +21,6 @@ public class ChambreService {
     @Autowired
     private FoyerRepository foyerRepository;
 
-    //////////////////////////////// Done/////////////////////////////////////////
     public Chambre addChambre(Chambre chambre, Long foyerId) {
         Optional<Foyer> foyer = foyerRepository.findById(foyerId);
         if (foyer.isPresent()) {
@@ -36,42 +35,32 @@ public class ChambreService {
         Chambre existingChambre = getChambrebyId(id);
 
         if (existingChambre != null) {
-            // Update only the fields that are provided in the updatedChambre object
 
-            // Only update Description if it's provided in the request
             if (updatedChambre.getDescription() != null) {
                 existingChambre.setDescription(updatedChambre.getDescription());
             }
 
-            // Only update Type if it's provided in the request
             if (updatedChambre.getType() != null) {
                 existingChambre.setType(updatedChambre.getType());
             }
 
-            // Only update Availble if it's provided in the request
             if (updatedChambre.isAvailble() != null) {
                 existingChambre.setAvailble(updatedChambre.isAvailble());
             }
 
-            // Only update Price if it's provided in the request
             if (updatedChambre.getPrice() != null) {
                 existingChambre.setPrice(updatedChambre.getPrice());
             }
 
-            // Only update Foyer if it's provided in the request
             if (updatedChambre.getFoyer() != null) {
                 existingChambre.setFoyer(updatedChambre.getFoyer());
             }
 
-            // Save the partially updated chambre
             return chambreRepository.save(existingChambre);
         } else {
             throw new IllegalArgumentException("Chambre not found");
         }
     }
-
-    /////////////////////////////////// Done//////////////////////////////////////////
-    ///
 
     public List<Chambre> getChambresByFoyerId(Long foyerId) {
         return chambreRepository.findByFoyerId(foyerId);
@@ -84,11 +73,11 @@ public class ChambreService {
             dto.setId(chambre.getId());
             dto.setName(chambre.getName());
             dto.setDescription(chambre.getDescription());
-            dto.setType(chambre.getType().toString()); // Convert enum to String
+            dto.setType(chambre.getType().toString());
             dto.setAvailble(chambre.isAvailble());
             dto.setPrice(chambre.getPrice());
             dto.setenMaintenance(chambre.isEnMaintenance());
-            // Check if foyer is present and set both foyerId and foyerNom
+
             if (chambre.getFoyer() != null) {
                 dto.setFoyerId(chambre.getFoyer().getId());
                 dto.setFoyerNom(chambre.getFoyer().getNom());
@@ -97,13 +86,11 @@ public class ChambreService {
         }).collect(Collectors.toList());
     }
 
-    /////////////////////////////////////// Done///////////////////////////////////////////////
     public Chambre getChambrebyId(Long id) {
         return chambreRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Chambre not found"));
     }
 
-    // -------------------------------------Done-------------------------------------------
     public String deleteChambre(Long id) {
         Chambre chambre = chambreRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Chambre not found"));

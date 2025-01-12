@@ -8,8 +8,8 @@ public class ChambreDTO {
     private String type;
     private boolean availble;
     private String price;
-    private Long foyerId; // ID of the associated Foyer
-    private String foyerNom; // Name of the associated Foyer
+    private Long foyerId;
+    private String foyerNom;
     private boolean enMaintenance;
 
     // Getters and Setters

@@ -54,7 +54,6 @@ public class SecurityConfig {
             return corsConfig;
         });
 
-        // Disable CSRF, as it's typically not necessary for APIs with JWTs
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll() // Permit access to authentication routes (login/register)

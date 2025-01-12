@@ -31,25 +31,22 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String authorizationHeader = request.getHeader("Authorization");
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            String token = authorizationHeader.substring(7); // Extract the token
+            String token = authorizationHeader.substring(7);
 
             try {
-                // Assuming your JWT utility method is correctly extracting claims
+
                 Claims claims = jwtUtil.extractAllClaims(token);
 
-                // Extract the role directly from claims, assuming it's in the "role" claim
-                String role = claims.get("role", String.class); // Get the role
+                String role = claims.get("role", String.class);
 
                 if (role != null) {
-                    // Print the role for debugging
+
                     System.out.println("Extracted Role: " + role);
 
-                    // Strip ROLE_ if it's present
                     if (role.startsWith("ROLE_")) {
-                        role = role.substring(5); // Remove 'ROLE_' prefix if present
+                        role = role.substring(5);
                     }
 
-                    // Add the role to the granted authorities
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                             claims.getSubject(),
                             null,

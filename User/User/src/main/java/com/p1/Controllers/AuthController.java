@@ -50,17 +50,14 @@ public class AuthController {
 
     @PostMapping("/login")
     public Map<String, String> login(@RequestParam String email, @RequestParam String mdp) {
-        // Authenticate the user
+
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, mdp));
 
-        // Retrieve user details from the repository
         Utilisateur utilisateur = (Utilisateur) userDetailsService.loadUserByUsername(email);
 
-        // Generate the JWT token
         String token = jwtUtil.generateToken(utilisateur.getId(), utilisateur.getEmail(),
                 utilisateur.getRole().name());
 
-        // Return the token in a structured JSON response
         Map<String, String> response = new HashMap<>();
         response.put("token", token);
         return response;

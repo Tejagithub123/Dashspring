@@ -22,14 +22,12 @@ public class AgentController {
     @Autowired
     private PlainteService plainteService;
 
-    // Endpoint to set 'cloturee' to true for a specific Plainte
     @PatchMapping("/plainte/{id}/cloturer")
     public ResponseEntity<Plainte> cloturerPlainte(@PathVariable Long id) {
         Plainte updatedPlainte = plainteService.cloturerPlainte(id);
         return ResponseEntity.ok(updatedPlainte);
     }
 
-    // Get all Plaintes
     @GetMapping("plainte/Allplaintes")
     public ResponseEntity<List<Plainte>> getAllPlaintes() {
         List<Plainte> plaintes = plainteService.getAllPlaintes();
