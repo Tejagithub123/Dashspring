@@ -77,7 +77,7 @@
             <button class="btn btn-danger" (click)="chambre.id ? deleteChambre(chambre.id) : null" [disabled]="!chambre.id">Delete</button>
           </td>
           <td *ngIf="role === 'ROLE_ETUDIANT'">
-             <button class="btn btn-danger" (click)="chambre.id ? addReservation(chambre.id) : null" [disabled]="!chambre.id">Réserver</button>
+             <button class="btn btn-info" (click)="chambre.id ? addReservation(chambre.id) : null" [disabled]="!chambre.id">Réserver</button>
           </td>
         </tr>
       </tbody>

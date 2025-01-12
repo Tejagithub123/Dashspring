@@ -32,10 +32,12 @@
           </td>
           <td *ngIf="role === 'ROLE_PERSONNEL'">
             <button
+            class="btn btn-success"
               (click)="approveReservation(reservation.id)">
               Approve
             </button>
             <button
+            class="btn btn-danger"
               (click)="rejectReservation(reservation.id)"
             >
               Reject
