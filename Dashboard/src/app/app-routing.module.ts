@@ -28,6 +28,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 import { RoomAvailabilityComponent } from './components/room-availability/room-availability.component';
 import { FactureListComponent } from './components/facture-list/facture-list.component';
+import { PersonnelFactureListComponent } from './components/personnel-facture-list/personnel-facture-list.component';
 const routes: Routes = [  { path: '',  component:HomeComponent , canActivate: [AuthGuard]}, // Redirect to login page by default
 { path: 'login', component: LoginComponent },  // Define the login routev
 
@@ -91,7 +92,8 @@ component: PersonnelComponent },
 
         { path: 'facture', component: FactureListComponent },
 
-       
+        { path: 'facture-list', component: PersonnelFactureListComponent},
+
 
         
 

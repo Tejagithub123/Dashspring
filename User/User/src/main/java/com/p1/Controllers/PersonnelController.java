@@ -3,6 +3,7 @@ package com.p1.Controllers;
 import com.p1.Model.AgentMaintenance;
 import com.p1.Model.Chambre;
 import com.p1.Model.Etudiant;
+import com.p1.Model.Facture;
 import com.p1.Model.Personnel;
 import com.p1.Model.Plainte;
 import com.p1.Model.Reservation;
@@ -13,6 +14,7 @@ import com.p1.Service.PersonnelService;
 import com.p1.Service.PlainteService;
 import com.p1.Service.ReservationService;
 import com.p1.Service.EtudiantService;
+import com.p1.Service.FactureService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -208,6 +210,19 @@ public class PersonnelController {
             @RequestBody Reservation updatedReservation) {
         Reservation updatedRes = reservationService.updateReservation(id, updatedReservation);
         return new ResponseEntity<>(updatedRes, HttpStatus.OK);
+    }
+
+    @Autowired
+    private FactureService factureService;
+
+    @GetMapping("/facture/foyer/{foyerId}")
+    public List<Facture> getFacturesByFoyerId(@PathVariable Long foyerId) {
+        return factureService.getFacturesByFoyerId(foyerId);
+    }
+
+    @GetMapping("/facture/all")
+    public List<Facture> getAllFactures() {
+        return factureService.getAllFactures();
     }
 
 }

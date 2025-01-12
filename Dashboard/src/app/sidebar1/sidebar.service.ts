@@ -113,7 +113,7 @@ export class SidebarService {
       condition: ['ROLE_AGENT','ROLE_ADMIN','ROLE_PERSONNEL','ROLE_ETUDIANT'],
     }, 
     {
-      title: 'liste des reservations',
+      title: 'liste reservations',
       icon: 'fa fa-list',
       route : '/liste-reservations',
       type: 'simple', 
@@ -131,11 +131,19 @@ export class SidebarService {
 
     {
       title: 'facture',
-      icon: 'fa fa-book',  
+      icon: 'fa fa-money',  
       route: '/facture',
       type: 'simple', 
       condition: ['ROLE_ETUDIANT'],
     }, 
+
+    {
+      title: 'liste factures',
+      icon: 'fa fa-money',  
+      route: '/facture-list',
+      type: 'simple', 
+      condition: ['ROLE_PERSONNEL'],
+    },
     
     
 

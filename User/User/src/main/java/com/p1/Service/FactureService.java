@@ -24,32 +24,34 @@ public class FactureService {
     private ChambreRepository chambreRepository;
 
     public Facture markAsPaid(Long factureId) {
-        // Find the Facture by ID
+
         Facture facture = factureRepository.findById(factureId)
                 .orElseThrow(() -> new IllegalArgumentException("Facture not found"));
 
-        // Update the Facture status to PAYEE
         facture.setStatus(Facture.PaymentStatus.PAYEE);
 
-        // Retrieve the associated Reservation
         Reservation reservation = facture.getReservation();
         if (reservation == null) {
             throw new IllegalArgumentException("Reservation not found for this Facture");
         }
 
-        // Retrieve the associated Chambre
         Chambre chambre = reservation.getChambre();
         if (chambre == null) {
             throw new IllegalArgumentException("Chambre not found for this Reservation");
         }
 
-        // Update the Chambre's available status to false
         chambre.setAvailble(false);
 
-        // Save the updated Chambre
         chambreRepository.save(chambre);
 
-        // Save the updated Facture
         return factureRepository.save(facture);
+    }
+
+    public List<Facture> getFacturesByFoyerId(Long foyerId) {
+        return factureRepository.findByReservationChambreFoyerId(foyerId);
+    }
+
+    public List<Facture> getAllFactures() {
+        return factureRepository.findAll();
     }
 }

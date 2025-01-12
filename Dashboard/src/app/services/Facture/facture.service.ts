@@ -9,15 +9,15 @@ import { AuthService } from '../auth/auth.service'; // Import AuthService
   providedIn: 'root',
 })
 export class FactureService {
-  private apiUrl = 'http://localhost:8090/etudiant/facture'; // Backend API URL
-
+  private apiUrl = 'http://localhost:8090/etudiant/facture'; 
+  private apiUrl1 = 'http://localhost:8090/personnel/facture';
   constructor(
     private http: HttpClient,
     private userStorageService: UserStorageService ,
     private authService: AuthService
   ) {}
 
-  // Helper method to get headers with the Bearer token
+ 
   private getHeaders(): HttpHeaders {
     const token = this.authService.getToken(); // Get the token from storage
     return new HttpHeaders({
@@ -25,13 +25,13 @@ export class FactureService {
     });
   }
 
-  // Get invoices by student ID
+ 
   getFacturesByEtudiant(etudiantId: number): Observable<Facture[]> {
     const headers = this.getHeaders(); // Include the Bearer token in the request
     return this.http.get<Facture[]>(`${this.apiUrl}/${etudiantId}`, { headers });
   }
 
-  // Mark an invoice as paid
+
   markAsPaid(factureId: number): Observable<Facture> {
     const headers = this.getHeaders(); // Include the Bearer token in the request
     return this.http.put<Facture>(
@@ -39,5 +39,15 @@ export class FactureService {
       {}, // Empty body
       { headers }
     );
+  } 
+
+   getFacturesByFoyerId(foyerId: number): Observable<Facture[]> {
+    const headers = this.getHeaders(); // Include the Bearer token in the request
+    return this.http.get<Facture[]>(`${this.apiUrl1}/foyer/${foyerId}`, { headers });
+  }
+   // Get all invoices
+   getAllFactures(): Observable<Facture[]> {
+    const headers = this.getHeaders(); // Include the Bearer token in the request
+    return this.http.get<Facture[]>(`${this.apiUrl1}/all`, { headers });
   }
 }

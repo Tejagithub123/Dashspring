@@ -55,6 +55,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ReservationListComponent } from './components/reservation-list-component/reservation-list-component.component';
 import { RoomAvailabilityComponent } from './components/room-availability/room-availability.component';
 import { FactureListComponent } from './components/facture-list/facture-list.component';
+import { PersonnelFactureListComponent } from './components/personnel-facture-list/personnel-facture-list.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { FactureListComponent } from './components/facture-list/facture-list.com
     ProfileComponent,
     RoomAvailabilityComponent,
     FactureListComponent,
+    PersonnelFactureListComponent,
    
    
   ],
