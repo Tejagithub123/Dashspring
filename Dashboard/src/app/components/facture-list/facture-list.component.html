@@ -1,0 +1,45 @@
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div><br/></div>
+<div class="card">
+    <div class="card-header">List Factures</div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let facture of factures">
+            <td>{{ facture.id }}</td>
+            <td>{{ facture.dateFacture | date: 'medium' }}</td>
+            <td>{{ facture.prix }}</td>
+            <td>
+              <span [ngClass]="{
+                'text-success': facture.status === 'PAYEE',
+                'text-danger': facture.status === 'IMPAYEE'
+              }">
+                {{ facture.status }}
+              </span>
+            </td>
+            <td>
+              <button
+                *ngIf="facture.status === 'IMPAYEE'"
+                class="btn btn-success"
+                (click)="payerFacture(facture.id)"
+              >
+                Pay
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+

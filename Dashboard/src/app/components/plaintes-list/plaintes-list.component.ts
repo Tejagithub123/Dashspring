@@ -8,7 +8,7 @@ import { AgentMaintenanceService } from 'src/app/services/agent/agent-maintenanc
 @Component({
   selector: 'app-plaintes-list',
   templateUrl: './plaintes-list.component.html',
-  styleUrls: ['./plaintes-list.component.css']
+  styleUrls: ['./plaintes-list.component.scss']
 })
 export class PlaintesListComponent implements OnInit {
 

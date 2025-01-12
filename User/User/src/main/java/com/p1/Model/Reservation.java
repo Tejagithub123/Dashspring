@@ -1,6 +1,7 @@
 package com.p1.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.p1.Dto.ChambreDTO;
 
 import lombok.Data;
@@ -54,5 +55,9 @@ public class Reservation {
     public Long getFoyerId() {
         return foyerId;
     }
+
+    @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private Facture facture; // Link to the invoice
 
 }

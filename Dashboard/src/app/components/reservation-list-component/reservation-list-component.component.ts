@@ -58,6 +58,8 @@ export class ReservationListComponent implements OnInit {
       this.reservationService.approveReservation(reservationId).subscribe({
         next: () => {
           alert('Approved successfully!');
+         
+
         },
         error: (err) => {
           console.error('Error approving reservation:', err);

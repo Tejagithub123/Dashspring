@@ -128,6 +128,14 @@ export class SidebarService {
       condition: ['ROLE_ADMIN'],
       
     },
+
+    {
+      title: 'facture',
+      icon: 'fa fa-book',  
+      route: '/facture',
+      type: 'simple', 
+      condition: ['ROLE_ETUDIANT'],
+    }, 
     
     
 

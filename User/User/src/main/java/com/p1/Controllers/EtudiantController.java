@@ -2,11 +2,14 @@ package com.p1.Controllers;
 
 import com.p1.Dto.ChambreDTO;
 import com.p1.Model.Chambre;
+import com.p1.Model.Facture;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.p1.Service.ChambreService;
+import com.p1.Service.FactureService;
 
 import java.sql.Date;
 import java.util.List;
@@ -85,6 +88,21 @@ public class EtudiantController {
     public ResponseEntity<List<Reservation>> getReservationsByEtudiant(@PathVariable Long etudiantId) {
         List<Reservation> reservations = reservationService.getReservationsByEtudiant(etudiantId);
         return new ResponseEntity<>(reservations, HttpStatus.OK);
+    }
+
+    @Autowired
+    private FactureService factureService;
+
+    @GetMapping("facture/{etudiantId}")
+    public ResponseEntity<List<Facture>> getFacturesByEtudiant(@PathVariable Long etudiantId) {
+        List<Facture> factures = factureService.getFacturesByEtudiant(etudiantId);
+        return ResponseEntity.ok(factures);
+    }
+
+    @PutMapping("facture/payer/{factureId}")
+    public ResponseEntity<Facture> markAsPaid(@PathVariable Long factureId) {
+        Facture facture = factureService.markAsPaid(factureId);
+        return ResponseEntity.ok(facture);
     }
 
 }
