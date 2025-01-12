@@ -33,12 +33,14 @@
       <td>{{ personnel.cin }}</td>
       <td>{{ personnel.foyerName }}</td>
       <td>
+        <div class="action-buttons">
         <button
           class="btn btn-primary"
           (click)="openUpdateModal(updateModal, personnel)"
         >
           Update
         </button>
+    
         <button
           class="btn btn-danger"
           (click)="personnel.id ? deletePersonnel(personnel.id) : null"
@@ -46,6 +48,7 @@
         >
           Delete
         </button>
+      </div>
       </td>
     </tr>
   </tbody>

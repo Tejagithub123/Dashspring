@@ -17,6 +17,7 @@
           <th>Prénom</th>
           <th>Email</th>
           <th>Speciality</th>
+          <th>Date de Naissance</th>  
           <th>CIN</th>
           <th>Actions</th>
         </tr>
@@ -27,8 +28,10 @@
           <td>{{ agent.prenom }}</td>
           <td>{{ agent.email }}</td>
           <td>{{ agent.specialite }}</td>
+          <td>{{ agent.dateNaissance | date: 'dd/MM/yyyy' }}</td>
           <td>{{ agent.cin }}</td>
           <td>
+            <div class="action-buttons">
             <button
               class="btn btn-primary"
               (click)="openUpdateModal(updateModal, agent)"
@@ -42,6 +45,7 @@
             >
               Delete
             </button>
+          </div>
           </td>
         </tr>
       </tbody>
@@ -98,6 +102,16 @@
               <option value="FROID">FROID</option>
               <option value="ELECTRICITE">ELECTRICITE</option>
             </select>
+          </div> 
+          <div class="mb-3">
+            <label for="dateNaissance" class="form-label">Date de Naissance</label>
+            <input
+              type="date"
+              id="dateNaissance"
+              [(ngModel)]="selectedAgent.dateNaissance"
+              name="dateNaissance"
+              class="form-control"
+            />
           </div>
           <div class="mb-3">
             <label for="cin" class="form-label">CIN</label>

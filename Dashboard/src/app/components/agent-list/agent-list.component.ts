@@ -62,6 +62,10 @@ export class AgentListComponent implements OnInit {
       if (this.selectedAgent.cin !== this.originalAgent.cin) {
         updatePayload.cin = this.selectedAgent.cin;
       }
+      if (this.selectedAgent.dateNaissance !== this.originalAgent.dateNaissance) {
+        updatePayload.dateNaissance = this.selectedAgent.dateNaissance;
+      }
+      
 
       this.agentService.updateAgent(this.selectedAgent.id, updatePayload).subscribe(
         () => {

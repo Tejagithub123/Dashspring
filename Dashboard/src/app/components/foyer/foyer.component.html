@@ -83,7 +83,7 @@
           <td>{{ foyer.longitude }}</td>
           <td class="d-flex justify-content-around">
             <!-- Edit Button -->
-            <button class="btn btn-primary" (click)="selectFoyerForEditing(foyer)">Edit</button>
+            <button class="btn btn-primary" (click)="selectFoyerForEditing(foyer)">Update</button>
             
             <!-- Delete Button -->
             <button class="btn btn-danger" [disabled]="!foyer?.id" (click)="deleteFoyer(foyer?.id)">

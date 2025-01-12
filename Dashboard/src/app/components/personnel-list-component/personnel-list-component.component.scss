@@ -67,4 +67,11 @@
   .col-md-6 {
     margin-bottom: 20px; /* More space between fields on small screens */
   }
+} 
+
+.action-buttons {
+  display: flex;
+  gap: 10px; /* Adjust spacing between buttons */
+  justify-content: center; /* Center the buttons horizontally */
+  align-items: center; /* Center the buttons vertically */
 }
